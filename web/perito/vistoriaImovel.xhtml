@@ -1,0 +1,160 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/Template.xhtml">
+
+            <ui:define name="centro">
+                <p:panel id="vistoriaImovel" header="Cadastro de Vistoria de Imovel">
+                    <h:form id="edicaoVistoriaImovel">
+                        <h:panelGrid columns="3" style="margin-right: 100%">
+                            <h:outputLabel value="Guia Pericial: "  for="guiaPericial"/>
+                            <p:selectOneMenu id="guiaPericial" value="#{vistoriaVeiculoMB.laudo.guia}" required="true"
+                                             converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
+                                             style="250px">
+                                <f:selectItem itemLabel="Selecione..."/>
+                                <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
+                                               itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
+                            </p:selectOneMenu>
+                            <h:inputHidden />    
+                            <h:outputText value="Referência: "/>
+                            <p:inputText value="#{vistoriaVeiculoMB.laudo.referencia}" size="50" maxlength="100" required="true"
+                                                 requiredMessage="A referência não pode ficar em branco!"/>
+                            <h:inputHidden />
+                            <h:outputText value="Local do Exame: "/>
+                            <p:inputText value="#{vistoriaVeiculoMB.laudo.localExame}" size="50" maxlength="100" required="true"
+                                                 requiredMessage="O local do exame não pode ficar em branco!"/>
+                            <h:inputHidden />
+                            <h:outputLabel value="Natureza da Perícia: " />
+                            <p:selectOneRadio id="natureza" value="#{vistoriaImovelMB.vistoriaImovel.natureza}" rendered="true"
+                                          requiredMessage="Selecione a Natureza da Perícia!">
+                            <f:selectItem itemValue="Arrombamento" itemLabel="Arrombamento" />
+                            <f:selectItem itemValue="Danos" itemLabel="Danos" />
+                            </p:selectOneRadio>                            
+                            <h:inputHidden />
+                            <h:outputLabel  value="Data do Fato: " />
+                            <p:calendar value="#{vistoriaImovelBean.vistoriaImovel.dataFato}" required="true" requiredMessage="Campo Data do Fato em branco!" />
+                            <h:inputHidden />
+                            <h:outputLabel  value="Data e hora do Exame: " />
+                            <p:calendar value="#{vistoriaImovelBean.vistoriaImovel.dataExame}" pattern="dd/MM/yyyy HH:mm" locale="br" required="true" 
+                            		requiredMessage="Campo Data e hora do Exame em branco!" />
+                        </h:panelGrid>
+                        
+                        <br />
+                        
+                        <h:panelGrid columns="2" style="margin-right: 100%">
+                            <p:fieldset legend="local">                       
+                                <h:outputLabel value="Tipo imóvel: " />
+                                <p:selectOneRadio id="tipoImovel" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.tipoImovel}">
+                                    <f:selectItem itemValue="Residencial" itemLabel="Residencial" />
+                                    <f:selectItem itemValue="Comercial" itemLabel="Comercial" />
+                                </p:selectOneRadio>
+                                
+                                <br />
+                                
+                                <h:outputLabel value="Edificado na porção: " />		
+                                <p:selectOneRadio id="eidficado" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.edificado}">
+                                    <f:selectItem itemValue="Anterior" itemLabel="Anterior" />
+                                    <f:selectItem itemValue="Posterior" itemLabel="Posterior" />
+                                    <f:selectItem itemValue="L. direita" itemLabel="L. direita" />
+                                    <f:selectItem itemValue="L. esquerda" itemLabel="L. esquerda" />																						
+                                </p:selectOneRadio>
+                                
+                                <br />
+                                
+                                <h:outputLabel value="Ladeado por outros imóveis: " />		
+                                <p:selectOneRadio id="ladeado" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.ladeado}">
+					<f:selectItem itemValue="Sim" itemLabel="Sim" />
+					<f:selectItem itemValue="Nao" itemLabel="Não" />
+                                </p:selectOneRadio>
+                               
+                                <br />
+                                
+                                <h:outputLabel value="Muros: " />		
+                                <p:selectOneRadio id="muros" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.muros}">
+					<f:selectItem itemValue="Pre-moldado" itemLabel="Pré-moldado" />
+					<f:selectItem itemValue="Tijolos" itemLabel="Tijolos" />
+                                </p:selectOneRadio>
+                                
+                                <h:outputLabel value="Altura média (m): " />
+				<p:inputText value="#{vistoriaImovelMB.vistoriaImovel.localImovel.altura}"
+							required="true" requiredMessage="Campo Altura média (m) invalido!">
+					<f:convertNumber minFractionDigits="2"/>
+                                </p:inputText> 
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="3" style="margin-right: 100%">
+                            <p:fieldset legend="Vias de Acesso ao Interior do Terreno">
+                                <h:outputLabel value="Vias de acesso ao interior do terreno: " />		
+                                <p:selectOneRadio id="viasTerreno1" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.viasTerreno1}" 
+                                                  required="true" requiredMessage="Selecione algum item!">
+					<f:selectItem itemValue="Portão social" itemLabel="Portão social" />
+					<f:selectItem itemValue="Garagem" itemLabel="Garagem" />																														
+				</p:selectOneRadio>
+				<h:inputHidden />
+                                <p:selectOneRadio id="estrutura1" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.estrutura1}" required="true" requiredMessage="Selecione algum item!">
+					<f:selectItem itemValue="Metalica" itemLabel="Metálica" />
+					<f:selectItem itemValue="Madeira" itemLabel="Madeira" />
+				</p:selectOneRadio>
+				<h:inputHidden />
+				<h:outputLabel value="Sistema de trancamento: " />		
+                                <p:selectOneRadio id="trancamento1" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.trancamento1}" required="true" requiredMessage="Selecione algum item!">
+                                        <f:selectItem itemValue="Cilindrico" itemLabel="Cilíndrico" />
+					<f:selectItem itemValue="Cadeado" itemLabel="Cadeado" />								
+					<f:selectItem itemValue="Nenhum" itemLabel="Nenhum" />
+					<f:selectItem itemValue="Outro" itemLabel="Outro" />
+					<p:ajax update="t1" />																													
+				</p:selectOneRadio>
+							
+				<h:outputLabel value="" id="t1" >
+				<p:inputText value="#{vistoriaImovelMB.vistoriaImovel.localImovel.trancamento1}" 
+                                             rendered="#{vistoriaImovelMB.vistoriaImovel.localImovel.trancamento1 == 'Outro'}"/>
+				</h:outputLabel>
+                                <h:outputLabel value="Marca: " />
+				<p:inputText id="marcaTrancamento1" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.marca1}" style="width:300px"/>
+				<h:inputHidden />
+                                <br /><br />
+				<h:outputLabel value="Vias de acesso ao interior do terreno: " />		
+                                <p:selectOneRadio id="viasTerreno2" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.viasTerreno2}">
+					<f:selectItem itemValue="Portão social" itemLabel="Portão social" />
+					<f:selectItem itemValue="Garagem" itemLabel="Garagem" />																														
+				</p:selectOneRadio>
+				<h:inputHidden />
+                                <h:outputLabel value="Estrutura: " />		
+                                <p:selectOneRadio id="estrutura2" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.estrutura2}">
+					<f:selectItem itemValue="Metalica" itemLabel="Metálica" />
+					<f:selectItem itemValue="Madeira" itemLabel="Madeira" />
+				</p:selectOneRadio>
+				<h:inputHidden />
+				<h:outputLabel value="Sistema de trancamento: " />		
+                                <p:selectOneRadio id="trancamento2" value="#{vistoriaImovelMB.vistoriaImovel.localImovel.trancamento2}">
+					<f:selectItem itemValue="Cilindrico" itemLabel="Cilíndrico" />
+					<f:selectItem itemValue="Cadeado" itemLabel="Cadeado" />
+					<f:selectItem itemValue="Nenhum" itemLabel="Nenhum" />
+					<f:selectItem itemValue="Outro" itemLabel="Outro" />																																						
+				<p:ajax update="t2" />																													
+				</p:selectOneRadio>
+							
+				<h:outputLabel value="" id="t2" >
+				<p:inputText value="#{vistoriaImovelMB.vistoriaImovel.localImovel.trancamento2}" 
+                                             rendered="#{vistoriaImovelBean.vistoriaImovel.localImovel.trancamento2 == 'Outro'}"/>
+				</h:outputLabel>
+                                
+                                <h:outputLabel value="Marca: " />
+				<p:inputText id="marcaTrancamento2" value="#{vistoriaImovelBean.vistoriaImovel.localImovel.marca2}" 
+                                             style="width:300px"/>
+				<h:inputHidden />
+                            </p:fieldset>
+                        </h:panelGrid>
+                    </h:form>
+                </p:panel> 
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="veiculo" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1cafb2fd-d94e-41a2-9a6e-59a39f9ff302">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idLaudo" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     laudo.`localExame` AS laudo_localExame,
+     laudo.`referencia` AS laudo_referencia,
+     guia_pericial.`numeroGuia` AS guia_pericial_numeroGuia,
+     guia_pericial.`vitima` AS guia_pericial_vitima,
+     guia_pericial.`envolvido` AS guia_pericial_envolvido,
+     autoridade.`nome` AS autoridade_nome,
+     destino.`nomeDestino` AS destino_nomeDestino,
+     vistoria_veiculo.`dataExame` AS vistoria_veiculo_dataExame,
+     veiculo.`ano` AS veiculo_ano,
+     veiculo.`chassis` AS veiculo_chassis,
+     veiculo.`cor` AS veiculo_cor,
+     veiculo.`marca` AS veiculo_marca,
+     veiculo.`modelo` AS veiculo_modelo,
+     veiculo.`odometro` AS veiculo_odometro,
+     veiculo.`placa` AS veiculo_placa,
+     veiculo.`pneu` AS veiculo_pneu,
+     tipo_de_exame.`descricaoExame` AS tipo_de_exame_descricaoExame,
+     procedencia.`descricao` AS procedencia_descricao,
+     danos.`descricao` AS danos_descricao,
+     danos.`imagem` AS danos_imagem,
+     laudo.`idLaudo` AS laudo_idLaudo
+FROM
+     `guia_pericial` guia_pericial INNER JOIN `laudo` laudo ON guia_pericial.`idGuia` = laudo.`guia`
+     INNER JOIN `autoridade` autoridade ON guia_pericial.`autoridade` = autoridade.`idAutoridade`
+     INNER JOIN `destino` destino ON guia_pericial.`destino` = destino.`idDestino`
+     INNER JOIN `tipo_de_exame` tipo_de_exame ON guia_pericial.`tipoExame` = tipo_de_exame.`idTipoExame`
+     INNER JOIN `procedencia` procedencia ON guia_pericial.`procedencia` = procedencia.`idProcedencia`
+     INNER JOIN `vistoria_veiculo` vistoria_veiculo ON laudo.`idLaudo` = vistoria_veiculo.`idVistoriaVeiculo`
+     INNER JOIN `danos` danos ON laudo.`idLaudo` = danos.`laudo`
+     INNER JOIN `veiculo` veiculo ON vistoria_veiculo.`veiculo` = veiculo.`idVeiculo`
+WHERE
+     laudo.`idLaudo` = idLaudo]]>
+	</queryString>
+	<field name="laudo_localExame" class="java.lang.String"/>
+	<field name="laudo_referencia" class="java.lang.String"/>
+	<field name="guia_pericial_numeroGuia" class="java.lang.String"/>
+	<field name="guia_pericial_vitima" class="java.lang.String"/>
+	<field name="guia_pericial_envolvido" class="java.lang.String"/>
+	<field name="autoridade_nome" class="java.lang.String"/>
+	<field name="destino_nomeDestino" class="java.lang.String"/>
+	<field name="vistoria_veiculo_dataExame" class="java.sql.Timestamp"/>
+	<field name="veiculo_ano" class="java.lang.String"/>
+	<field name="veiculo_chassis" class="java.lang.String"/>
+	<field name="veiculo_cor" class="java.lang.String"/>
+	<field name="veiculo_marca" class="java.lang.String"/>
+	<field name="veiculo_modelo" class="java.lang.String"/>
+	<field name="veiculo_odometro" class="java.lang.Integer"/>
+	<field name="veiculo_placa" class="java.lang.String"/>
+	<field name="veiculo_pneu" class="java.lang.String"/>
+	<field name="tipo_de_exame_descricaoExame" class="java.lang.String"/>
+	<field name="procedencia_descricao" class="java.lang.String"/>
+	<field name="danos_descricao" class="java.lang.String"/>
+	<field name="danos_imagem" class="java.io.InputStream"/>
+	<field name="laudo_idLaudo" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="108">
+			<image>
+				<reportElement uuid="9589336f-057f-46f9-98f8-c74bf32bff4f" x="0" y="0" width="555" height="108"/>
+				<imageExpression><![CDATA["inst2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<textField>
+				<reportElement uuid="72fa8fef-ac7e-4751-8fe8-711e986bf828" x="300" y="0" width="29" height="20"/>
+				<textElement>
+					<font fontName="Bookman Old Style" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{laudo_idLaudo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6870fed5-abe8-4def-a94d-8dd827c78650" x="227" y="0" width="73" height="20"/>
+				<textElement>
+					<font fontName="Bookman Old Style" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laudo n.º]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="675">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="cef7252d-4046-4dee-b65f-49a4b85a8a0d" x="143" y="73" width="412" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{laudo_localExame}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="4f28730a-bfb8-46a9-b3dd-885626254810" x="96" y="153" width="459" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{laudo_referencia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="76ca272e-2547-4127-9179-539e25e19e27" x="187" y="133" width="368" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_numeroGuia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e165d78e-e5ec-400c-b297-c5c85fa5cb31" x="64" y="173" width="491" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_vitima}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="3ad478c5-c8f2-4551-81ef-39be10f9b516" x="87" y="193" width="468" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_envolvido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="9e017bed-803c-4679-a307-1ea0b5f10b1d" x="202" y="33" width="353" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{autoridade_nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="756438d7-898b-4f0e-8f2c-82b17ea80c49" x="140" y="213" width="415" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{destino_nomeDestino}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="f1c768d6-3744-4355-abd8-7f5ae745d274" x="195" y="113" width="360" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_veiculo_dataExame}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a96ceacf-f3f8-4886-b5a3-64d6c0a70a93" x="143" y="320" width="63" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veiculo_ano}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="5437c596-11e0-4446-9390-a32e8efa6cbe" x="61" y="350" width="494" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veiculo_chassis}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="fcc3c3f7-bd3a-4964-92f3-16bd9c6e6e6b" x="452" y="300" width="102" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veiculo_cor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="cb7e3f11-e7b5-48a0-80aa-a5c2fb158ff2" x="179" y="280" width="121" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veiculo_marca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a361c771-7363-468d-ad78-f55c0e7e3369" x="278" y="320" width="61" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veiculo_modelo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="24672aca-054b-45a4-a0fe-946d001dec7e" x="76" y="390" width="479" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veiculo_odometro}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ac1f06bc-f7f7-4937-8b9a-7bf960a6f5ae" x="236" y="300" width="74" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veiculo_placa}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="8604451a-e393-4069-ae0e-130196d6e231" x="143" y="370" width="411" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veiculo_pneu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9ab43032-e10e-469b-a012-36354271dae0" x="169" y="53" width="386" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_de_exame_descricaoExame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="78552dd5-d858-4916-92a3-1f5632f6c763" x="85" y="93" width="470" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{procedencia_descricao}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="b93e0c73-115b-4deb-bf3a-5a0ee306cd91" positionType="FixRelativeToBottom" x="0" y="244" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c862ec9f-4a54-41b0-b6bf-6189c5226d1f" x="218" y="0" width="121" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bookman Old Style" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dados do Laudo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="12faf128-0fc3-4e48-a55f-bb9d8494376a" x="213" y="244" width="126" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bookman Old Style" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Do Veículo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="390a852c-00f2-4670-9086-3647c62f67ff" x="0" y="33" width="202" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUTORIDADE REQUISITANTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="03ccc2a9-cf68-4d63-b3d3-a6496e462e09" x="0" y="53" width="169" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NATUREZA DOS EXAMES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7806e593-466b-439a-8eb0-407524f45aa7" x="0" y="73" width="143" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOCAL DOS EXAMES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="62ae3a08-be5f-4634-a545-373edc7b25c0" x="0" y="93" width="85" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MUNICÍPIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e2e504d9-63b6-4aac-bdb9-2982bc3313c1" x="0" y="113" width="195" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA E HORA DOS EXAMES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="637e1c8a-620b-4b26-92b3-e93380c5bd6e" x="0" y="133" width="187" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REQUISIÇÃO DOS EXAMES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3337c59d-471d-4923-bc38-f3cecd495621" x="0" y="153" width="96" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REFERÊNCIA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="84e9d5ac-b5f5-46e7-a2c9-ca4590adbe65" x="0" y="173" width="64" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VÍTIMA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6cbe4625-a4f9-4358-9957-8b4efcf3174d" x="0" y="193" width="87" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INDICIADO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b667e45-965c-4103-8d16-9624318d7a60" x="0" y="213" width="143" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESTINO DO LAUDO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="afdad4d9-6616-4ad7-903f-c3479cf4adcc" x="0" y="280" width="179" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<text><![CDATA[Tratava-se do veículo ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bec4a9c9-7e29-4a35-add7-c60ae1658f2e" x="431" y="280" width="123" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<text><![CDATA[as placas de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3e529714-92ca-498e-bd84-98f8e378fb36" x="300" y="280" width="131" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<text><![CDATA[na ocasião com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd1d1de4-c11c-45e7-bf87-8a35712394ac" x="310" y="300" width="142" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<text><![CDATA[cor predominante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e581f9f0-4306-4adb-a3c4-962f3f10eed8" x="0" y="320" width="143" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<text><![CDATA[ano de fabricação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="67623aa1-7920-4c0e-8fa1-a62c2ecf1b3b" x="0" y="300" width="236" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<text><![CDATA[identificação alfanuméricas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8676caec-0953-4802-9e4b-fd9a9b69b3f6" x="206" y="320" width="72" height="20"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<text><![CDATA[e modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="08f82a60-9931-4ec2-aeed-eba3adf75874" x="0" y="350" width="61" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CHASSI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="32c84807-f41b-484c-828c-c04f1a99c201" x="0" y="370" width="143" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO DOS PNEUS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e7bfce8-ba29-4f1e-a840-ad0adbc9cdbc" x="0" y="390" width="76" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ODÔMETRO:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1c5148bb-1f6d-4cde-9ffb-b2b394f201c6" x="0" y="426" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="3c59149e-777b-4355-b018-c473a5c9fe3b" x="202" y="426" width="141" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bookman Old Style" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Imagens do Laudo]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="8755a008-c0b9-43bf-88a8-8cba6c09d0b4" x="0" y="464" width="329" height="211"/>
+				<imageExpression><![CDATA[$F{danos_imagem}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="dc4205b6-fa15-40c8-98e3-c7c761b9a582" mode="Opaque" x="0" y="0" width="515" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font fontName="Courier New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="639cb622-1669-4567-a5f1-fb857bc03ca1" mode="Opaque" x="515" y="0" width="40" height="17" backcolor="#CCCCCC"/>
+				<textElement>
+					<font fontName="Courier New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="c30b18bd-c902-4652-a982-3b23f0f87385" x="0" y="0" width="218" height="17"/>
+				<textElement>
+					<font fontName="Courier New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

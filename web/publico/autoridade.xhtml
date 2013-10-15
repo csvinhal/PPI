@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <h:form id="edicao">
+            <h:messages />
+            <h:inputHidden value="#{autoridadeMB.autoridade.idAutoridade}"/>
+            <h:panelGrid columns="2" style="alignment-adjust: auto">
+                <h:outputLabel  value="Nome: " for="nome"/>
+                <h:inputText id="nome" label="Nome" value="#{autoridadeMB.autoridade.nome}" size="50" maxlength="100"
+                             required="true" requiredMessage="Campo Nome não pode ficar em branco!">
+                </h:inputText>
+                <h:outputLabel  value="Masp: " for="masp"/>
+                <h:inputText id="masp" label="Masp" value="#{autoridadeMB.autoridade.masp}" size="9" maxlength="9"
+                             required="true" requiredMessage="Campo Masp em branco!">
+                    <f:validateLength minimum="9" maximum="9"/>
+                </h:inputText>
+                <h:outputLabel value="e-Mail: " for="email"/>
+                <h:inputText id="email" label="e-Mail" value="#{autoridadeMB.autoridade.email}" size="50" maxlength="100"
+                             required="true" requiredMessage="Campo e-Mail em branco!">
+                    <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"/>
+                </h:inputText>
+                <h:inputHidden/>
+                <h:commandButton value="Salvar" actionListener="#{autoridadeMB.salvar()}" />            
+            </h:panelGrid>
+        </h:form>
+
+    </body>
+</html>

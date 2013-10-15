@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="toxicologico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64ae6de9-d5c8-4c71-8d32-0f61cbc031ed">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idLaudo" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     laudo.`localExame` AS laudo_localExame,
+     laudo.`referencia` AS laudo_referencia,
+     guia_pericial.`envolvido` AS guia_pericial_envolvido,
+     guia_pericial.`numeroGuia` AS guia_pericial_numeroGuia,
+     toxicologico_preliminar.`dataOcorrencia` AS toxicologico_preliminar_dataOcorrencia,
+     toxicologico_preliminar.`observacao` AS toxicologico_preliminar_observacao,
+     involucro.`peso` AS involucro_peso,
+     involucro.`quantidade` AS involucro_quantidade,
+     cor.`descricao` AS cor_descricao,
+     substancia.`descricao` AS substancia_descricao,
+     substancia.`tipoSubstancia` AS substancia_tipoSubstancia,
+     tipo_involucro.`descricao` AS tipo_involucro_descricao,
+     destino.`nomeDestino` AS destino_nomeDestino,
+     autoridade.`nome` AS autoridade_nome,
+     procedencia.`descricao` AS procedencia_descricao
+FROM
+     `guia_pericial` guia_pericial INNER JOIN `laudo` laudo ON guia_pericial.`idGuia` = laudo.`guia`
+     INNER JOIN `toxicologico_preliminar` toxicologico_preliminar ON laudo.`idLaudo` = toxicologico_preliminar.`idPreliminar`
+     INNER JOIN `involucro` involucro ON toxicologico_preliminar.`involucro` = involucro.`idInvolucro`
+     INNER JOIN `cor` cor ON involucro.`cor` = cor.`idCor`
+     INNER JOIN `substancia` substancia ON involucro.`substancia` = substancia.`idSubstancia`
+     INNER JOIN `tipo_involucro` tipo_involucro ON involucro.`tipoInvolucro` = tipo_involucro.`idTipoInvolucro`
+     INNER JOIN `destino` destino ON guia_pericial.`destino` = destino.`idDestino`
+     INNER JOIN `autoridade` autoridade ON guia_pericial.`autoridade` = autoridade.`idAutoridade`
+     INNER JOIN `procedencia` procedencia ON guia_pericial.`procedencia` = procedencia.`idProcedencia`
+WHERE
+     laudo.`idLaudo` = idLaudo]]>
+	</queryString>
+	<field name="laudo_localExame" class="java.lang.String"/>
+	<field name="laudo_referencia" class="java.lang.String"/>
+	<field name="guia_pericial_envolvido" class="java.lang.String"/>
+	<field name="guia_pericial_numeroGuia" class="java.lang.String"/>
+	<field name="toxicologico_preliminar_dataOcorrencia" class="java.sql.Date"/>
+	<field name="toxicologico_preliminar_observacao" class="java.lang.String"/>
+	<field name="involucro_peso" class="java.lang.Double"/>
+	<field name="involucro_quantidade" class="java.lang.Double"/>
+	<field name="cor_descricao" class="java.lang.String"/>
+	<field name="substancia_descricao" class="java.lang.String"/>
+	<field name="substancia_tipoSubstancia" class="java.lang.String"/>
+	<field name="tipo_involucro_descricao" class="java.lang.String"/>
+	<field name="destino_nomeDestino" class="java.lang.String"/>
+	<field name="autoridade_nome" class="java.lang.String"/>
+	<field name="procedencia_descricao" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="108">
+			<image>
+				<reportElement uuid="5cd3e7a5-3f39-4d74-aeeb-30681df19fca" x="0" y="0" width="555" height="108"/>
+				<imageExpression><![CDATA["timbre.jpg"]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="7132c068-b274-4215-9f05-0e05da8d09ec" positionType="Float" stretchType="RelativeToTallestObject" x="2" y="91" width="552" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_numeroGuia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="39">
+			<staticText>
+				<reportElement uuid="c3edfc72-4720-4e2f-bdcb-012f24457f8f" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="553" height="39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[LAUDO DE CONSTATAÇÃO TOXICOLÓGICA ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="631">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="26497e3f-8326-415f-9735-9ccfbd27e555" positionType="Float" stretchType="RelativeToTallestObject" x="124" y="84" width="429" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{laudo_localExame}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="832af6d7-7322-43ef-a98b-ddca8478ce71" positionType="Float" stretchType="RelativeToTallestObject" x="92" y="44" width="461" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{laudo_referencia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="514fccec-02a6-474c-989d-701ad01a2c9d" positionType="Float" stretchType="RelativeToTallestObject" x="123" y="104" width="430" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_envolvido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement uuid="074e1e06-5b9f-4ee4-a0ab-0d4d811a61b7" positionType="Float" stretchType="RelativeToTallestObject" x="152" y="64" width="401" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{toxicologico_preliminar_dataOcorrencia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ecfdcea2-ca97-47ba-bfd6-94f85a20ec11" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="594" width="553" height="37"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{toxicologico_preliminar_observacao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00">
+				<reportElement uuid="d89747ef-f80e-42a3-a025-c323781f7593" positionType="Float" stretchType="RelativeToTallestObject" x="92" y="303" width="461" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{involucro_peso}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement uuid="e20d9df1-1636-4e8c-8aa1-653b160a3c60" positionType="Float" stretchType="RelativeToTallestObject" x="165" y="363" width="388" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{involucro_quantidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="66864a62-ce7f-4724-a766-6ee694254fca" positionType="Float" stretchType="RelativeToTallestObject" x="103" y="343" width="450" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cor_descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="314d8256-a2bf-4e10-a249-138ce996bd08" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="283" width="553" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{substancia_descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="31898ecc-a83f-41db-aea2-2548f7dff214" positionType="Float" stretchType="RelativeToTallestObject" x="104" y="323" width="449" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_involucro_descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="608379c3-5dc1-44b3-aeab-409db5249e21" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="24" width="354" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{autoridade_nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="83e65ac8-67f5-451b-94a8-a5fb18c3c65f" positionType="Float" stretchType="RelativeToTallestObject" x="136" y="124" width="417" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{destino_nomeDestino}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="231f462f-fc01-4e3a-8929-3b744815be8b" positionType="Float" stretchType="RelativeToTallestObject" x="104" y="4" width="449" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{procedencia_descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d412d0e9-62f2-42d1-9ec9-b9b62ecca773" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="4" width="105" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PROCEDÊNCIA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="81e94ce4-a9d7-4ac8-bd2f-ae03ca3755e3" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="24" width="201" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[AUTORIDADE REQUISITANTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="25580d93-3687-437b-a61e-c46da365a82b" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="44" width="93" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[REFERÊNCIA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ddcd7f20-6df8-4f96-bde5-bd87d557cdf1" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="64" width="153" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DATA DA APREENSÃO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2049605f-9ca5-4d44-a64d-ea0dc834a468" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="84" width="125" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[LOCAL DO EXAME:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f6776c4a-3312-4561-b1a1-028de3dae68d" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="124" width="137" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DESTINO DO LAUDO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5e3a93cd-c2d2-43d0-a936-0418cb4e915a" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="104" width="123" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[INVESTIGADO(S):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c791baca-be17-46bf-9a9b-5fe3defbb72e" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="303" width="92" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Peso Bruto (g):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5befcddb-a0ec-4bc9-bfa6-c74b91bcbb65" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="363" width="165" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Quantidade de invólucros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd652ac5-086a-46f7-bb8b-94c3c846d4db" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="343" width="103" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cor do invólucro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3edf8856-4b17-4e7e-99a6-8ba9a07c12a8" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="323" width="104" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Tipo do invólucro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="21d6c965-1eb6-49da-92b5-643ae42c32e9" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="154" width="553" height="27"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[HISTÓRICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3953825c-8075-4862-92d3-b54631b855b6" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="-1" y="399" width="555" height="27"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[CONCLUSÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9c79327-8763-4392-821b-ab26ca0b4fc8" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="-1" y="441" width="556" height="37"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cumprindo o disposto no parágrafo 1° do art. 50 da Lei n.º 11.343 de 23 de agosto de 2006, o signatário procedeu aos ensaios preliminares na substância supramencionada, identificando-a como:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e59b992-173b-4093-b93d-52dce086d070" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="-1" y="543" width="556" height="51"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Em atendimento a portaria n° 002/97 republicada no boletim interno da Polícia Civil em 31/01/2012, a substância acima foi encaminhada para o exame toxicológico definitivo em envelope de segurança.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad3e6c8b-a53c-4788-9152-027981b05858" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="193" width="553" height="38"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Em atendimento à requisição da Autoridade supracitada, o Perito Oficial signatário realizou o exame de Constatação Preliminar de Droga.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3576cc67-3dd5-4723-ac14-452b486dd237" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="243" width="553" height="27"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DA SUBSTÂNCIA E EXAMES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="aeb36cf7-3f83-453b-a454-aa934333d000" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="-1" y="516" width="555" height="27"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ENCAMINHAMENTO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement uuid="e53b25d0-b1e5-400c-9d18-fad50b640280" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="477" width="553" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{substancia_tipoSubstancia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="1e6db48e-66f8-41a2-8baf-0312bc15f52e" mode="Opaque" x="0" y="0" width="515" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="d919c5ca-2bea-4a3f-8ea0-a00cb1da1f84" mode="Opaque" x="515" y="0" width="40" height="17" backcolor="#CCCCCC"/>
+				<textElement>
+					<font fontName="Calibri" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="3c5f869b-7f2e-4021-b149-8d66619b3c93" x="0" y="0" width="201" height="17"/>
+				<textElement>
+					<font fontName="Calibri" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

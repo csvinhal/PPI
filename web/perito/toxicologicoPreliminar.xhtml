@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/Template.xhtml">
+
+            <ui:define name="centro">
+                <p:panel id="panelToxicologicoPreliminar" header="Cadastro de Toxicologico Preliminar" toggleable="true">
+                    <h:form id="dadosGuia">
+                        <p:growl life="3000"/>
+                        <h:panelGrid columns="2" style="margin-right: 100%">
+                            <h:outputLabel value="Guia Pericial: " for="guiaPericial"/>
+                            <p:selectOneMenu id="guiaPericial" value="#{toxicologicoPreliminarMB.laudo.guia}" required="true"
+                                             converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
+                                             style="250px">
+                                <f:selectItem itemLabel="Selecione..."/>
+                                <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
+                                               itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
+                            </p:selectOneMenu>
+                            
+                            <h:outputLabel value="Data da Ocorrência: " for="dataOcorrencia"/>
+                            <p:calendar value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.dataOcorrencia}" 
+                                        id="dataOcorrencia" required="true" requiredMessage="O campo Data da Ocorrência não pode ficar em branco">
+                            </p:calendar>
+                            
+                             <h:outputLabel  value="Referência: " for="referencia"/>
+                             <p:inputText id="referencia" label="Referência" value="#{toxicologicoPreliminarMB.laudo.referencia}" size="50" maxlength="150"
+                                          required="false" requiredMessage="Campo Referência inválido!">
+                            </p:inputText>
+                            
+                            <h:outputLabel  value="Local do Exame: " />
+                            <p:inputText id="localExame" label="Local do Exame" value="#{toxicologicoPreliminarMB.laudo.localExame}" size="50" maxlength="150"
+                                         required="false" requiredMessage="Campo Local do Exame inválido!">
+                            </p:inputText>                            
+                                                                  
+                            <h:outputLabel value="Substancia: " for="substancia"/>
+                            <p:selectOneMenu id="substancia" value="#{toxicologicoPreliminarMB.involucro.substancia}" required="true"
+                                             converter="substanciaConverter" requiredMessage="Campo Substancia é obrigatorio."
+                                             style="width:160px">
+                                <f:selectItem itemLabel="Selecione..." />
+                                <f:selectItems value="#{substanciaMB.listarSubstancias()}" var="s"
+                                               itemLabel="#{s.tipoSubstancia}" itemValue="#{s}"/>
+                            </p:selectOneMenu>
+                            
+                            <h:outputLabel value="Qtde. de Invólucros: " for="quantidade" />
+                            <p:inputText id="quantidade" label="Quantidade" 
+                                         value="#{toxicologicoPreliminarMB.involucro.quantidade}" size="20" required="true">
+					<f:convertNumber minFractionDigits="1"/>
+                            </p:inputText>
+                            
+                            <h:outputLabel value="Peso Bruto(g): " for="peso" />
+                            <p:inputText id="peso" label="Peso" value="#{toxicologicoPreliminarMB.involucro.peso}"
+					size="20" required="true">
+					<f:convertNumber pattern="#0.00"/>
+                            </p:inputText>
+                            
+                            <h:outputLabel value="Tipo do Involucro: " for="tipoInvolucro" />
+                            <p:selectOneMenu id="tipoInvolucro" 
+                                             value="#{toxicologicoPreliminarMB.involucro.tipoInvolucro}"
+                                             converter="tipoInvolucroConverter" required="true" requiredMessage="Campo Tipo de Involucro é obrigatorio." 
+                                             style="width:160px">
+                                <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                <f:selectItems value="#{tipoInvolucroMB.listarTiposInvolucros()}"
+                                               var="ti" itemLabel="#{ti.descricao}" 
+                                               itemValue="#{ti}" />
+                            </p:selectOneMenu>
+                            
+                            <h:outputLabel value="Cor do invólucro: " for="cor" />
+                            <p:selectOneMenu id="cor" 
+                                             value="#{toxicologicoPreliminarMB.involucro.cor}"
+                                             converter="corConverter" required="true" requiredMessage="Campo Cor é obrigatorio."
+                                             style="width:160px">
+                                <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                <f:selectItems value="#{corInvolucroMB.listarCores()}" var="c" 
+                                               itemLabel="#{c.descricao}" itemValue="#{c}" />
+                            </p:selectOneMenu>
+                            
+                            <h:outputText value="Observação: " />
+                            <p:inputTextarea value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.observacao}"  
+                                             rows="5" cols="53" maxlength="255" autoResize="false" />
+                            
+                            <p:commandButton value="Salvar" action="#{toxicologicoPreliminarMB.salvar()}" ajax="false" style="margin-right: 100%"/>
+                            <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:panel>
+                <h:form id="listar">
+                    <p:dialog header="Lista das Substancias Cadastradas" widgetVar="dlgListar">
+                        <p:dataTable value="#{toxicologicoPreliminarMB.listarTiposInvolucros()}" var="ti" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Laudo Número">
+                                <h:outputText value="#{ti.laudo.idLaudo} - #{ti.laudo.guia.numeroGuia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Procedência</f:facet>
+                                #{ti.laudo.guia.procedencia.descricao}"
+                            </p:column>
+                            <p:column headerText="Autoridade Requisitante">
+                                <h:outputText value="#{ti.laudo.guia.autoridade.nome}" />
+                            </p:column>
+                            <p:column headerText="Destino Laudo">
+                                <h:outputText value="#{ti.laudo.guia.destino.nomeDestino}"/>
+                            </p:column>
+                            <p:column headerText="Data da Ocorrência">
+                                <h:outputText value="#{ti.dataOcorrencia}">
+                                    <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Referência">
+                                <h:outputText value="#{ti.laudo.referencia}"/>
+                            </p:column>
+                            <p:column headerText="Indiciado">
+                                <h:outputText value="#{ti.laudo.guia.envolvido}"/>
+                            </p:column>
+                            <p:column headerText="Substancia / Descrição">
+                                <h:outputText value="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Qtd Invólucros">
+                                <h:outputText value="#{ti.involucro.quantidade}"/>
+                            </p:column>
+                            <p:column headerText="Peso Bruto(g)">
+                                <h:outputText value="#{ti.involucro.peso}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandLink action="#{guiaPericialMB.remover(g)}" 
+                                               onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
+                                    <h:graphicImage url="./../resources/Imagens/excluir.png" />
+                                </p:commandLink>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandLink update=":dadosGuia">
+                                    <h:graphicImage url="./../resources/Imagens/editar.png"/>
+                                    <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
+                                </p:commandLink>
+                            </p:column>
+                            <p:column headerText="Imprimir" style="text-align: center">
+                                <p:commandButton value="Gerar Relatorio" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
+						onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

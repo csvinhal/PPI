@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <p:panel id="panelEdicaoUsuario" header="Cadastro de Usuarios">
+            <h:form id="cadastro">
+                <h:inputHidden value="#{usuarioMB.usuario.idUsuario}"/>
+                <p:panelGrid columns="2">
+                <h:outputLabel value="Nome: " for="nome"/>
+                <h:inputText id="nome" size="40" maxlength="100" value="#{usuarioMB.usuario.nome}" 
+                		     required="true" requiredMessage="Campo Nome em branco!" />
+                    <h:outputLabel  value="e-Mail: " for="email"/>
+                    <h:inputText id="email" label="e-Mail" value="#{usuarioMB.usuario.email}" size="40" maxlength="100"
+                                 required="true" requiredMessage="Campo e-Mail invalido!" redisplay="true">
+                        <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"/>
+                    </h:inputText>
+                    <h:outputLabel value="Senha:" for="senha"/>
+                    <h:inputSecret id="senha" label="Senha" value="#{usuarioMB.usuario.senha}" size="40" maxlength="40" required="true" redisplay="true"/>
+				
+				<h:outputLabel value="Confirmar Senha:" for="confirmarsenha"/>
+                                <h:inputSecret id="confirmarsenha" label="Confirmar Senha" value="#{usuarioMB.confirmaSenha}" size="40" 
+							   maxlength="40" required="true" redisplay="true"/>
+                    <h:button value="Voltar" outcome="/publico/login"/>
+                    <h:commandButton value="Salvar" action="#{usuarioMB.salvar()}"/>            
+                </p:panelGrid>
+            </h:form>
+        </p:panel>
+    </body>
+</html>

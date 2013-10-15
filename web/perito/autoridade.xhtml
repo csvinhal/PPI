@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/Template.xhtml">
+
+            <ui:define name="centro">
+                <p:panel id="panelCadastroAutoridade" header="Cadastro de Autoridades" toggleable="true">
+                    <h:form id="dadosAutoridade">
+                        <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%" >
+                                <h:outputText value="Nome: "/>
+                                <p:inputText value="#{autoridadeMB.autoridade.nome}" size="50" maxlength="100" required="true"
+                                             requiredMessage="O nome não pode ficar em branco!"/>
+                                <h:outputText value="Masp: "/>
+                                <p:inputMask value="#{autoridadeMB.autoridade.masp}" size="9" maxlength="9" 
+                                             required="true" mask="9999999-9" requiredMessage="Campo Masp em branco ou incompleto!">
+                                    <f:validateLength minimum="9" maximum="9" />
+                                </p:inputMask>
+                                <h:outputText value="e-Mail:"/>
+                                <p:inputText value="#{autoridadeMB.autoridade.email}" size="50" maxlength="100" required="true"
+                                             requiredMessage="Email não pode ficar em branco!">
+                                    <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
+                                </p:inputText>
+                                <p:commandButton value="Salvar" action="#{autoridadeMB.salvar()}" ajax="false" style="margin-right: 100%"/>
+                                <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
+                            </h:panelGrid>
+                    </h:form>
+                </p:panel>
+                    <h:form id="listar">
+                        <p:dialog header="Lista de Autoridades Cadastradas" widgetVar="dlgListar">
+                            <p:dataTable value="#{autoridadeMB.listarAutoridades()}" var="a" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                                <p:column headerText="Codigo">
+                                    <h:outputText value="#{a.idAutoridade}"/>
+                                </p:column>
+                                <p:column headerText="Nome">
+                                    <h:outputText value="#{a.nome}"/>
+                                </p:column>
+                                <p:column headerText="Email">
+                                    <h:outputText value="#{a.email}"/>
+                                </p:column>
+                                <p:column headerText="Masp">
+                                    <h:outputText value="#{a.masp}"/>
+                                </p:column>
+                                <p:column headerText="Excluir" style="text-align: center">
+                                    <p:commandLink action="#{autoridadeMB.Remover(a)}" 
+                                                       onclick="if(!confirm('Confirma a exclusão de #{t.descricaoExame}?')) return false" ajax="false">
+                                            <h:graphicImage url="./../resources/Imagens/excluir.png" />
+                                        </p:commandLink>
+                                    </p:column>
+                                    <p:column headerText="Editar" style="text-align: center">
+                                        <p:commandLink update=":dadosAutoridade">
+                                            <h:graphicImage url="./../resources/Imagens/editar.png" />
+                                            <f:setPropertyActionListener target="#{autoridadeMB.autoridade}" value="#{a}"/>
+                                        </p:commandLink>
+                                    </p:column>
+                            </p:dataTable> 
+                        </p:dialog>
+                    </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

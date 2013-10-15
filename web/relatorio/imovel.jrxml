@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="imovel" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7301b1ba-4ce1-4490-b6f1-e8efab756879">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="302"/>
+	<parameter name="idLaudo" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     vistoria_imovel.`dataExame` AS vistoria_imovel_dataExame,
+     vistoria_imovel.`dataFato` AS vistoria_imovel_dataFato,
+     vistoria_imovel.`esclarecimento1` AS vistoria_imovel_esclarecimento1,
+     vistoria_imovel.`esclarecimento2` AS vistoria_imovel_esclarecimento2,
+     vistoria_imovel.`esclarecimento3` AS vistoria_imovel_esclarecimento3,
+     vistoria_imovel.`natureza` AS vistoria_imovel_natureza,
+     vistoria_imovel.`provas` AS vistoria_imovel_provas,
+     vistoria_imovel.`vistoriaDescricao1` AS vistoria_imovel_vistoriaDescricao1,
+     vistoria_imovel.`vistoriaDescricao2` AS vistoria_imovel_vistoriaDescricao2,
+     vistoria_imovel.`vistoriaDescricao3` AS vistoria_imovel_vistoriaDescricao3,
+     local_imovel.`altura` AS local_imovel_altura,
+     local_imovel.`clarificacao` AS local_imovel_clarificacao,
+     local_imovel.`comodos` AS local_imovel_comodos,
+     local_imovel.`estrutura1` AS local_imovel_estrutura1,
+     local_imovel.`edificado` AS local_imovel_edificado,
+     local_imovel.`estrutura2` AS local_imovel_estrutura2,
+     local_imovel.`estruturaJanela` AS local_imovel_estruturaJanela,
+     local_imovel.`instalacoes` AS local_imovel_instalacoes,
+     local_imovel.`ladeado` AS local_imovel_ladeado,
+     local_imovel.`marca1` AS local_imovel_marca1,
+     local_imovel.`marca2` AS local_imovel_marca2,
+     local_imovel.`marca3` AS local_imovel_marca3,
+     local_imovel.`marca4` AS local_imovel_marca4,
+     local_imovel.`muros` AS local_imovel_muros,
+     local_imovel.`paredes` AS local_imovel_paredes,
+     local_imovel.`piso` AS local_imovel_piso,
+     local_imovel.`teto` AS local_imovel_teto,
+     local_imovel.`tipoImovel` AS local_imovel_tipoImovel,
+     local_imovel.`trancamento1` AS local_imovel_trancamento1,
+     local_imovel.`trancamento2` AS local_imovel_trancamento2,
+     local_imovel.`trancamento3` AS local_imovel_trancamento3,
+     local_imovel.`trancamento4` AS local_imovel_trancamento4,
+     local_imovel.`viasEdificacao1` AS local_imovel_viasEdificacao1,
+     local_imovel.`viasEdificacao2` AS local_imovel_viasEdificacao2,
+     local_imovel.`viasTerreno1` AS local_imovel_viasTerreno1,
+     local_imovel.`viasTerreno2` AS local_imovel_viasTerreno2,
+     laudo.`localExame` AS laudo_localExame,
+     autoridade.`nome` AS autoridade_nome,
+     guia_pericial.`numeroGuia` AS guia_pericial_numeroGuia,
+     guia_pericial.`vitima` AS guia_pericial_vitima,
+     guia_pericial.`envolvido` AS guia_pericial_envolvido,
+     destino.`nomeDestino` AS destino_nomeDestino
+FROM
+     `local_imovel` local_imovel INNER JOIN `vistoria_imovel` vistoria_imovel ON local_imovel.`idLocal` = vistoria_imovel.`localImovel`
+     INNER JOIN `laudo` laudo ON vistoria_imovel.`idImovel` = laudo.`idLaudo`
+     INNER JOIN `guia_pericial` guia_pericial ON laudo.`guia` = guia_pericial.`idGuia`
+     INNER JOIN `autoridade` autoridade ON guia_pericial.`autoridade` = autoridade.`idAutoridade`
+     INNER JOIN `destino` destino ON guia_pericial.`destino` = destino.`idDestino`
+WHERE
+     laudo.`idLaudo` = idLaudo]]>
+	</queryString>
+	<field name="vistoria_imovel_dataExame" class="java.sql.Timestamp"/>
+	<field name="vistoria_imovel_dataFato" class="java.sql.Date"/>
+	<field name="vistoria_imovel_esclarecimento1" class="java.lang.String"/>
+	<field name="vistoria_imovel_esclarecimento2" class="java.lang.String"/>
+	<field name="vistoria_imovel_esclarecimento3" class="java.lang.String"/>
+	<field name="vistoria_imovel_natureza" class="java.lang.String"/>
+	<field name="vistoria_imovel_provas" class="java.lang.String"/>
+	<field name="vistoria_imovel_vistoriaDescricao1" class="java.lang.String"/>
+	<field name="vistoria_imovel_vistoriaDescricao2" class="java.lang.String"/>
+	<field name="vistoria_imovel_vistoriaDescricao3" class="java.lang.String"/>
+	<field name="local_imovel_altura" class="java.lang.Double"/>
+	<field name="local_imovel_clarificacao" class="java.lang.String"/>
+	<field name="local_imovel_comodos" class="java.lang.Integer"/>
+	<field name="local_imovel_estrutura1" class="java.lang.String"/>
+	<field name="local_imovel_edificado" class="java.lang.String"/>
+	<field name="local_imovel_estrutura2" class="java.lang.String"/>
+	<field name="local_imovel_estruturaJanela" class="java.lang.String"/>
+	<field name="local_imovel_instalacoes" class="java.lang.String"/>
+	<field name="local_imovel_ladeado" class="java.lang.String"/>
+	<field name="local_imovel_marca1" class="java.lang.String"/>
+	<field name="local_imovel_marca2" class="java.lang.String"/>
+	<field name="local_imovel_marca3" class="java.lang.String"/>
+	<field name="local_imovel_marca4" class="java.lang.String"/>
+	<field name="local_imovel_muros" class="java.lang.String"/>
+	<field name="local_imovel_paredes" class="java.lang.String"/>
+	<field name="local_imovel_piso" class="java.lang.String"/>
+	<field name="local_imovel_teto" class="java.lang.String"/>
+	<field name="local_imovel_tipoImovel" class="java.lang.String"/>
+	<field name="local_imovel_trancamento1" class="java.lang.String"/>
+	<field name="local_imovel_trancamento2" class="java.lang.String"/>
+	<field name="local_imovel_trancamento3" class="java.lang.String"/>
+	<field name="local_imovel_trancamento4" class="java.lang.String"/>
+	<field name="local_imovel_viasEdificacao1" class="java.lang.String"/>
+	<field name="local_imovel_viasEdificacao2" class="java.lang.String"/>
+	<field name="local_imovel_viasTerreno1" class="java.lang.String"/>
+	<field name="local_imovel_viasTerreno2" class="java.lang.String"/>
+	<field name="laudo_localExame" class="java.lang.String"/>
+	<field name="autoridade_nome" class="java.lang.String"/>
+	<field name="guia_pericial_numeroGuia" class="java.lang.String"/>
+	<field name="guia_pericial_vitima" class="java.lang.String"/>
+	<field name="guia_pericial_envolvido" class="java.lang.String"/>
+	<field name="destino_nomeDestino" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="35">
+			<staticText>
+				<reportElement uuid="237e2f95-c74c-4daf-8290-777e288c6ef8" x="1" y="0" width="554" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[SEÇÃO TÉCNICA REGIONAL DE CRIMINALÍSTICA – 1ªDRPC/10ºPDC
+PERÍCIAS DE CRIMES CONTRA O PATRIMÔNIO
+]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="802">
+			<textField isStretchWithOverflow="true" pattern="HH.mm">
+				<reportElement uuid="320d5461-1df1-4d7a-929a-dcca04f31a96" x="258" y="40" width="240" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_dataExame}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement uuid="12f0e73c-a692-41a7-ba64-16e8d3ca77c9" x="60" y="40" width="96" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_dataFato}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="72cc99df-c9e6-455c-95cb-a3a0f25e1515" x="143" y="680" width="412" height="35"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_esclarecimento1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a66a833c-1f86-455b-82fb-ea12627fdeab" x="176" y="715" width="379" height="40"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_esclarecimento2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="cf2118e4-c4b1-44ae-a877-ca1dd41a3984" x="115" y="755" width="440" height="37"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_esclarecimento3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b9b0db49-1851-4227-98d0-13068fb162dc" x="419" y="0" width="136" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_natureza}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="6ef1caae-12d8-45ae-a684-635deab29d44" x="100" y="645" width="455" height="35"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_provas}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="0fec3d4d-fe39-4322-810e-d8b5334fb01e" x="264" y="520" width="291" height="46"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_vistoriaDescricao1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ead10aad-35a7-469b-bdc0-32ce893ce4e4" x="99" y="566" width="456" height="34"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_vistoriaDescricao2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="917963a0-a160-4435-ab77-8f97363b1360" x="159" y="610" width="395" height="35"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vistoria_imovel_vistoriaDescricao3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="dba15ae3-0920-453a-bcc3-48a2eb0512a3" x="336" y="160" width="60" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_altura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e0ceffd2-e83b-4599-991e-7c8ae2fa381a" x="128" y="420" width="184" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_clarificacao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="dc8431f2-ad7b-44d8-9ac6-a80ddb7c3c35" x="303" y="440" width="72" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_comodos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="2f10c683-2429-458b-871f-d73b94d4519f" x="15" y="220" width="150" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_estrutura1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ff5fbd6c-4c13-420e-ac4d-23aee1d20ebf" x="294" y="140" width="228" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_edificado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="9d126b1f-ff10-4d68-b377-1ed1906bcc18" x="15" y="280" width="150" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_estrutura2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="cc8cc092-ba1d-43dd-aa06-957ab4e04945" x="48" y="440" width="184" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_estruturaJanela}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e552fb51-e67c-48dd-975a-b10f7e2d21c9" x="60" y="480" width="144" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_instalacoes}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a1ab47c8-376b-4d95-9dc1-0908cc3982c7" x="128" y="160" width="52" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_ladeado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="33987bfb-1b6f-46da-a254-2246f0d794af" x="198" y="240" width="201" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_marca1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="2fb3f206-51dd-458b-a158-5919ce3e20a4" x="198" y="300" width="201" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_marca2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="09f660cf-7a4b-472f-83c3-c1f06584c922" x="198" y="360" width="201" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_marca3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="a65f782e-7a43-4454-ba19-c33f03d31edb" x="200" y="400" width="199" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_marca4}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="be010711-40dd-43b9-a803-7128529afe57" x="212" y="160" width="64" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_muros}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="96d2ed1a-4163-4cdb-b3ea-957f5ad45d0a" x="174" y="460" width="99" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_paredes}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="4febb073-d300-4134-bbe5-5cedd4db6b01" x="450" y="460" width="104" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_piso}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="51c42a72-3335-4efa-b5ab-d24b249f7ed4" x="317" y="460" width="89" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_teto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="c4d100c0-208c-44f5-846b-bdf82f62c95f" x="70" y="140" width="131" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_tipoImovel}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ad2211ca-d5e6-427e-b68f-af716016ba36" x="15" y="240" width="150" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_trancamento1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="7c2b2e2a-e4fe-40be-bd23-1aeff6b5d5cd" x="15" y="300" width="150" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_trancamento2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="d1f38616-293a-4ee9-b60e-263a7c389126" x="44" y="360" width="121" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_trancamento3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="cb788484-d9d1-4f05-b5a3-b83aa85e8933" x="44" y="400" width="121" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_trancamento4}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="4cf68fc3-fc3b-44ae-8e36-5c26dda8686c" x="44" y="340" width="121" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_viasEdificacao1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="4fdcad6d-16a6-4f68-a974-73aa4d23ae1d" x="44" y="380" width="121" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_viasEdificacao2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="f669cc97-bff2-41c5-9666-80c51a0b9467" x="15" y="200" width="150" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_viasTerreno1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="7387e288-a942-4270-862f-32ebb0b0cd8d" x="12" y="260" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{local_imovel_viasTerreno2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="cae83950-3e6e-4a89-b302-0417b37f3e73" x="78" y="20" width="248" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{laudo_localExame}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="92d4b2ca-1931-49bf-b5e8-90bdb0fc48c0" x="110" y="0" width="216" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{autoridade_nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="5a6aa59e-113f-4e8e-9062-30ed82ecfa80" x="54" y="60" width="192" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_numeroGuia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a19b61a5-3bac-4785-8935-a98361cb45d2" x="36" y="80" width="222" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_vitima}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="07a35465-4c30-40c9-930e-b11bb6693cc5" x="303" y="80" width="252" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_envolvido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="103492d7-b655-4e30-ad3e-cdae4f6e51ee" x="103" y="100" width="452" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{destino_nomeDestino}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ba3f78fd-bfec-4249-8aa9-2c3867db7027" x="0" y="0" width="110" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Autoridade Requisitante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c31b4f03-89eb-45c3-bf6c-eb40a9ead560" x="326" y="0" width="93" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Natureza da Perícia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e2ebd10f-f963-4e2a-89b6-db9d8bd5ed35" x="0" y="20" width="78" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Local do Exame: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b3d2120c-bc52-4201-a594-56dc99473c93" x="0" y="40" width="60" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Data do fato:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f03c923d-4b4a-43e9-a2a6-4b93c76154f8" x="156" y="40" width="102" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Data e hora do exame:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8a50ab23-7303-4db8-87f1-999c5898e808" x="1" y="60" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Requisição:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fafc1850-447e-4fc7-a10b-a3df70a024f9" x="1" y="80" width="35" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Vítima:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="309e5de8-db2a-4f63-bcdd-bc253e214dad" x="258" y="80" width="45" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Indiciado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3d34814e-72a4-4f72-b465-3372064d2f0e" x="1" y="100" width="102" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Destino do Laudo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3a96f4e3-6b60-4359-9a09-6a9322387eca" x="1" y="140" width="69" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Tipo de imóvel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8e024cb3-1857-4d0d-a8d3-e85250c44748" x="201" y="140" width="94" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Edificado na porção:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cfd4f1fc-0086-493d-8e59-a0ec48be9928" x="0" y="160" width="128" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Ladeado por outros imóveis:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="512d56fa-a12e-438c-a506-5e77b7d56ed6" x="180" y="160" width="32" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Muros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="da5a03c3-3ffa-48b8-ab58-a249e4d7b69e" x="276" y="160" width="60" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Altura média:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9eca2409-9e30-47f9-996a-b71b1a103b30" x="396" y="160" width="10" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[m]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dab40c52-3f2e-470f-9e29-a52be143589c" x="1" y="180" width="328" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Vias de acesso ao interior do terreno: estrutura / sistema de trancamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e9977ae7-bd71-4ffe-ae25-844efa59cc25" x="1" y="200" width="14" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[1 -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a8b95692-9bd4-45b2-a0a8-5deb7253a03a" x="0" y="260" width="15" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[2 -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d5d48b3-7962-4a4c-99ae-f52692a841db" x="165" y="240" width="33" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[marca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c0be6938-abde-4b6e-8bcc-cdb6a4399db7" x="165" y="300" width="33" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[marca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="671c1008-2a89-4ccc-adfe-d6fcc338b275" x="0" y="320" width="343" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Vias de acesso ao interior da edificação: estrutura / sistema de trancamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5bc1d66c-c74d-44f1-8c93-9dbe8b76c5b1" x="1" y="340" width="43" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[1 - Porta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5cd42cf5-6f25-45b8-9803-52f4f687efb5" x="165" y="360" width="33" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[marca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="22adb486-c0a6-4c35-8db1-ce6337efba60" x="0" y="380" width="43" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[2 - Porta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8d38b166-33e3-4efd-ba45-c96b2f05ca07" x="165" y="400" width="33" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[marca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e20607d0-df7b-4cbf-a07b-1c52dfcc712d" x="0" y="420" width="127" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Vias de clarificação natural:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="edf88de0-bfbd-40d7-9a51-8c9d6bf90e5e" x="1" y="440" width="47" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Estrutura:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a83bee2b-a82f-4f4e-b634-e30cccb6ed91" x="232" y="440" width="71" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Nº de cômodos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="285e63b1-6916-478c-b257-f3f6ad0ee038" x="0" y="460" width="129" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Características construtivas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="79c2060f-1f26-44bd-8a4b-7bbb38acb9a9" x="130" y="460" width="44" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Paredes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4cc13a77-f62f-426a-80d6-3121ceee74ff" x="273" y="460" width="44" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Teto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b65b6bac-bfe6-408b-8e92-f068495c67ca" x="406" y="460" width="44" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Piso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="49e14eff-6b7f-4772-a8be-fa6cef652da3" x="1" y="480" width="58" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Instalações: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="812232fd-3b72-4b2e-a9f6-9778ff80462c" x="1" y="520" width="263" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Descrição de vias de acesso arrombadas e/ou danificadas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="683cf461-6d34-4870-9a8c-e8c64a39d3fe" x="1" y="566" width="98" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Resultado dos danos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d20073f9-50c5-45c3-aeda-fe22585c17ed" x="247" y="120" width="41" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Local]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c2087d69-9ae7-4ce6-aa01-2cb1a25dae59" x="0" y="610" width="159" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Existência de escalada (descrição):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9bc1fbc5-8787-4425-bebd-3027d0497f90" x="1" y="645" width="99" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[OBJETOS/OUTROS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d2b3773-6c1d-41cb-9ba2-32db102410ea" x="0" y="679" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Acompanhou(aram) os exames:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b2918e1-5a66-41f0-b72d-efb665312a73" x="2" y="715" width="174" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Autoridade local/ PM – viatura / outros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d5061cd9-0f8c-4bbc-81f1-80c5970a9d1e" x="2" y="755" width="114" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Outros dados relevantes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c313af3e-f77d-4f51-8d29-ce5a1f9b7e49" x="222" y="500" width="54" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Vistoria]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

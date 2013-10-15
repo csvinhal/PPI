@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../WEB-INF/Template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+           <ui:define name="centro">
+                <p:panel id="panelVistoriaVeiculo" header="Cadastro de Vistoria de Veiculos" toggleable="true">
+                    <h:form id="vistoriaVeiculo">
+                        <p:growl life="3000"/>
+                        <h:panelGrid columns="2" style="margin-right: 100%">
+                            <h:outputLabel value="Guia Pericial: "  for="guiaPericial"/>
+                            <p:selectOneMenu id="guiaPericial" value="#{vistoriaVeiculoMB.laudo.guia}" required="true"
+                                             converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
+                                             style="250px">
+                                <f:selectItem itemLabel="Selecione..."/>
+                                <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
+                                               itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
+                            </p:selectOneMenu>
+                            <h:outputText value="Referência: "/>
+                            <p:inputText value="#{vistoriaVeiculoMB.laudo.referencia}" size="50" maxlength="100" required="true"
+                                                 requiredMessage="A referência não pode ficar em branco!"/>
+                            <h:outputText value="Local do Exame: "/>
+                            <p:inputText value="#{vistoriaVeiculoMB.laudo.localExame}" size="50" maxlength="100" required="true"
+                                                 requiredMessage="O local do exame não pode ficar em branco!"/>
+                            <h:outputText value="Data do Exame: "/>
+                            <p:calendar value="#{vistoriaVeiculoMB.vistoriaVeiculo.dataExame}" pattern="dd/MM/yyyy HH:mm" locale="br"
+                                        required="true" requiredMessage="A data do exame não pode ficar em branco!"/>
+                            <h:outputText value="Marca do Veiculo: "/>
+                            <p:inputText id="anoMarca" value="#{vistoriaVeiculoMB.veiculo.marca}" size="50" maxlength="100" required="true"
+                                                 requiredMessage="A marca do veiculo não pode ficar em branco!"/>
+                            <h:outputText value="Modelo ano: "/>
+                            <p:inputMask value="#{vistoriaVeiculoMB.veiculo.modelo}" size="8" maxlength="4" required="true"
+                                         mask="9999" requiredMessage="O ano do modelo não pode ficar em branco!">
+                                <f:validateLength minimum="4" maximum="4"/>
+                            </p:inputMask>
+                            <h:outputText value="Cor do Veiculo: "/>
+                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.cor}" size="50" maxlength="20" required="true"
+                                                 requiredMessage="A cor do veiculo não pode ficar em branco!"/>
+                            <h:outputText value="Ano: "/>
+                            <p:inputMask id="ano" value="#{vistoriaVeiculoMB.veiculo.ano}" size="8" maxlength="4" 
+                                         required="true" requiredMessage="O ano não pode ficar em branco!" mask="9999">
+                                <f:validateLength minimum="4" maximum="4"/>
+                            </p:inputMask>
+                            <h:outputText value="Placa do Veiculo: "/>
+                            <p:inputMask value="#{vistoriaVeiculoMB.veiculo.placa}" size="8" maxlength="8"
+                                         required="true" requiredMessage="A placa não pode ficar em branco!" mask="a**-9999">
+                                <f:validateLength minimum="8" maximum="8"/>
+                            </p:inputMask>
+                            <h:outputText value="Estado dos Pneus: "/>
+                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.pneu}" size="50" maxlength="100" required="true"
+                                                 requiredMessage="O estado dos não pode ficar em branco!"/>
+                            <h:outputText value="Chassi: "/>
+                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.chassis}" size="50" maxlength="17" required="true"
+                                                 requiredMessage="O chassi não pode ficar em branco!"/>
+                            <h:outputText value="Odometro: "/>
+                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.odometro}" size="10" maxlength="10" 
+                                         >
+                                
+                            </p:inputText>
+                            
+                            <p:commandButton value="Salvar" action="#{vistoriaVeiculoMB.salvar()}" ajax="false" style="margin-right: 100%"/>
+                            <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:panel>
+                <h:form id="listar">
+                    <p:dialog header="Lista das Substancias Cadastradas" widgetVar="dlgListar">
+                        <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="ti" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Laudo Número">
+                                <h:outputText value="#{ti.laudo.idLaudo} - #{ti.laudo.guia.numeroGuia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">Procedência</f:facet>
+                                #{ti.laudo.guia.procedencia.descricao}"
+                            </p:column>
+                            <p:column headerText="Autoridade Requisitante">
+                                <h:outputText value="#{ti.laudo.guia.autoridade.nome}" />
+                            </p:column>
+                            <p:column headerText="Destino Laudo">
+                                <h:outputText value="#{ti.laudo.guia.destino.nomeDestino}"/>
+                            </p:column>
+                            <p:column headerText="Data da Ocorrência">
+                                <h:outputText value="#{ti.dataOcorrencia}">
+                                    <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Referência">
+                                <h:outputText value="#{ti.laudo.referencia}"/>
+                            </p:column>
+                            <p:column headerText="Indiciado">
+                                <h:outputText value="#{ti.laudo.guia.envolvido}"/>
+                            </p:column>
+                            <p:column headerText="Substancia / Descrição">
+                                <h:outputText value="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Qtd Invólucros">
+                                <h:outputText value="#{ti.involucro.quantidade}"/>
+                            </p:column>
+                            <p:column headerText="Peso Bruto(g)">
+                                <h:outputText value="#{ti.involucro.peso}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandLink action="#{guiaPericialMB.remover(g)}" 
+                                               onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
+                                    <h:graphicImage url="./../resources/Imagens/excluir.png" />
+                                </p:commandLink>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandLink update=":dadosGuia">
+                                    <h:graphicImage url="./../resources/Imagens/editar.png"/>
+                                    <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
+                                </p:commandLink>
+                            </p:column>
+                            <p:column headerText="Imprimir" style="text-align: center">
+                                <p:commandButton value="Gerar Relatorio" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
+						onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+        </ui:composition>

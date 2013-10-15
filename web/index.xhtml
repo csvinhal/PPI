@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/Template.xhtml">
+
+            <ui:define name="centro">
+                <h:outputText value="Descrição: "/>
+                <p:inputText value="#{tipoInvolucroMB.tipoInvolucro.descricao}" size="50" maxlength="100" required="true"
+                                        requiredMessage="A descrição do Involucro não pode ficar em branco!"/>
+           </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

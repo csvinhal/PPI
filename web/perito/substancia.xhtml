@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/Template.xhtml">
+
+            <ui:define name="centro">
+                <p:panel id="panelCadastroSubstancia" header="Cadastro Substancia" toggleable="true">
+                    <h:form id="dadosSubstancia">
+                        <p:growl life="3000"/>
+                        <h:panelGrid columns="2" style="margin-right: 100%">
+                            <h:outputText value="Tipo da Substancia: "/>
+                            <p:inputText value="#{substanciaMB.substancia.tipoSubstancia}" size="50" maxlength="100" required="true"
+                                                 requiredMessage="A substancia não pode ficar em branco!"/>
+                            <h:outputText value="Descrição: " />
+                            <p:inputTextarea value="#{substanciaMB.substancia.descricao}"  rows="5" cols="53" maxlength="255" autoResize="false" />
+                            <p:commandButton value="Salvar" action="#{substanciaMB.salvar()}" ajax="false" style="margin-right: 100%"/>
+                            <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:panel>
+                <h:form id="listar">
+                    <p:dialog header="Lista das Substancias Cadastradas" widgetVar="dlgListar">
+                        <p:dataTable value="#{substanciaMB.listarSubstancias()}" var="s" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{s.idSubstancia}"/>
+                            </p:column>
+                            <p:column headerText="Tipo da Substancia">
+                                      <h:outputText value="#{s.tipoSubstancia}" />
+                            </p:column>
+                            <p:column headerText="Descrição">
+                                <h:outputText value="#{s.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandLink action="#{substanciaMB.remover(s)}" 
+                                               onclick="if(!confirm('Confirma a exclusão de #{s.descricao}?')) return false" ajax="false">
+                                    <h:graphicImage url="./../resources/Imagens/excluir.png" />
+                                        </p:commandLink>
+                                    </p:column>
+                                    <p:column headerText="Editar" style="text-align: center">
+                                        <p:commandLink update=":dadosSubstancia">
+                                            <h:graphicImage url="./../resources/Imagens/editar.png"/>
+                                            <f:setPropertyActionListener target="#{substanciaMB.substancia}" value="#{s}"/>
+                                        </p:commandLink>
+                                    </p:column>
+                        </p:dataTable> 
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
