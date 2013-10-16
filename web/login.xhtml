@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <link href="/WebDipam/resources/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/WebDipam/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+
+    <body>
+
+            <form method="post" action="#{request.contextPath}/j_spring_security_check">
+
+                <h:panelGrid columns="2" cellpadding="10" id="login">
+                    <p:growl id="msg0" />
+                    <h:panelGrid columns="2">
+
+                        <h:outputText value="Usuário: " style="font-weight: bold;" />
+                        <p:inputText type='text' id='j_username'  autocomplete="false" />
+
+                        <h:outputText value="Senha: " style="font-weight: bold;"/>
+                        <p:inputText  type='password' id='j_password'   />
+                        
+                        <h:commandButton value="Entrar"  style="text-align: center; border-radius: 5px; height: 30px; width: 80px;"/>
+                        <h:commandButton action="#{usuarioBean.cadastraUsuario()}" value="Registre-se" 
+                           style="text-align: center; border-radius: 5px; height: 30px; width: 80px;"/>
+                    </h:panelGrid>
+                    
+                    
+                    <script>
+                        document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}";
+                    </script>
+                </h:panelGrid>
+            </form>         
+    </body>
+</html>
