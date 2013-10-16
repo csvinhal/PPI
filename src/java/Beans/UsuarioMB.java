@@ -3,6 +3,7 @@ package Beans;
 import Controller.UsuarioEJB;
 import Model.Permissao;
 import Model.Usuario;
+import java.io.Serializable;
 import java.util.List;
 import javacrypt.Crypt;
 import javax.ejb.EJB;
@@ -13,7 +14,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean(name="usuarioMB")
 @ViewScoped
-public class UsuarioMB {
+public class UsuarioMB implements Serializable{
     @EJB
     private UsuarioEJB usuEJB;
     private Usuario usuario;

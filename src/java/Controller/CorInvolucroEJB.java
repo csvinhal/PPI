@@ -1,21 +1,14 @@
 package Controller;
 
 import Model.Cor;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Crouch
- */
-@Stateless
-public class CorInvolucroEJB {
 
-    @PersistenceContext(unitName="PPi0PU")
-    private EntityManager em;
+@Stateless
+public class CorInvolucroEJB extends Manager{
     
     public void salvar(Cor corInvolucro){
         em.merge(corInvolucro);

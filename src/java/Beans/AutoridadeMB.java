@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Beans;
 
 import Controller.AutoridadeEJB;
@@ -14,10 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Crouch
- */
 @ManagedBean(name = "autoridadeMB")
 @ViewScoped
 public class AutoridadeMB implements Serializable{

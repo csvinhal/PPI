@@ -2,17 +2,13 @@ package Controller;
 
 import Model.Permissao;
 import Model.Usuario;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 @Stateless
-public class UsuarioEJB {
-    
-    @PersistenceUnit(unitName= "PPi0PU")
-    private EntityManager em;
+public class UsuarioEJB extends Manager{
 
     public void salvar(Usuario usuario){
         em.merge(usuario);

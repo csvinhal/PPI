@@ -12,21 +12,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Crouch
- */
 @Entity
 @XmlRootElement
 @NamedQueries({
@@ -48,17 +41,8 @@ public class Laudo implements Serializable {
     @NotNull
     @Size(min = 1, max = 100)
     private String referencia;
-    @JoinColumn(name = "guia", referencedColumnName = "idGuia")
-    @ManyToOne(optional = false)
-    private GuiaPericial guia;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "laudo")
-    private VistoriaVeiculo vistoriaVeiculo;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "laudo")
-    private VistoriaImovel vistoriaImovel;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "laudo")
     private List<Danos> danosList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "laudo")
-    private ToxicologicoPreliminar toxicologicoPreliminar;
 
     public Laudo() {
     }
@@ -97,30 +81,6 @@ public class Laudo implements Serializable {
         this.referencia = referencia;
     }
 
-    public GuiaPericial getGuia() {
-        return guia;
-    }
-
-    public void setGuia(GuiaPericial guia) {
-        this.guia = guia;
-    }
-
-    public VistoriaVeiculo getVistoriaVeiculo() {
-        return vistoriaVeiculo;
-    }
-
-    public void setVistoriaVeiculo(VistoriaVeiculo vistoriaVeiculo) {
-        this.vistoriaVeiculo = vistoriaVeiculo;
-    }
-
-    public VistoriaImovel getVistoriaImovel() {
-        return vistoriaImovel;
-    }
-
-    public void setVistoriaImovel(VistoriaImovel vistoriaImovel) {
-        this.vistoriaImovel = vistoriaImovel;
-    }
-
     @XmlTransient
     public List<Danos> getDanosList() {
         return danosList;
@@ -128,14 +88,6 @@ public class Laudo implements Serializable {
 
     public void setDanosList(List<Danos> danosList) {
         this.danosList = danosList;
-    }
-
-    public ToxicologicoPreliminar getToxicologicoPreliminar() {
-        return toxicologicoPreliminar;
-    }
-
-    public void setToxicologicoPreliminar(ToxicologicoPreliminar toxicologicoPreliminar) {
-        this.toxicologicoPreliminar = toxicologicoPreliminar;
     }
 
     @Override

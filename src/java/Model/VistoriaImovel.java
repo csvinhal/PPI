@@ -8,11 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,20 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "vistoria_imovel")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "VistoriaImovel.findAll", query = "SELECT v FROM VistoriaImovel v"),
-    @NamedQuery(name = "VistoriaImovel.findByDataExame", query = "SELECT v FROM VistoriaImovel v WHERE v.dataExame = :dataExame"),
-    @NamedQuery(name = "VistoriaImovel.findByDataFato", query = "SELECT v FROM VistoriaImovel v WHERE v.dataFato = :dataFato"),
-    @NamedQuery(name = "VistoriaImovel.findByEsclarecimento1", query = "SELECT v FROM VistoriaImovel v WHERE v.esclarecimento1 = :esclarecimento1"),
-    @NamedQuery(name = "VistoriaImovel.findByEsclarecimento2", query = "SELECT v FROM VistoriaImovel v WHERE v.esclarecimento2 = :esclarecimento2"),
-    @NamedQuery(name = "VistoriaImovel.findByEsclarecimento3", query = "SELECT v FROM VistoriaImovel v WHERE v.esclarecimento3 = :esclarecimento3"),
-    @NamedQuery(name = "VistoriaImovel.findByNatureza", query = "SELECT v FROM VistoriaImovel v WHERE v.natureza = :natureza"),
-    @NamedQuery(name = "VistoriaImovel.findByProvas", query = "SELECT v FROM VistoriaImovel v WHERE v.provas = :provas"),
-    @NamedQuery(name = "VistoriaImovel.findByVistoriaDescricao1", query = "SELECT v FROM VistoriaImovel v WHERE v.vistoriaDescricao1 = :vistoriaDescricao1"),
-    @NamedQuery(name = "VistoriaImovel.findByVistoriaDescricao2", query = "SELECT v FROM VistoriaImovel v WHERE v.vistoriaDescricao2 = :vistoriaDescricao2"),
-    @NamedQuery(name = "VistoriaImovel.findByVistoriaDescricao3", query = "SELECT v FROM VistoriaImovel v WHERE v.vistoriaDescricao3 = :vistoriaDescricao3"),
-    @NamedQuery(name = "VistoriaImovel.findByIdImovel", query = "SELECT v FROM VistoriaImovel v WHERE v.idImovel = :idImovel")})
-public class VistoriaImovel implements Serializable {
+public class VistoriaImovel extends Laudo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -69,10 +53,6 @@ public class VistoriaImovel implements Serializable {
     private String vistoriaDescricao2;
     @Size(max = 255)
     private String vistoriaDescricao3;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    private Integer idImovel;
     @JoinColumn(name = "usuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuario usuario;
@@ -86,12 +66,8 @@ public class VistoriaImovel implements Serializable {
     public VistoriaImovel() {
     }
 
-    public VistoriaImovel(Integer idImovel) {
-        this.idImovel = idImovel;
-    }
 
     public VistoriaImovel(Integer idImovel, Date dataExame, Date dataFato, String natureza) {
-        this.idImovel = idImovel;
         this.dataExame = dataExame;
         this.dataFato = dataFato;
         this.natureza = natureza;
@@ -177,14 +153,6 @@ public class VistoriaImovel implements Serializable {
         this.vistoriaDescricao3 = vistoriaDescricao3;
     }
 
-    public Integer getIdImovel() {
-        return idImovel;
-    }
-
-    public void setIdImovel(Integer idImovel) {
-        this.idImovel = idImovel;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -207,31 +175,5 @@ public class VistoriaImovel implements Serializable {
 
     public void setLaudo(Laudo laudo) {
         this.laudo = laudo;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idImovel != null ? idImovel.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VistoriaImovel)) {
-            return false;
-        }
-        VistoriaImovel other = (VistoriaImovel) object;
-        if ((this.idImovel == null && other.idImovel != null) || (this.idImovel != null && !this.idImovel.equals(other.idImovel))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Model.VistoriaImovel[ idImovel=" + idImovel + " ]";
-    }
-    
+    }    
 }

@@ -55,7 +55,7 @@ public class VistoriaVeiculoMB implements Serializable {
     
     
     public void salvar(){
-        if(vistoriaVeiculo.getIdVistoriaVeiculo() == null){
+        if(vistoriaVeiculo.getIdLaudo() == null){
             try{
                 vistoriaVeiculo.setLaudo(laudo);
                 vistoriaVeiculo.setVeiculo(veiculo);

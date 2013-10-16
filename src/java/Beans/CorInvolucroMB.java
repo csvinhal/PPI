@@ -10,10 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Crouch
- */
 @ManagedBean
 @ViewScoped
 public class CorInvolucroMB implements Serializable {

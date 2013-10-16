@@ -1,22 +1,14 @@
 package Controller;
 
 import Model.TipoDeExame;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Crouch
- */
 @Stateless
-public class TipoDeExameEJB {
-    
-    @PersistenceContext(unitName="PPi0PU")
-    private EntityManager em;
-    
+public class TipoDeExameEJB extends Manager{
+
     public void salvar(TipoDeExame tipoDeExame){
         em.merge(tipoDeExame);
     }

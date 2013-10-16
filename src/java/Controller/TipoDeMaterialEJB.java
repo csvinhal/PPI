@@ -1,21 +1,13 @@
 package Controller;
 
 import Model.TipoDeMaterial;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Crouch
- */
 @Stateless
-public class TipoDeMaterialEJB {
-    
-    @PersistenceContext(unitName="PPi0PU")
-    private EntityManager em;
+public class TipoDeMaterialEJB extends Manager{
     
     public void salvar(TipoDeMaterial tipoDeMaterial){
         em.merge(tipoDeMaterial);

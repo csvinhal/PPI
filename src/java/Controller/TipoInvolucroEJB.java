@@ -1,20 +1,13 @@
 package Controller;
 
 import Model.TipoInvolucro;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Crouch
- */
 @Stateless
-public class TipoInvolucroEJB {
-    @PersistenceContext(unitName="PPi0PU")
-    private EntityManager em;
+public class TipoInvolucroEJB extends Manager{
     
     public void salvar(TipoInvolucro tipoInvolucro){
         em.merge(tipoInvolucro);

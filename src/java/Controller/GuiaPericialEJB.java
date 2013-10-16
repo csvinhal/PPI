@@ -1,22 +1,14 @@
 package Controller;
 
 import Model.GuiaPericial;
+import Util.Manager;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Crouch
- */
 @Stateless
-public class GuiaPericialEJB {
-
-   @PersistenceContext(unitName = "PPi0PU")
-    private EntityManager em;
+public class GuiaPericialEJB extends Manager{
 
     public void salvar(GuiaPericial guiaPericial) {
         guiaPericial.setDataEntrada(new Date());
@@ -29,7 +21,7 @@ public class GuiaPericialEJB {
     }
     
     public void excluir(GuiaPericial guiaPericial){
-         guiaPericial = em.find(GuiaPericial.class, guiaPericial.getIdGuia());
+         guiaPericial = em.find(GuiaPericial.class, guiaPericial.getIdLaudo());
          em.remove(guiaPericial);
     }
     

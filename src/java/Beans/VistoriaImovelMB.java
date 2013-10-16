@@ -42,7 +42,7 @@ public class VistoriaImovelMB implements Serializable{
     }
     
     public void salvar(){
-        if(vistoriaImovel.getIdImovel() == null){
+        if(vistoriaImovel.getIdLaudo() == null){
             try{
                 vistoriaImovel.setLaudo(laudo);
                 vistoriaImovelEJB.salvar(vistoriaImovel);

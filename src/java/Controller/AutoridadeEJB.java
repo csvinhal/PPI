@@ -1,20 +1,14 @@
 package Controller;
 
 import Model.Autoridade;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Crouch
- */
+
 @Stateless
-public class AutoridadeEJB {
-    @PersistenceContext(unitName = "PPi0PU")
-    private EntityManager em;
+public class AutoridadeEJB extends Manager{
 
     public void salvar(Autoridade autoridade) {
         em.merge(autoridade);

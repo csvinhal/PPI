@@ -1,21 +1,14 @@
 package Controller;
 
 import Model.Procedencia;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Crouch
- */
 @Stateless
-public class ProcedenciaEJB {
+public class ProcedenciaEJB extends Manager{
 
-    @PersistenceContext(unitName="PPi0PU")
-    private EntityManager em;
     
     public void salvar(Procedencia procedencia){
         em.merge(procedencia);

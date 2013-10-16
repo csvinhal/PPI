@@ -2,6 +2,7 @@ package Beans;
 
 import Controller.InvolucroEJB;
 import Model.Involucro;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -11,7 +12,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean(name="involucroMB")
 @ViewScoped
-public class InvolucroMB {
+public class InvolucroMB implements Serializable{
 
     @EJB
     InvolucroEJB involucroEJB;

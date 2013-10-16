@@ -1,37 +1,31 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <link href="/WebDipam/resources/css/default.css" rel="stylesheet" type="text/css" />
-    <link href="/WebDipam/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
-
-    <body>
-
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>PPI</title>
+        <link type="text/css" rel="stylesheet" href="dot-luv/skin.css"/>
+    </h:head>
+    <h:body style="background-image:url('./relatorio/civilmg.gif');background-position: 50% 0%;background-repeat: no-repeat">
+        <p:dialog header="Login" visible="true" closable="false" draggable="false" resizable="false" width="420">
+            <center>
+                <h:outputText value="Usuário ou senha incorretos!" rendered="#{param.erro}" style="color: darkred"/>
+            </center>
             <form method="post" action="#{request.contextPath}/j_spring_security_check">
-
-                <h:panelGrid columns="2" cellpadding="10" id="login">
-                    <p:growl id="msg0" />
-                    <h:panelGrid columns="2">
-
-                        <h:outputText value="Usuário: " style="font-weight: bold;" />
-                        <p:inputText type='text' id='j_username'  autocomplete="false" />
-
-                        <h:outputText value="Senha: " style="font-weight: bold;"/>
-                        <p:inputText  type='password' id='j_password'   />
-                        
-                        <h:commandButton value="Entrar"  style="text-align: center; border-radius: 5px; height: 30px; width: 80px;"/>
-                        <h:commandButton action="#{usuarioBean.cadastraUsuario()}" value="Registre-se" 
-                           style="text-align: center; border-radius: 5px; height: 30px; width: 80px;"/>
-                    </h:panelGrid>
-                    
-                    
-                    <script>
-                        document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}";
-                    </script>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="j_username" value="Email: *" /> 
+                    <h:inputText id="j_username" required="true" autocomplete="false"/>
+                    <h:outputLabel for="j_password" value="Password: * " />
+                    <h:inputSecret id="j_password" required="true" autocomplete="false"/>
+                    <h:commandButton value="Login" style="text-align: center; height: 30px; width: 80px;"/>
+                    <h:commandButton value="Registre-se" action="#{usuarioMB.cadastraUsuario()}" style="text-align: center; height: 30px; width: 80px;"/>
+                <script>
+                    document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}";
+                </script>
                 </h:panelGrid>
-            </form>         
-    </body>
+            </form>
+        </p:dialog>
+    </h:body>
 </html>

@@ -18,7 +18,7 @@
                
       
         <form-login login-page="/login.xhtml" always-use-default-target="true"
-                    default-target-url="/principal/index.xhtml" authentication-failure-url="/negado/usuarionegado.xhtml" /> 
+                    default-target-url="/principal/index.xhtml" authentication-failure-url="/login.xhtml?login_error=1" /> 
         <logout logout-success-url="/login.xhtml" />
         <session-management>
             <concurrency-control max-sessions="1"  expired-url="/index.xhtml"/>
@@ -41,7 +41,7 @@
             <password-encoder hash="md5" />
             <jdbc-user-service data-source-ref="dataSource"
                                users-by-username-query="SELECT email, senha, 'true' as ativo FROM usuario WHERE email = ?"
-                               authorities-by-username-query="SELECT email, role FROM usuario inner join papel on usuario.permissao_id = permissao.id WHERE email = ?" />
+                               authorities-by-username-query="SELECT email, role FROM usuario inner join permissao on usuario.permissao_id = permissao.id WHERE email = ?" />
         </authentication-provider>
     </authentication-manager>
 

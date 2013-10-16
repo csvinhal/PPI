@@ -1,17 +1,13 @@
 package Controller;
 
 import Model.ToxicologicoPreliminar;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless
-public class ToxicologicoPreliminarEJB {
-
-    @PersistenceContext(unitName = "PPi0PU")
-    private EntityManager em;
+public class ToxicologicoPreliminarEJB extends Manager{
 
     public void salvar(ToxicologicoPreliminar toxicologico) {
         em.merge(toxicologico);
@@ -23,7 +19,7 @@ public class ToxicologicoPreliminarEJB {
     }
     
     public void excluir(ToxicologicoPreliminar toxicologico){
-         toxicologico = em.find(ToxicologicoPreliminar.class, toxicologico.getIdPreliminar());
+         toxicologico = em.find(ToxicologicoPreliminar.class, toxicologico.getIdLaudo());
          em.remove(toxicologico);
     } 
 

@@ -1,7 +1,7 @@
 package Beans;
 
 import Controller.ToxicologicoPreliminarEJB;
-import Factory.RelatorioFactory;
+import Util.RelatorioFactory;
 import Model.Involucro;
 import Model.Laudo;
 import Model.ToxicologicoPreliminar;
@@ -55,7 +55,7 @@ public class ToxicologicoPreliminarMB implements Serializable{
         
         
     public void salvar(){
-        if(toxicologicoPreliminar.getIdPreliminar() == null){
+        if(toxicologicoPreliminar.getIdLaudo() == null){
             try{
                 toxicologicoPreliminar.setLaudo(laudo);
                 toxicologicoPreliminar.setInvolucro(involucro);
@@ -106,6 +106,6 @@ public class ToxicologicoPreliminarMB implements Serializable{
     
     public void geraRelatorioToxicologicoPreliminar(ToxicologicoPreliminar preliminar) {
         RelatorioFactory relatorioFactory = new RelatorioFactory();
-        relatorioFactory.geraRelatorioPreliminar(toxicologicoPreliminar.getIdPreliminar());
+        relatorioFactory.geraRelatorioPreliminar(toxicologicoPreliminar.getIdLaudo());
     }
 }

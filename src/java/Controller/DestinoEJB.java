@@ -1,20 +1,14 @@
 package Controller;
 
 import Model.Destino;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Crouch
- */
 @Stateless
-public class DestinoEJB {
-    @PersistenceContext(unitName="PPi0PU")
-    private EntityManager em;
+public class DestinoEJB extends Manager{
+
     
     public void salvar(Destino destino){
         em.merge(destino);

@@ -10,10 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Crouch
- */
 @ManagedBean(name="tipoDeMaterialMB")
 @ViewScoped
 public class TipoDeMaterialMB implements Serializable{

@@ -2,17 +2,13 @@ package Controller;
 
 import Model.GuiaPericial;
 import Model.Laudo;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless
-public class LaudoEJB {
-    @PersistenceContext(unitName = "PPi0PU")
-    private EntityManager em;
-
+public class LaudoEJB extends Manager{
     
     public List<Laudo> listarLaudos(){
         Query query = em.createQuery("Select l From Laudo l");

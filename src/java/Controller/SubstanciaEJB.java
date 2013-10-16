@@ -1,17 +1,13 @@
 package Controller;
 
 import Model.Substancia;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless
-public class SubstanciaEJB {
-
-   @PersistenceContext(unitName = "PPi0PU")
-    private EntityManager em;
+public class SubstanciaEJB extends Manager{
 
     public void salvar(Substancia substancia) {
         em.merge(substancia);

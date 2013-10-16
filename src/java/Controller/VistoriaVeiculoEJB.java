@@ -1,17 +1,13 @@
 package Controller;
 
 import Model.VistoriaVeiculo;
+import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless
-public class VistoriaVeiculoEJB {
-
-    @PersistenceContext(unitName = "PPi0PU")
-    private EntityManager em;
+public class VistoriaVeiculoEJB extends Manager{
 
     public void salvar(VistoriaVeiculo vistoriaVeiculo) {
         em.merge(vistoriaVeiculo);
@@ -23,7 +19,7 @@ public class VistoriaVeiculoEJB {
     }
     
     public void excluir(VistoriaVeiculo vistoriaVeiculo){
-         vistoriaVeiculo = em.find(VistoriaVeiculo.class, vistoriaVeiculo.getIdVistoriaVeiculo());
+         vistoriaVeiculo = em.find(VistoriaVeiculo.class, vistoriaVeiculo.getIdLaudo());
          em.remove(vistoriaVeiculo);
     } 
 
