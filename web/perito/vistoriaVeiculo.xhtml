@@ -12,7 +12,7 @@
                         <p:growl life="3000"/>
                         <h:panelGrid columns="2" style="margin-right: 100%">
                             <h:outputLabel value="Guia Pericial: "  for="guiaPericial"/>
-                            <p:selectOneMenu id="guiaPericial" value="#{vistoriaVeiculoMB.laudo.guia}" required="true"
+                            <p:selectOneMenu id="guiaPericial" value="#{vistoriaVeiculoMB.vistoriaVeiculo.guia}" required="true"
                                              converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
                                              style="250px">
                                 <f:selectItem itemLabel="Selecione..."/>
@@ -20,10 +20,10 @@
                                                itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
                             </p:selectOneMenu>
                             <h:outputText value="Referência: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.laudo.referencia}" size="50" maxlength="100" required="true"
+                            <p:inputText value="#{vistoriaVeiculoMB.vistoriaVeiculo.referencia}" size="50" maxlength="100" required="true"
                                                  requiredMessage="A referência não pode ficar em branco!"/>
                             <h:outputText value="Local do Exame: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.laudo.localExame}" size="50" maxlength="100" required="true"
+                            <p:inputText value="#{vistoriaVeiculoMB.vistoriaVeiculo.localExame}" size="50" maxlength="100" required="true"
                                                  requiredMessage="O local do exame não pode ficar em branco!"/>
                             <h:outputText value="Data do Exame: "/>
                             <p:calendar value="#{vistoriaVeiculoMB.vistoriaVeiculo.dataExame}" pattern="dd/MM/yyyy HH:mm" locale="br"
@@ -56,73 +56,69 @@
                             <p:inputText value="#{vistoriaVeiculoMB.veiculo.chassis}" size="50" maxlength="17" required="true"
                                                  requiredMessage="O chassi não pode ficar em branco!"/>
                             <h:outputText value="Odometro: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.odometro}" size="10" maxlength="10" 
-                                         >
+                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.odometro}" size="10"  maxlength="10" required="true"
+                                         requiredMessage="O odometro não pode ficar em branco!">
                                 
                             </p:inputText>
                             
                             <p:commandButton value="Salvar" action="#{vistoriaVeiculoMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                            <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
+               <br />
+               <br />
                 <h:form id="listar">
-                    <p:dialog header="Lista das Substancias Cadastradas" widgetVar="dlgListar">
-                        <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="ti" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
-                            <p:column headerText="Laudo Número">
-                                <h:outputText value="#{ti.laudo.idLaudo} - #{ti.laudo.guia.numeroGuia}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">Procedência</f:facet>
-                                #{ti.laudo.guia.procedencia.descricao}"
-                            </p:column>
-                            <p:column headerText="Autoridade Requisitante">
-                                <h:outputText value="#{ti.laudo.guia.autoridade.nome}" />
-                            </p:column>
-                            <p:column headerText="Destino Laudo">
-                                <h:outputText value="#{ti.laudo.guia.destino.nomeDestino}"/>
-                            </p:column>
-                            <p:column headerText="Data da Ocorrência">
-                                <h:outputText value="#{ti.dataOcorrencia}">
-                                    <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column headerText="Referência">
-                                <h:outputText value="#{ti.laudo.referencia}"/>
-                            </p:column>
-                            <p:column headerText="Indiciado">
-                                <h:outputText value="#{ti.laudo.guia.envolvido}"/>
-                            </p:column>
-                            <p:column headerText="Substancia / Descrição">
-                                <h:outputText value="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}"/>
-                            </p:column>
-                            <p:column headerText="Qtd Invólucros">
-                                <h:outputText value="#{ti.involucro.quantidade}"/>
-                            </p:column>
-                            <p:column headerText="Peso Bruto(g)">
-                                <h:outputText value="#{ti.involucro.peso}"/>
-                            </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandLink action="#{guiaPericialMB.remover(g)}" 
-                                               onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
-                                    <h:graphicImage url="./../resources/Imagens/excluir.png" />
-                                </p:commandLink>
-                            </p:column>
-                            <p:column headerText="Editar" style="text-align: center">
-                                <p:commandLink update=":dadosGuia">
-                                    <h:graphicImage url="./../resources/Imagens/editar.png"/>
-                                    <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
-                                </p:commandLink>
-                            </p:column>
-                            <p:column headerText="Imprimir" style="text-align: center">
-                                <p:commandButton value="Gerar Relatorio" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
-						onclick="this.form.target='_blank'" ajax="false"  process="@this">
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable> 
-                    </p:dialog>
+                    <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="vv" paginator="true" rows="10" 
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                        <f:facet name="header">
+                        Lista dos Veículos Cadastrados
+                        </f:facet>
+                        <p:column headerText="Autoridade Requisitante">
+                            <h:outputText value="#{vv.guia.autoridade.nome}" />
+                        </p:column>
+                        <p:column headerText="Natureza dos Exames">
+                            <h:outputText value="#{vv.guia.tipoExame.descricaoExame}" />
+                        </p:column>
+                        <p:column headerText="Local dos Exames">
+                            <h:outputText value="#{vv.guia.localExame}" />
+                        </p:column>
+                        <p:column headerText="Municipio">
+                            <h:outputText value="#{vv.guia.procedencia.descricao}" />
+                        </p:column>
+                        <p:column headerText="Data e Hora dos Exames">
+                            <h:outputText value="#{vv.dataExame}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Referencia Laudo">
+                            <h:outputText value="#{vv.referencia}" />
+                        </p:column>
+                        <p:column headerText="Vitima">
+                            <h:outputText value="#{vv.guia.vitima}" />
+                        </p:column>
+                        <p:column headerText="Indiciado">
+                            <h:outputText value="#{vv.guia.envolvido}" />
+                        </p:column>
+                        <p:column headerText="Destino do Laudo">
+                            <h:outputText value="#{vv.guia.destino.nomeDestino}" />
+                        </p:column>
+                        <p:column headerText="Excluir" style="text-align: center">
+                            <p:commandButton action="#{vistoriaVeiculoMB.remover(vv)}"  icon="ui-icon-trash"
+                                           onclick="if(!confirm('Confirma a exclusão da guia #{vv.idLaudo}?')) return false" ajax="false">
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Editar" style="text-align: center">
+                            <p:commandButton update=":vistoriaVeiculo" icon="ui-icon-pencil">
+                                <f:setPropertyActionListener target="#{vistoriaVeiculoMB.vistoriaVeiculo}" value="#{vv}"/>
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Imprimir" style="text-align: center">
+                            <p:commandButton actionListener="#{vistoriaVeiculoMB.geraRelatorioVistoriaVeiculo(vv)}" icon="ui-icon-print"
+                                            onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable> 
                 </h:form>
             </ui:define>
         </ui:composition>

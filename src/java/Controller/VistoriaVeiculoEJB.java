@@ -22,5 +22,11 @@ public class VistoriaVeiculoEJB extends Manager{
          vistoriaVeiculo = em.find(VistoriaVeiculo.class, vistoriaVeiculo.getIdLaudo());
          em.remove(vistoriaVeiculo);
     } 
+    
+    public VistoriaVeiculo pesquisaPorIdLaudo(int idLaudo){
+        Query query = em.createQuery("SELECT l FROM Laudo l WHERE l.idLaudo = :idLaudo")
+                .setParameter("idLaudo", idLaudo);
+        return (VistoriaVeiculo) query.getSingleResult();
+    }
 
 }

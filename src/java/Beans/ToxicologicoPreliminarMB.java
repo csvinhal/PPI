@@ -51,6 +51,7 @@ public class ToxicologicoPreliminarMB implements Serializable{
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Toxicologico Preliminar salvo com sucesso!"));
                 toxicologicoPreliminar = new ToxicologicoPreliminar();
+                involucro = new Involucro();
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();
@@ -63,6 +64,7 @@ public class ToxicologicoPreliminarMB implements Serializable{
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Toxicologico Preliminar editado com sucesso!"));
                 toxicologicoPreliminar = new ToxicologicoPreliminar();
+                involucro = new Involucro();
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();

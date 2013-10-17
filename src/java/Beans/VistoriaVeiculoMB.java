@@ -4,6 +4,7 @@ import Controller.VistoriaVeiculoEJB;
 import Model.Laudo;
 import Model.Veiculo;
 import Model.VistoriaVeiculo;
+import Util.RelatorioFactory;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -19,12 +20,10 @@ public class VistoriaVeiculoMB implements Serializable {
     @EJB
     VistoriaVeiculoEJB vistoriaVeiculoEJB;
     private VistoriaVeiculo vistoriaVeiculo;
-    private Laudo laudo;
     private Veiculo veiculo;
     
     public VistoriaVeiculoMB() {
     vistoriaVeiculo = new VistoriaVeiculo();
-    laudo = new Laudo();
     veiculo = new Veiculo();    
     }
 
@@ -36,14 +35,6 @@ public class VistoriaVeiculoMB implements Serializable {
         this.vistoriaVeiculo = vistoriaVeiculo;
     }
 
-    public Laudo getLaudo() {
-        return laudo;
-    }
-
-    public void setLaudo(Laudo laudo) {
-        this.laudo = laudo;
-    }
-
     public Veiculo getVeiculo() {
         return veiculo;
     }
@@ -52,17 +43,15 @@ public class VistoriaVeiculoMB implements Serializable {
         this.veiculo = veiculo;
     }
     
-    
-    
     public void salvar(){
         if(vistoriaVeiculo.getIdLaudo() == null){
             try{
-                vistoriaVeiculo.setLaudo(laudo);
                 vistoriaVeiculo.setVeiculo(veiculo);
                 vistoriaVeiculoEJB.salvar(vistoriaVeiculo);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
                 vistoriaVeiculo = new VistoriaVeiculo();
+                veiculo = new Veiculo();
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();
@@ -70,12 +59,12 @@ public class VistoriaVeiculoMB implements Serializable {
             }
         }else{
             try{
-                vistoriaVeiculo.setLaudo(laudo);
                 vistoriaVeiculo.setVeiculo(veiculo);
                 vistoriaVeiculoEJB.salvar(vistoriaVeiculo);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Editado com sucesso!"));
                 vistoriaVeiculo = new VistoriaVeiculo();
+                veiculo = new Veiculo();
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();
@@ -102,5 +91,10 @@ public class VistoriaVeiculoMB implements Serializable {
              FacesContext fc = FacesContext.getCurrentInstance();
              fc.addMessage(null, new FacesMessage("Erro ao excluir vistoria do veiculo!"));
         }
+    }
+    
+    public void geraRelatorioVistoriaVeiculo(VistoriaVeiculo veiculo) {
+        RelatorioFactory relatorioFactory = new RelatorioFactory();
+        relatorioFactory.geraRelatorioPreliminar(veiculo.getIdLaudo());
     }
 }
