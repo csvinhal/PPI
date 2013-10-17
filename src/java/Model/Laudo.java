@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.io.Serializable;
@@ -12,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -41,6 +39,9 @@ public class Laudo implements Serializable {
     @NotNull
     @Size(min = 1, max = 100)
     private String referencia;
+    @JoinColumn(name = "guia", referencedColumnName = "idGuia")
+    @ManyToOne(optional = false)
+    private GuiaPericial guia;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "laudo")
     private List<Danos> danosList;
 
@@ -80,6 +81,15 @@ public class Laudo implements Serializable {
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
+    
+    public GuiaPericial getGuia() {
+        return guia;
+    }
+
+    public void setGuia(GuiaPericial guia) {
+        this.guia = guia;
+    }
+
 
     @XmlTransient
     public List<Danos> getDanosList() {

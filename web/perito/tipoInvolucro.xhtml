@@ -23,31 +23,32 @@
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
+                <br />
+                <br />
                 <h:form id="listar">
-                    <p:dialog header="Lista dos Involucros Cadastrados" widgetVar="dlgListar">
-                        <p:dataTable value="#{tipoInvolucroMB.listarTiposInvolucros()}" var="t" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
-                            <p:column headerText="Codigo">
-                                <h:outputText value="#{t.idTipoInvolucro}"/>
-                            </p:column>
-                            <p:column headerText="Nome">
-                                <h:outputText value="#{t.descricao}"/>
-                            </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandLink action="#{tipoInvolucroMB.remover(t)}" 
-                                               onclick="if(!confirm('Confirma a exclusão de #{t.descricao}?')) return false" ajax="false">
-                                    <h:graphicImage url="./../resources/Imagens/excluir.png" />
-                                        </p:commandLink>
-                                    </p:column>
-                                    <p:column headerText="Editar" style="text-align: center">
-                                        <p:commandLink update=":dadosTipoInvolucro">
-                                            <h:graphicImage url="./../resources/Imagens/editar.png"/>
-                                            <f:setPropertyActionListener target="#{tipoInvolucroMB.tipoInvolucro}" value="#{t}"/>
-                                        </p:commandLink>
-                                    </p:column>
-                        </p:dataTable> 
-                    </p:dialog>
+                    <p:dataTable value="#{tipoInvolucroMB.listarTiposInvolucros()}" var="t" paginator="true" rows="10" 
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                         <f:facet name="header">
+                            Lista de Invólucros Cadastrados
+                        </f:facet>
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{t.idTipoInvolucro}"/>
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{t.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Excluir" style="text-align: center">
+                            <p:commandButton action="#{tipoInvolucroMB.remover(t)}" icon="ui-icon-trash" 
+                                           onclick="if(!confirm('Confirma a exclusão de #{t.descricao}?')) return false" ajax="false">
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Editar" style="text-align: center">
+                            <p:commandButton update=":dadosTipoInvolucro" icon="ui-icon-pencil">
+                                <f:setPropertyActionListener target="#{tipoInvolucroMB.tipoInvolucro}" value="#{t}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable> 
                 </h:form>
             </ui:define>
         </ui:composition>

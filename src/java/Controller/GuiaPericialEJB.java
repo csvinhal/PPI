@@ -21,7 +21,7 @@ public class GuiaPericialEJB extends Manager{
     }
     
     public void excluir(GuiaPericial guiaPericial){
-         guiaPericial = em.find(GuiaPericial.class, guiaPericial.getIdLaudo());
+         guiaPericial = em.find(GuiaPericial.class, guiaPericial.getIdGuia());
          em.remove(guiaPericial);
     }
     
@@ -35,6 +35,5 @@ public class GuiaPericialEJB extends Manager{
         Query query = em.createQuery("SELECT g FROM GuiaPericial g WHERE g.idGuia = :idGuia")
                 .setParameter("idGuia", idGuia);
         return (GuiaPericial) query.getSingleResult();
-        
     }
 }

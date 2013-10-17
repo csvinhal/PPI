@@ -59,9 +59,6 @@ public class VistoriaImovel extends Laudo implements Serializable {
     @JoinColumn(name = "localImovel", referencedColumnName = "idLocal")
     @ManyToOne(optional = false)
     private LocalImovel localImovel;
-    @JoinColumn(name = "idImovel", referencedColumnName = "idLaudo", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Laudo laudo;
 
     public VistoriaImovel() {
     }
@@ -167,13 +164,5 @@ public class VistoriaImovel extends Laudo implements Serializable {
 
     public void setLocalImovel(LocalImovel localImovel) {
         this.localImovel = localImovel;
-    }
-
-    public Laudo getLaudo() {
-        return laudo;
-    }
-
-    public void setLaudo(Laudo laudo) {
-        this.laudo = laudo;
-    }    
+    }   
 }

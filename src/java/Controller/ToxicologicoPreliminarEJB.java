@@ -22,5 +22,11 @@ public class ToxicologicoPreliminarEJB extends Manager{
          toxicologico = em.find(ToxicologicoPreliminar.class, toxicologico.getIdLaudo());
          em.remove(toxicologico);
     } 
+    
+    public ToxicologicoPreliminar pesquisaPorIdLaudo(int idLaudo){
+        Query query = em.createQuery("SELECT l FROM Laudo l WHERE l.idLaudo = :idLaudo")
+                .setParameter("idLaudo", idLaudo);
+        return (ToxicologicoPreliminar) query.getSingleResult();
+    }
 
 }

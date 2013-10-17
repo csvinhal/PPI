@@ -72,75 +72,75 @@
                             <h:outputText value="Observação: " />
                             <p:inputTextarea value="#{guiaPericialMB.guiaPericial.observacao}"  rows="5" cols="53" maxlength="255" autoResize="false" />
                             <p:commandButton value="Salvar" action="#{guiaPericialMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                            <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
+                <br />
+                <br />
                 <h:form id="listar">
-                    <p:dialog header="Lista das Substancias Cadastradas" widgetVar="dlgListar">
-                        <p:dataTable value="#{guiaPericialMB.listarGuias()}" var="g" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
-                            <p:column headerText="Número da Guia">
-                                <h:outputText value="#{g.numeroGuia}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">Data de Entrada</f:facet>
-                                <h:outputText value="#{g.dataEntrada}" >
-                                	<f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
-                                </h:outputText> 
-                            </p:column>
-                            <p:column headerText="Vítima">
-                                <h:outputText value="#{g.vitima}" />
-                            </p:column>
-                            <p:column headerText="Envolvido">
-                                <h:outputText value="#{g.envolvido}"/>
-                            </p:column>
-                            <p:column headerText="Local do Exame">
-                                <h:outputText value="#{g.localExame}"/>
-                            </p:column>
-                            <p:column headerText="Referência">
-                                <h:outputText value="#{g.referencia}"/>
-                            </p:column>
-                            <p:column headerText="Autoridade">
-                                <h:outputText value="#{g.autoridade.nome}"/>
-                            </p:column>
-                            <p:column headerText="Destino">
-                                <h:outputText value="#{g.destino.nomeDestino}"/>
-                            </p:column>
-                            <p:column headerText="Procedencia">
-                                <h:outputText value="#{g.procedencia.descricao}"/>
-                            </p:column>
-                            <p:column headerText="Tipo de Material">
-                                <p:dataList value="#{g.tipoDeMaterial}" var="tipoDeMaterial">
-                                    #{tipoDeMaterial.descricaoMaterial}
-                                </p:dataList>
-                            </p:column>
-                            <p:column headerText="Tipo de Exame">
-                                <h:outputText value="#{g.tipoExame.descricaoExame}"/>
-                            </p:column>
-                            <p:column headerText="Observação">
-                                <h:outputText value="#{g.observacao}"/>
-                            </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandLink action="#{guiaPericialMB.remover(g)}" 
-                                               onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
-                                    <h:graphicImage url="./../resources/Imagens/excluir.png" />
-                                </p:commandLink>
-                            </p:column>
-                            <p:column headerText="Editar" style="text-align: center">
-                                <p:commandLink update=":dadosGuia">
-                                    <h:graphicImage url="./../resources/Imagens/editar.png"/>
-                                    <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
-                                </p:commandLink>
-                            </p:column>
-                            <p:column headerText="Imprimir" style="text-align: center">
-                                <p:commandButton value="Gerar Relatorio" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
-						onclick="this.form.target='_blank'" ajax="false"  process="@this">
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable> 
-                    </p:dialog>
+                    <p:dataTable value="#{guiaPericialMB.listarGuias()}" var="g" paginator="true" rows="10" 
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                        <f:facet name="header">
+                        Lista das Guias Periciais Cadastradas
+                        </f:facet>
+                        <p:column headerText="Número da Guia">
+                            <h:outputText value="#{g.numeroGuia}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Data de Entrada</f:facet>
+                            <h:outputText value="#{g.dataEntrada}" >
+                                    <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                            </h:outputText> 
+                        </p:column>
+                        <p:column headerText="Vítima">
+                            <h:outputText value="#{g.vitima}" />
+                        </p:column>
+                        <p:column headerText="Envolvido">
+                            <h:outputText value="#{g.envolvido}"/>
+                        </p:column>
+                        <p:column headerText="Local do Exame">
+                            <h:outputText value="#{g.localExame}"/>
+                        </p:column>
+                        <p:column headerText="Referência">
+                            <h:outputText value="#{g.referencia}"/>
+                        </p:column>
+                        <p:column headerText="Autoridade">
+                            <h:outputText value="#{g.autoridade.nome}"/>
+                        </p:column>
+                        <p:column headerText="Destino">
+                            <h:outputText value="#{g.destino.nomeDestino}"/>
+                        </p:column>
+                        <p:column headerText="Procedencia">
+                            <h:outputText value="#{g.procedencia.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Tipo de Material">
+                            <p:dataList value="#{g.tipoDeMaterial}" var="tipoDeMaterial">
+                                #{tipoDeMaterial.descricaoMaterial}
+                            </p:dataList>
+                        </p:column>
+                        <p:column headerText="Tipo de Exame">
+                            <h:outputText value="#{g.tipoExame.descricaoExame}"/>
+                        </p:column>
+                        <p:column headerText="Observação">
+                            <h:outputText value="#{g.observacao}"/>
+                        </p:column>
+                        <p:column headerText="Excluir" style="text-align: center">
+                            <p:commandButton action="#{guiaPericialMB.remover(g)}" icon="ui-icon-trash"
+                                           onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Editar" style="text-align: center">
+                            <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
+                                <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Imprimir" style="text-align: center">
+                            <p:commandButton icon="ui-icon-print" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
+                                            onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable> 
                 </h:form>
             </ui:define>
         </ui:composition>

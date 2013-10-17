@@ -1,9 +1,13 @@
 package Beans;
 
+import Controller.UsuarioEJB;
 import Model.Usuario;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,26 +17,20 @@ import org.springframework.security.core.userdetails.User;
 @SessionScoped
 public class LoginMB implements Serializable{
     
-    private Usuario usuario;
+    @EJB
+    public UsuarioEJB usuEJB;
+    public Usuario usuario;
     
-    public LoginMB() {
-        usuario = new Usuario();
-        SecurityContext context = SecurityContextHolder.getContext();
-        if (context instanceof SecurityContext){
-            Authentication authentication = context.getAuthentication();
-            if (authentication instanceof Authentication){
-                usuario.setEmail(((User)authentication.getPrincipal()).getUsername());
+     public Usuario getUserLogado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext external = context.getExternalContext();
+        String login = external.getRemoteUser();
+
+        if (usuario == null || !login.equals(usuario.getEmail())) {
+            if (login != null) {
+                usuario = usuEJB.findUsuarioPorLogin(login);                
             }
         }
-    }
-
-    public Usuario getUsuario() {
         return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-    
-    
+    }   
 }

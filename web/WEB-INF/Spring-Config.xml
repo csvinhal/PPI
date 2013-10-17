@@ -13,15 +13,12 @@
         <intercept-url pattern="/restrito/**" access="ROLE_ADMIN"/> 
        
         <intercept-url pattern="/perito/**" access="ROLE_ADMIN" /> 
-        
-        <intercept-url pattern="/publico/**" access="ROLE_ADMIN,ROLE_USUARIO" /> 
-               
       
-        <form-login login-page="/login.xhtml" always-use-default-target="true"
-                    default-target-url="/principal/index.xhtml" authentication-failure-url="/login.xhtml?login_error=1" /> 
-        <logout logout-success-url="/login.xhtml" />
+        <form-login login-page="/publico/login.xhtml" always-use-default-target="true"
+                    default-target-url="/principal/index.xhtml" authentication-failure-url="/publico/login.xhtml?login_error=1" /> 
+        <logout logout-success-url="/publico/login.xhtml" />
         <session-management>
-            <concurrency-control max-sessions="1"  expired-url="/index.xhtml"/>
+            <concurrency-control max-sessions="1"  expired-url="/publico/login.xhtml"/>
         </session-management>
     </http>
 	 	

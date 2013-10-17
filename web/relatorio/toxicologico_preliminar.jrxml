@@ -10,8 +10,8 @@
      laudo.`referencia` AS laudo_referencia,
      guia_pericial.`envolvido` AS guia_pericial_envolvido,
      guia_pericial.`numeroGuia` AS guia_pericial_numeroGuia,
-     toxicologico_preliminar.`dataOcorrencia` AS toxicologico_preliminar_dataOcorrencia,
-     toxicologico_preliminar.`observacao` AS toxicologico_preliminar_observacao,
+     laudo.`dataOcorrencia` AS toxicologico_preliminar_dataOcorrencia,
+     laudo.`observacao` AS toxicologico_preliminar_observacao,
      involucro.`peso` AS involucro_peso,
      involucro.`quantidade` AS involucro_quantidade,
      cor.`descricao` AS cor_descricao,
@@ -23,8 +23,7 @@
      procedencia.`descricao` AS procedencia_descricao
 FROM
      `guia_pericial` guia_pericial INNER JOIN `laudo` laudo ON guia_pericial.`idGuia` = laudo.`guia`
-     INNER JOIN `toxicologico_preliminar` toxicologico_preliminar ON laudo.`idLaudo` = toxicologico_preliminar.`idPreliminar`
-     INNER JOIN `involucro` involucro ON toxicologico_preliminar.`involucro` = involucro.`idInvolucro`
+     INNER JOIN `involucro` involucro ON laudo.`involucro` = involucro.`idInvolucro`
      INNER JOIN `cor` cor ON involucro.`cor` = cor.`idCor`
      INNER JOIN `substancia` substancia ON involucro.`substancia` = substancia.`idSubstancia`
      INNER JOIN `tipo_involucro` tipo_involucro ON involucro.`tipoInvolucro` = tipo_involucro.`idTipoInvolucro`

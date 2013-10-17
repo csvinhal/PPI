@@ -1,13 +1,13 @@
 package Beans;
 
 import Controller.GuiaPericialEJB;
-import Util.RelatorioFactory;
 import Model.Autoridade;
 import Model.Destino;
 import Model.GuiaPericial;
 import Model.Procedencia;
 import Model.TipoDeExame;
 import Model.TipoDeMaterial;
+import Util.RelatorioFactory;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -15,10 +15,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Crouch
- */
 @ManagedBean(name = "guiaPericialMB")
 public class GuiaPericialMB implements Serializable{
 
@@ -111,7 +107,7 @@ public class GuiaPericialMB implements Serializable{
     }
 
     public void salvar() {
-        if (guiaPericial.getIdLaudo() == null) {
+        if (guiaPericial.getIdGuia() == null) {
             try {
                 guiaPericialEJB.salvar(guiaPericial);
                 FacesContext fc = FacesContext.getCurrentInstance();
@@ -147,8 +143,8 @@ public class GuiaPericialMB implements Serializable{
         }
     }
 
-    public void geraRelatorioGuia(GuiaPericial guiaSelecionada) {
+    public void geraRelatorioGuia(GuiaPericial guiaPericial) {
         RelatorioFactory relatorioFactory = new RelatorioFactory();
-        relatorioFactory.geraRelatorioGuia(guiaSelecionada.getIdLaudo());
+        relatorioFactory.geraRelatorioGuia(guiaPericial.getIdGuia());
     }
 }

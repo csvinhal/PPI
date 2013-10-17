@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Util;
 
 import java.io.IOException;
@@ -16,28 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperRunManager;
 
-/**
- *
- * @author Crouch
- */
 public class RelatorioFactory {
         public static Connection getConexao() {
         Connection conexao = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/ppi2", "root", "connect");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/ppi", "root", "connect");
         } catch (Exception e) {
             System.out.println(e);
         }
         return conexao;
     }
     
-     public static void geraRelatorioGuia(int idGuia) {
+     public static void geraRelatorioGuia(Integer idGuia) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             HttpServletResponse response = (HttpServletResponse) context
                     .getExternalContext().getResponse();
-            InputStream reportStream = context.getExternalContext().getResourceAsStream("/relatorio/guia.jasper");
+            InputStream reportStream = context.getExternalContext().getResourceAsStream("/relatorio/guiaPericial.jasper");
             response.setContentType("application/pdf");
             ServletOutputStream servletOutputStream = response.getOutputStream();
             Map<String, Object> map = new HashMap<String, Object>();

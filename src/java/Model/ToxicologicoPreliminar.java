@@ -1,19 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,10 +13,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Crouch
- */
 @Entity
 @Table(name = "toxicologico_preliminar")
 @XmlRootElement
@@ -43,9 +31,6 @@ public class ToxicologicoPreliminar extends Laudo implements Serializable {
     @JoinColumn(name = "involucro", referencedColumnName = "idInvolucro")
     @ManyToOne(optional = false)
     private Involucro involucro;
-    @JoinColumn(name = "idPreliminar", referencedColumnName = "idLaudo", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Laudo laudo;
 
     public ToxicologicoPreliminar() {
     }
@@ -84,13 +69,5 @@ public class ToxicologicoPreliminar extends Laudo implements Serializable {
 
     public void setInvolucro(Involucro involucro) {
         this.involucro = involucro;
-    }
-
-    public Laudo getLaudo() {
-        return laudo;
-    }
-
-    public void setLaudo(Laudo laudo) {
-        this.laudo = laudo;
-    }    
+    }   
 }

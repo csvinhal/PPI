@@ -1,18 +1,21 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,15 +24,28 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Crouch
- */
+
 @Entity
 @Table(name = "guia_pericial")
 @XmlRootElement
-public class GuiaPericial extends Laudo implements Serializable {
+@NamedQueries({
+    @NamedQuery(name = "GuiaPericial.findAll", query = "SELECT g FROM GuiaPericial g"),
+    @NamedQuery(name = "GuiaPericial.findByIdGuia", query = "SELECT g FROM GuiaPericial g WHERE g.idGuia = :idGuia"),
+    @NamedQuery(name = "GuiaPericial.findByDataEntrada", query = "SELECT g FROM GuiaPericial g WHERE g.dataEntrada = :dataEntrada"),
+    @NamedQuery(name = "GuiaPericial.findByEnvolvido", query = "SELECT g FROM GuiaPericial g WHERE g.envolvido = :envolvido"),
+    @NamedQuery(name = "GuiaPericial.findByLocalExame", query = "SELECT g FROM GuiaPericial g WHERE g.localExame = :localExame"),
+    @NamedQuery(name = "GuiaPericial.findByNumeroGuia", query = "SELECT g FROM GuiaPericial g WHERE g.numeroGuia = :numeroGuia"),
+    @NamedQuery(name = "GuiaPericial.findByObservacao", query = "SELECT g FROM GuiaPericial g WHERE g.observacao = :observacao"),
+    @NamedQuery(name = "GuiaPericial.findByReferencia", query = "SELECT g FROM GuiaPericial g WHERE g.referencia = :referencia"),
+    @NamedQuery(name = "GuiaPericial.findByStatus", query = "SELECT g FROM GuiaPericial g WHERE g.status = :status"),
+    @NamedQuery(name = "GuiaPericial.findByVitima", query = "SELECT g FROM GuiaPericial g WHERE g.vitima = :vitima")})
+
+public class GuiaPericial implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    private Integer idGuia;
     @Temporal(TemporalType.DATE)
     private Date dataEntrada;
     @Basic(optional = false)
@@ -54,10 +70,12 @@ public class GuiaPericial extends Laudo implements Serializable {
     @Size(max = 100)
     private String vitima;
     @JoinTable(name = "guiamaterial", joinColumns = {
-        @JoinColumn(name = "laudo_id", referencedColumnName = "idLaudo")}, inverseJoinColumns = {
+        @JoinColumn(name = "guia_id", referencedColumnName = "idGuia")}, inverseJoinColumns = {
         @JoinColumn(name = "tipoMaterial_id", referencedColumnName = "idTipoMaterial")})
     @ManyToMany
     private List<TipoDeMaterial> tipoDeMaterial;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "guia")
+    private List<Laudo> laudoList;
     @JoinColumn(name = "usuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuario usuario;
@@ -80,11 +98,24 @@ public class GuiaPericial extends Laudo implements Serializable {
     public GuiaPericial() {
     }
 
-    public GuiaPericial(String envolvido, String localExame, String numeroGuia, String referencia) {
+    public GuiaPericial(Integer idGuia) {
+        this.idGuia = idGuia;
+    }
+
+    public GuiaPericial(Integer idGuia, String envolvido, String localExame, String numeroGuia, String referencia) {
+        this.idGuia = idGuia;
         this.envolvido = envolvido;
         this.localExame = localExame;
         this.numeroGuia = numeroGuia;
         this.referencia = referencia;
+    }
+
+    public Integer getIdGuia() {
+        return idGuia;
+    }
+
+    public void setIdGuia(Integer idGuia) {
+        this.idGuia = idGuia;
     }
 
     public Date getDataEntrada() {
@@ -160,6 +191,15 @@ public class GuiaPericial extends Laudo implements Serializable {
         this.tipoDeMaterial = tipoDeMaterial;
     }
 
+    @XmlTransient
+    public List<Laudo> getLaudoList() {
+        return laudoList;
+    }
+
+    public void setLaudoList(List<Laudo> laudoList) {
+        this.laudoList = laudoList;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -206,5 +246,31 @@ public class GuiaPericial extends Laudo implements Serializable {
 
     public void setAutoridade(Autoridade autoridade) {
         this.autoridade = autoridade;
-    }    
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idGuia != null ? idGuia.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof GuiaPericial)) {
+            return false;
+        }
+        GuiaPericial other = (GuiaPericial) object;
+        if ((this.idGuia == null && other.idGuia != null) || (this.idGuia != null && !this.idGuia.equals(other.idGuia))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Model.GuiaPericial[ idGuia=" + idGuia + " ]";
+    }
+    
 }

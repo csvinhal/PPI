@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="guiaPericial" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bac33ee2-7be9-4e4b-9833-0b7d865affcf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idGuia" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT distinct
+     guia_pericial.`dataEntrada` AS guia_pericial_dataEntrada,
+     guia_pericial.`envolvido` AS guia_pericial_envolvido,
+     guia_pericial.`localExame` AS guia_pericial_localExame,
+     guia_pericial.`numeroGuia` AS guia_pericial_numeroGuia,
+     guia_pericial.`observacao` AS guia_pericial_observacao,
+     guia_pericial.`referencia` AS guia_pericial_referencia,
+     guia_pericial.`vitima` AS guia_pericial_vitima,
+     autoridade.`nome` AS autoridade_nome,
+     destino.`nomeDestino` AS destino_nomeDestino,
+     tipo_de_exame.`descricaoExame` AS tipo_de_exame_descricaoExame,
+     tipo_de_material.`descricaoMaterial` AS tipo_de_material_descricaoMaterial,
+     procedencia.`descricao` AS procedencia_descricao
+FROM
+     `autoridade` autoridade INNER JOIN `guia_pericial` guia_pericial
+		ON autoridade.`idAutoridade` = guia_pericial.`autoridade`
+     INNER JOIN `destino` destino
+		ON guia_pericial.`destino` = destino.`idDestino`
+     INNER JOIN `tipo_de_exame` tipo_de_exame
+		ON guia_pericial.`tipoExame` = tipo_de_exame.`idTipoExame`
+     INNER JOIN `guiaMaterial` guiaMaterial
+		ON guia_pericial.`idGuia` = guiaMaterial.`guia_id`
+	 INNER JOIN `tipo_de_material` tipo_de_material
+		ON guiaMaterial.`tipoMaterial_id` = tipo_de_material.`idTipoMaterial`
+     INNER JOIN `procedencia` procedencia
+		ON guia_pericial.`procedencia` = procedencia.`idProcedencia`
+WHERE
+     guia_pericial.`idGuia` = idGuia]]>
+	</queryString>
+	<field name="guia_pericial_dataEntrada" class="java.sql.Date"/>
+	<field name="guia_pericial_envolvido" class="java.lang.String"/>
+	<field name="guia_pericial_localExame" class="java.lang.String"/>
+	<field name="guia_pericial_numeroGuia" class="java.lang.String"/>
+	<field name="guia_pericial_observacao" class="java.lang.String"/>
+	<field name="guia_pericial_referencia" class="java.lang.String"/>
+	<field name="guia_pericial_vitima" class="java.lang.String"/>
+	<field name="autoridade_nome" class="java.lang.String"/>
+	<field name="destino_nomeDestino" class="java.lang.String"/>
+	<field name="tipo_de_exame_descricaoExame" class="java.lang.String"/>
+	<field name="tipo_de_material_descricaoMaterial" class="java.lang.String"/>
+	<field name="procedencia_descricao" class="java.lang.String"/>
+	<group name="Group Header">
+		<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+		<groupHeader>
+			<band height="218">
+				<staticText>
+					<reportElement uuid="8ead2897-34df-411b-9b68-a3d081628b89" x="0" y="0" width="59" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Guia Nº:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="481a05c3-5067-47a1-a2fa-36e8a1a384ea" x="0" y="20" width="112" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Data de entrada:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="39bf9205-00ef-4497-a30f-5a850115ad01" x="0" y="40" width="88" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Autoridade:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8b0313e9-3470-4e14-bd69-edb5773a6938" x="0" y="58" width="59" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Destino:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c870c9e9-9ea7-4552-84cf-a0ed627bc39a" x="0" y="78" width="88" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Procedência:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7953f1df-4834-4e0e-a292-66c83a7c7014" x="0" y="98" width="77" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Referência:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="5a3f3790-13f6-44dd-90a3-610a73bd74a7" x="0" y="118" width="112" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Local do Exame:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c91e7c2e-200a-430c-a06b-e72321355092" x="0" y="138" width="59" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Vítima:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="cace1b3c-1fc8-4451-a001-c80f67f2fa1f" x="0" y="158" width="77" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Envolvido:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8c052755-d402-4eeb-b0df-9377efe44df0" x="0" y="178" width="112" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo de Exame:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="e1c86407-6d9b-414d-963c-1172276896ed" x="112" y="20" width="443" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{guia_pericial_dataEntrada}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="fe791ddb-714b-4f21-8e13-52c5c6d68695" x="77" y="158" width="478" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{guia_pericial_envolvido}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="acc7d237-e5f8-4430-a570-ba693253dff8" x="112" y="118" width="443" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{guia_pericial_localExame}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="ecc3f67b-3762-427c-afd6-e9c1b62ec52f" x="59" y="0" width="496" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{guia_pericial_numeroGuia}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="79e0db55-83b9-44d3-8e38-d1a948c1bb7e" x="77" y="98" width="478" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{guia_pericial_referencia}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="46bde961-c5a7-4dd4-9db2-8a07ea07fe38" x="59" y="138" width="496" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{guia_pericial_vitima}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="a3458ec2-892f-4875-883b-8ca32261e2d5" x="88" y="40" width="467" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{autoridade_nome}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="5bfdb960-f5b6-4eb1-a696-5e314231a033" x="59" y="60" width="496" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{destino_nomeDestino}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="fa84ac5c-bc02-4699-a809-bd61d7e480fa" x="112" y="178" width="443" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo_de_exame_descricaoExame}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="8a878e0a-defb-4b6b-a682-87719ae8930a" x="0" y="198" width="100" height="20"/>
+					<textElement>
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Material:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="03254f27-8af3-4527-98a8-e7c4cfe76154" x="88" y="78" width="467" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{procedencia_descricao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement uuid="7a618c12-fe4f-43a5-8e65-27fa5f403a69" x="0" y="2" width="555" height="77"/>
+				<imageExpression><![CDATA["C:\\Users\\Cristiano\\Documents\\NetBeansProjects\\PPi0\\web\\relatorio\\timbre.JPG"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="75445f29-bb0f-4700-9d89-a2c8b8dfa55f" x="0" y="0" width="555" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Guia Pericial]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="331438aa-551a-4d99-8feb-c76997ca88b7" x="100" y="0" width="455" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_de_material_descricaoMaterial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement uuid="bc1e478c-4739-4d7b-9c2f-fbb2a26e8647" x="88" y="0" width="467" height="45"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guia_pericial_observacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="74f39db8-358e-48b3-bb56-e53244cd5b2d" x="0" y="0" width="88" height="23"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observação:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="f9d86650-a3fc-47ef-9e82-3e8d43d95eff" x="0" y="0" width="515" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="46a4fa90-4685-4404-bee9-c3af1caeacde" x="515" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

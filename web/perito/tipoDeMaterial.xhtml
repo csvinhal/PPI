@@ -19,15 +19,18 @@
                             <p:inputText value="#{tipoDeMaterialMB.tipoDeMaterial.descricaoMaterial}" size="50" maxlength="100" required="true"
                                                  requiredMessage="A descrição do material não pode ficar em branco!"/>
                             <p:commandButton value="Salvar" action="#{tipoDeMaterialMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                            <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
+                <br />
+                <br />
                 <h:form id="listar">
-                    <p:dialog header="Lista de Materiais Cadastrados" widgetVar="dlgListar">
                         <p:dataTable value="#{tipoDeMaterialMB.listarTiposDeMateriais()}" var="t" paginator="true" rows="10" 
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
                                          {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                        <f:facet name="header">
+                            Lista de Materiais Cadastrados
+                        </f:facet>
                             <p:column headerText="Codigo">
                                 <h:outputText value="#{t.idTipoMaterial}"/>
                             </p:column>
@@ -35,19 +38,16 @@
                                 <h:outputText value="#{t.descricaoMaterial}"/>
                             </p:column>
                             <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandLink action="#{tipoDeMaterialMB.remover(t)}" 
-                                               onclick="if(!confirm('Confirma a exclusão de #{t.descricaoMaterial}?')) return false" ajax="false">
-                                    <h:graphicImage url="./../resources/Imagens/excluir.png" />
-                                        </p:commandLink>
-                                    </p:column>
-                                    <p:column headerText="Editar" style="text-align: center">
-                                        <p:commandLink update=":dadosTipoDeMaterial">
-                                            <h:graphicImage url="./../resources/Imagens/editar.png" />
-                                            <f:setPropertyActionListener target="#{tipoDeMaterialMB.tipoDeMaterial}" value="#{t}"/>
-                                        </p:commandLink>
-                                    </p:column>
+                                <p:commandButton action="#{tipoDeMaterialMB.remover(t)}" icon="ui-icon-trash"
+                                           onclick="if(!confirm('Confirma a exclusão de #{t.descricaoMaterial}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":dadosTipoDeMaterial" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{tipoDeMaterialMB.tipoDeMaterial}" value="#{t}"/>
+                                </p:commandButton>
+                            </p:column>
                         </p:dataTable> 
-                    </p:dialog>
                 </h:form>
             </ui:define>
         </ui:composition>

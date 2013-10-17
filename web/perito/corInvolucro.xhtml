@@ -23,31 +23,33 @@
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
+                <br />
+                <br />
                 <h:form id="listar">
-                    <p:dialog header="Lista das Cores de Involucros Cadastradas" widgetVar="dlgListar">
-                        <p:dataTable value="#{corInvolucroMB.listarCores()}" var="c" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
-                            <p:column headerText="Codigo">
-                                <h:outputText value="#{c.idCor}"/>
-                            </p:column>
-                            <p:column headerText="Nome">
-                                <h:outputText value="#{c.descricao}"/>
-                            </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandLink action="#{corInvolucroMB.remover(c)}" 
-                                               onclick="if(!confirm('Confirma a exclusão de #{c.descricao}?')) return false" ajax="false">
-                                    <h:graphicImage url="./../resources/Imagens/excluir.png" />
-                                        </p:commandLink>
-                                    </p:column>
-                                    <p:column headerText="Editar" style="text-align: center">
-                                        <p:commandLink update=":dadosCorInvolucro">
-                                            <h:graphicImage url="./../resources/Imagens/editar.png"/>
-                                            <f:setPropertyActionListener target="#{corInvolucroMB.cor}" value="#{c}"/>
-                                        </p:commandLink>
-                                    </p:column>
-                        </p:dataTable> 
-                    </p:dialog>
+                    <p:dataTable value="#{corInvolucroMB.listarCores()}" var="c" paginator="true" rows="10" 
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                        <f:facet name="header">
+                            Lista de Cores de Invólucros Cadastrados
+                        </f:facet>
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{c.idCor}"/>
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{c.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Excluir" style="text-align: center">
+                            <p:commandButton action="#{corInvolucroMB.remover(c)}" icon="ui-icon-trash" 
+                                           onclick="if(!confirm('Confirma a exclusão de #{c.descricao}?')) return false" ajax="false">
+
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Editar" style="text-align: center">
+                            <p:commandButton update=":dadosCorInvolucro" icon="ui-icon-pencil">
+                                <f:setPropertyActionListener target="#{corInvolucroMB.cor}" value="#{c}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable> 
                 </h:form>
             </ui:define>
         </ui:composition>

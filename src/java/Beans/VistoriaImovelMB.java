@@ -44,7 +44,6 @@ public class VistoriaImovelMB implements Serializable{
     public void salvar(){
         if(vistoriaImovel.getIdLaudo() == null){
             try{
-                vistoriaImovel.setLaudo(laudo);
                 vistoriaImovelEJB.salvar(vistoriaImovel);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
@@ -56,7 +55,6 @@ public class VistoriaImovelMB implements Serializable{
             }
         }else{
             try{
-                vistoriaImovel.setLaudo(laudo);
                 vistoriaImovelEJB.salvar(vistoriaImovel);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Editado com sucesso!"));

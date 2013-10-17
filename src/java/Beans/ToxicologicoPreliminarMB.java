@@ -1,9 +1,8 @@
 package Beans;
 
 import Controller.ToxicologicoPreliminarEJB;
-import Util.RelatorioFactory;
 import Model.Involucro;
-import Model.Laudo;
+import Util.RelatorioFactory;
 import Model.ToxicologicoPreliminar;
 import java.io.Serializable;
 import java.util.List;
@@ -21,12 +20,10 @@ public class ToxicologicoPreliminarMB implements Serializable{
     ToxicologicoPreliminarEJB toxiPreliminarEJB;
     private ToxicologicoPreliminar toxicologicoPreliminar;
     private Involucro involucro;
-    private Laudo laudo;
     
     public ToxicologicoPreliminarMB() {
         toxicologicoPreliminar = new ToxicologicoPreliminar();
         involucro = new Involucro();
-        laudo = new Laudo();
     }
 
     public ToxicologicoPreliminar getToxicologicoPreliminar() {
@@ -44,20 +41,11 @@ public class ToxicologicoPreliminarMB implements Serializable{
     public void setInvolucro(Involucro involucro) {
         this.involucro = involucro;
     }
-
-    public Laudo getLaudo() {
-        return laudo;
-    }
-
-    public void setLaudo(Laudo laudo) {
-        this.laudo = laudo;
-    }
-        
+    
         
     public void salvar(){
         if(toxicologicoPreliminar.getIdLaudo() == null){
             try{
-                toxicologicoPreliminar.setLaudo(laudo);
                 toxicologicoPreliminar.setInvolucro(involucro);
                 toxiPreliminarEJB.salvar(toxicologicoPreliminar);
                 FacesContext fc = FacesContext.getCurrentInstance();
@@ -70,7 +58,6 @@ public class ToxicologicoPreliminarMB implements Serializable{
             }
         }else{
             try{
-                toxicologicoPreliminar.setLaudo(laudo);
                 toxicologicoPreliminar.setInvolucro(involucro);
                 toxiPreliminarEJB.salvar(toxicologicoPreliminar);
                 FacesContext fc = FacesContext.getCurrentInstance();
@@ -84,7 +71,7 @@ public class ToxicologicoPreliminarMB implements Serializable{
         }
     }
     
-     public List<ToxicologicoPreliminar> listarTiposInvolucros(){
+     public List<ToxicologicoPreliminar> listarToxicologicosPremilinares(){
         return toxiPreliminarEJB.listarToxicologicoPreliminar();
     }
 
@@ -106,6 +93,6 @@ public class ToxicologicoPreliminarMB implements Serializable{
     
     public void geraRelatorioToxicologicoPreliminar(ToxicologicoPreliminar preliminar) {
         RelatorioFactory relatorioFactory = new RelatorioFactory();
-        relatorioFactory.geraRelatorioPreliminar(toxicologicoPreliminar.getIdLaudo());
+        relatorioFactory.geraRelatorioPreliminar(preliminar.getIdLaudo());
     }
 }

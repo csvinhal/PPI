@@ -29,42 +29,42 @@
                                     <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
                                 </p:inputText>
                                 <p:commandButton value="Salvar" action="#{autoridadeMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                                <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
                             </h:panelGrid>
                     </h:form>
                 </p:panel>
-                    <h:form id="listar">
-                        <p:dialog header="Lista de Autoridades Cadastradas" widgetVar="dlgListar">
-                            <p:dataTable value="#{autoridadeMB.listarAutoridades()}" var="a" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
-                                <p:column headerText="Codigo">
-                                    <h:outputText value="#{a.idAutoridade}"/>
-                                </p:column>
-                                <p:column headerText="Nome">
-                                    <h:outputText value="#{a.nome}"/>
-                                </p:column>
-                                <p:column headerText="Email">
-                                    <h:outputText value="#{a.email}"/>
-                                </p:column>
-                                <p:column headerText="Masp">
-                                    <h:outputText value="#{a.masp}"/>
-                                </p:column>
-                                <p:column headerText="Excluir" style="text-align: center">
-                                    <p:commandLink action="#{autoridadeMB.Remover(a)}" 
-                                                       onclick="if(!confirm('Confirma a exclusão de #{t.descricaoExame}?')) return false" ajax="false">
-                                            <h:graphicImage url="./../resources/Imagens/excluir.png" />
-                                        </p:commandLink>
-                                    </p:column>
-                                    <p:column headerText="Editar" style="text-align: center">
-                                        <p:commandLink update=":dadosAutoridade">
-                                            <h:graphicImage url="./../resources/Imagens/editar.png" />
-                                            <f:setPropertyActionListener target="#{autoridadeMB.autoridade}" value="#{a}"/>
-                                        </p:commandLink>
-                                    </p:column>
-                            </p:dataTable> 
-                        </p:dialog>
-                    </h:form>
+                <br />
+                <br />
+                <h:form id="listar">
+                    <p:dataTable value="#{autoridadeMB.listarAutoridades()}" var="a" paginator="true" rows="10" 
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                 {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                        <f:facet name="header">
+                            Lista de Autoridades Cadastradas
+                        </f:facet>
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{a.idAutoridade}"/>
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{a.nome}"/>
+                        </p:column>
+                        <p:column headerText="Email">
+                            <h:outputText value="#{a.email}"/>
+                        </p:column>
+                        <p:column headerText="Masp">
+                            <h:outputText value="#{a.masp}"/>
+                        </p:column>
+                        <p:column headerText="Excluir" style="text-align: center">
+                            <p:commandButton action="#{autoridadeMB.Remover(a)}" icon="ui-icon-trash"
+                                               onclick="if(!confirm('Confirma a exclusão de #{t.descricaoExame}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":dadosAutoridade" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{autoridadeMB.autoridade}" value="#{a}"/>
+                                </p:commandButton>
+                            </p:column>
+                    </p:dataTable> 
+                </h:form>
             </ui:define>
         </ui:composition>
 
