@@ -26,16 +26,17 @@
                 <br />
                 <br />
                 <h:form id="listar">
-                    <p:dataTable value="#{corInvolucroMB.listarCores()}" var="c" paginator="true" rows="10" 
+                    <p:dataTable emptyMessage="Nenhuma Cor Cadastrada"
+                                     value="#{corInvolucroMB.listarCores()}" var="c" paginator="true" rows="10" 
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
                                      {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
                         <f:facet name="header">
                             Lista de Cores de Invólucros Cadastrados
                         </f:facet>
-                        <p:column headerText="Codigo">
-                            <h:outputText value="#{c.idCor}"/>
+                        <p:column headerText="Codigo" filterBy="#{c.idCor}" filterMatchMode="contains">
+                            <h:outputText value="#{c.idCor}" />
                         </p:column>
-                        <p:column headerText="Nome">
+                        <p:column headerText="Nome" filterBy="#{c.descricao}" filterMatchMode="contains">
                             <h:outputText value="#{c.descricao}"/>
                         </p:column>
                         <p:column headerText="Excluir" style="text-align: center">

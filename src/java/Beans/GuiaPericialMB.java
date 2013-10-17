@@ -106,7 +106,7 @@ public class GuiaPericialMB implements Serializable{
         this.guiaPericial = guiaPericial;
     }
 
-    public void salvar() {
+    public void salvar(){
         if (guiaPericial.getIdGuia() == null) {
             try {
                 guiaPericialEJB.salvar(guiaPericial);

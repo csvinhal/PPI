@@ -17,10 +17,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Crouch
- */
 @Entity
 @Table(name = "tipo_de_exame")
 @XmlRootElement
@@ -38,7 +34,7 @@ public class TipoDeExame implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     private String descricaoExame;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoExame")
+    @OneToMany(mappedBy = "tipoExame")
     private List<GuiaPericial> guiaPericialList;
 
     public TipoDeExame() {

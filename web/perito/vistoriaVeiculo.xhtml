@@ -70,37 +70,38 @@
                 <h:form id="listar">
                     <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="vv" paginator="true" rows="10" 
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                     emptyMessage="Nenhuma Vistoria de Veiculo Cadastrada">
                         <f:facet name="header">
                         Lista dos Veículos Cadastrados
                         </f:facet>
-                        <p:column headerText="Autoridade Requisitante">
+                        <p:column headerText="Autoridade Requisitante" filterBy="#{vv.guia.autoridade.nome}" filterMatchMode="contains">
                             <h:outputText value="#{vv.guia.autoridade.nome}" />
                         </p:column>
-                        <p:column headerText="Natureza dos Exames">
+                        <p:column headerText="Natureza dos Exames" filterBy="#{vv.guia.tipoExame.descricaoExame}" filterMatchMode="contains">
                             <h:outputText value="#{vv.guia.tipoExame.descricaoExame}" />
                         </p:column>
-                        <p:column headerText="Local dos Exames">
+                        <p:column headerText="Local dos Exames" filterBy="#{vv.guia.localExame}" filterMatchMode="contains">
                             <h:outputText value="#{vv.guia.localExame}" />
                         </p:column>
-                        <p:column headerText="Municipio">
+                        <p:column headerText="Municipio" filterBy="#{vv.guia.procedencia.descricao}" filterMatchMode="contains">
                             <h:outputText value="#{vv.guia.procedencia.descricao}" />
                         </p:column>
-                        <p:column headerText="Data e Hora dos Exames">
+                        <p:column headerText="Data e Hora dos Exames" filterBy="#{vv.dataExame}" filterMatchMode="contains">
                             <h:outputText value="#{vv.dataExame}">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="Referencia Laudo">
+                        <p:column headerText="Referencia Laudo" filterBy="#{vv.referencia}" filterMatchMode="contains">
                             <h:outputText value="#{vv.referencia}" />
                         </p:column>
-                        <p:column headerText="Vitima">
+                        <p:column headerText="Vitima" filterBy="#{vv.guia.vitima}" filterMatchMode="contains">
                             <h:outputText value="#{vv.guia.vitima}" />
                         </p:column>
-                        <p:column headerText="Indiciado">
+                        <p:column headerText="Indiciado" filterBy="#{vv.guia.envolvido}" filterMatchMode="contains">
                             <h:outputText value="#{vv.guia.envolvido}" />
                         </p:column>
-                        <p:column headerText="Destino do Laudo">
+                        <p:column headerText="Destino do Laudo" filterBy="#{vv.guia.destino.nomeDestino}" filterMatchMode="contains">
                             <h:outputText value="#{vv.guia.destino.nomeDestino}" />
                         </p:column>
                         <p:column headerText="Excluir" style="text-align: center">

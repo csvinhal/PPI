@@ -1,7 +1,6 @@
 package Beans;
 
 import Controller.VistoriaVeiculoEJB;
-import Model.Laudo;
 import Model.Veiculo;
 import Model.VistoriaVeiculo;
 import Util.RelatorioFactory;

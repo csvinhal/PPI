@@ -37,7 +37,7 @@ public class Cor implements Serializable {
     private Integer idCor;
     @Size(max = 30)
     private String descricao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cor")
+    @OneToMany(mappedBy = "cor")
     private List<Involucro> involucroList;
 
     public Cor() {

@@ -31,9 +31,6 @@ public class VistoriaVeiculo extends Laudo implements Serializable {
     @JoinColumn(name = "usuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuario usuario;
-    @JoinColumn(name = "idVistoriaVeiculo", referencedColumnName = "idLaudo", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Laudo laudo;
 
     public VistoriaVeiculo() {
     }
@@ -65,12 +62,4 @@ public class VistoriaVeiculo extends Laudo implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    public Laudo getLaudo() {
-        return laudo;
-    }
-
-    public void setLaudo(Laudo laudo) {
-        this.laudo = laudo;
-    }    
 }

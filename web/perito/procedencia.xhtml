@@ -27,14 +27,15 @@
                 <h:form id="listar">
                     <p:dataTable value="#{procedenciaMB.listarProcedencias()}" var="p" paginator="true" rows="10" 
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                     emptyMessage="Nenhuma Procedencia Cadastrada">
                         <f:facet name="header">
                             Lista de Procedências Cadastradas
                         </f:facet>
-                        <p:column headerText="Codigo">
+                        <p:column headerText="Codigo" filterBy="#{p.idProcedencia}" filterMatchMode="contains">
                             <h:outputText value="#{p.idProcedencia}"/>
                         </p:column>
-                        <p:column headerText="Nome">
+                        <p:column headerText="Nome" filterBy="#{p.descricao}" filterMatchMode="contains">
                             <h:outputText value="#{p.descricao}"/>
                         </p:column>
                         <p:column headerText="Excluir" style="text-align: center">

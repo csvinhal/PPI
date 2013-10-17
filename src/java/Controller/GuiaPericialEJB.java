@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 @Stateless
-public class GuiaPericialEJB extends Manager{
+public class GuiaPericialEJB extends Manager{ 
 
     public void salvar(GuiaPericial guiaPericial) {
         guiaPericial.setDataEntrada(new Date());

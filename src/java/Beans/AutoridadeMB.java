@@ -4,6 +4,7 @@ import Controller.AutoridadeEJB;
 import Model.Autoridade;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -36,7 +37,7 @@ public class AutoridadeMB implements Serializable{
                 autEJB.salvar(autoridade);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
-                autoridade = new Autoridade();
+                autoridade = new Autoridade(); 
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();

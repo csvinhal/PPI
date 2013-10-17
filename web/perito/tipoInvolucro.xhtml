@@ -28,14 +28,15 @@
                 <h:form id="listar">
                     <p:dataTable value="#{tipoInvolucroMB.listarTiposInvolucros()}" var="t" paginator="true" rows="10" 
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                     emptyMessage="Nenhum Involucro Cadastrado">
                          <f:facet name="header">
                             Lista de Invólucros Cadastrados
                         </f:facet>
-                        <p:column headerText="Codigo">
+                        <p:column headerText="Codigo" filterBy="#{t.idTipoInvolucro}" filterMatchMode="contains">
                             <h:outputText value="#{t.idTipoInvolucro}"/>
                         </p:column>
-                        <p:column headerText="Nome">
+                        <p:column headerText="Nome" filterBy="#{t.descricao}" filterMatchMode="contains">
                             <h:outputText value="#{t.descricao}"/>
                         </p:column>
                         <p:column headerText="Excluir" style="text-align: center">

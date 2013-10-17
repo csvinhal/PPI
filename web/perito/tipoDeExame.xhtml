@@ -27,15 +27,16 @@
                     <h:form id="listar">
                         <p:dataTable value="#{tipoDeExameMB.listarTiposDeExames()}" var="t" paginator="true" rows="10" 
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                 {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                                 {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                 emptyMessage="Nenhum Exame Cadastrado">
                         <f:facet name="header">
                             Lista de Exames Cadastrados
                         </f:facet>
-                            <p:column headerText="Codigo">
+                            <p:column headerText="Codigo" filterBy="#{t.idTipoExame}" filterMatchMode="contains">
                                 <h:outputText value="#{t.idTipoExame}"/>
                             </p:column>
-                            <p:column headerText="Nome">
-                                <h:outputText value="#{t.descricaoExame}"/>
+                            <p:column headerText="Nome" filterBy="#{t.descricaoExame}" filterMatchMode="contains">
+                                <h:outputText value="#{t.descricaoExame}" />
                             </p:column>
                             <p:column headerText="Excluir" style="text-align: center">
                                 <p:commandButton action="#{tipoDeExameMB.remover(t)}" icon="ui-icon-trash" 

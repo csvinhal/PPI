@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.io.Serializable;
@@ -21,10 +17,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Crouch
- */
 @Entity
 @Table(name = "local_imovel")
 @XmlRootElement
@@ -147,7 +139,7 @@ public class LocalImovel implements Serializable {
     private String viasTerreno1;
     @Size(max = 255)
     private String viasTerreno2;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "localImovel")
+    @OneToMany(mappedBy = "localImovel")
     private List<VistoriaImovel> vistoriaImovelList;
 
     public LocalImovel() {

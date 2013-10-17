@@ -80,38 +80,38 @@
                 <h:form id="listar">
                     <p:dataTable value="#{guiaPericialMB.listarGuias()}" var="g" paginator="true" rows="10" 
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                     emptyMessage="Nenhuma Guia Cadastrada">
                         <f:facet name="header">
                         Lista das Guias Periciais Cadastradas
                         </f:facet>
-                        <p:column headerText="Número da Guia">
+                        <p:column headerText="Número da Guia" filterBy="#{g.numeroGuia}" filterMatchMode="contains">
                             <h:outputText value="#{g.numeroGuia}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">Data de Entrada</f:facet>
+                        <p:column headerText="Data de Entrada" filterBy="#{g.dataEntrada}" filterMatchMode="contains">
                             <h:outputText value="#{g.dataEntrada}" >
                                     <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
                             </h:outputText> 
                         </p:column>
-                        <p:column headerText="Vítima">
+                        <p:column headerText="Vítima" filterBy="#{g.vitima}" filterMatchMode="contains">
                             <h:outputText value="#{g.vitima}" />
                         </p:column>
-                        <p:column headerText="Envolvido">
+                        <p:column headerText="Envolvido" filterBy="#{g.envolvido}" filterMatchMode="contains">
                             <h:outputText value="#{g.envolvido}"/>
                         </p:column>
-                        <p:column headerText="Local do Exame">
+                        <p:column headerText="Local do Exame" filterBy="#{g.localExame}" filterMatchMode="contains">
                             <h:outputText value="#{g.localExame}"/>
                         </p:column>
-                        <p:column headerText="Referência">
+                        <p:column headerText="Referência" filterBy="#{g.referencia}" filterMatchMode="contains">
                             <h:outputText value="#{g.referencia}"/>
                         </p:column>
-                        <p:column headerText="Autoridade">
+                        <p:column headerText="Autoridade" filterBy="#{g.autoridade.nome}" filterMatchMode="contains">
                             <h:outputText value="#{g.autoridade.nome}"/>
                         </p:column>
-                        <p:column headerText="Destino">
+                        <p:column headerText="Destino" filterBy="#{g.destino.nomeDestino}" filterMatchMode="contains">
                             <h:outputText value="#{g.destino.nomeDestino}"/>
                         </p:column>
-                        <p:column headerText="Procedencia">
+                        <p:column headerText="Procedencia" filterBy="#{g.procedencia.descricao}" filterMatchMode="contains">
                             <h:outputText value="#{g.procedencia.descricao}"/>
                         </p:column>
                         <p:column headerText="Tipo de Material">
@@ -119,7 +119,7 @@
                                 #{tipoDeMaterial.descricaoMaterial}
                             </p:dataList>
                         </p:column>
-                        <p:column headerText="Tipo de Exame">
+                        <p:column headerText="Tipo de Exame" filterBy="#{g.tipoExame.descricaoExame}" filterMatchMode="contains">
                             <h:outputText value="#{g.tipoExame.descricaoExame}"/>
                         </p:column>
                         <p:column headerText="Observação">

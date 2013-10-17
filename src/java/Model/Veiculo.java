@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.io.Serializable;
@@ -20,10 +16,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Crouch
- */
 @Entity
 @XmlRootElement
 @NamedQueries({
@@ -70,7 +62,7 @@ public class Veiculo implements Serializable {
     private String placa;
     @Size(max = 100)
     private String pneu;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculo")
+    @OneToMany(mappedBy = "veiculo")
     private List<VistoriaVeiculo> vistoriaVeiculoList;
 
     public Veiculo() {

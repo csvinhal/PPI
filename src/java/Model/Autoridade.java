@@ -3,7 +3,7 @@ package Model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,10 +16,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Crouch
- */
 @Entity
 @XmlRootElement
 @NamedQueries({
@@ -42,12 +38,13 @@ public class Autoridade implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 9)
+    @Column(name = "masp",unique=true)
     private String masp;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "autoridade")
+    @OneToMany(mappedBy = "autoridade")
     private List<GuiaPericial> guiaPericialList;
 
     public Autoridade() {

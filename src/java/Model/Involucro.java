@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Model;
 
 import java.io.Serializable;
@@ -21,10 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Crouch
- */
+
 @Entity
 @XmlRootElement
 @NamedQueries({
@@ -53,7 +47,7 @@ public class Involucro implements Serializable {
     @JoinColumn(name = "cor", referencedColumnName = "idCor")
     @ManyToOne(optional = false)
     private Cor cor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "involucro")
+    @OneToMany(mappedBy = "involucro")
     private List<ToxicologicoPreliminar> toxicologicoPreliminarList;
 
     public Involucro() {

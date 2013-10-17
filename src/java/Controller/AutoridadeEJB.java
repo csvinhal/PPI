@@ -3,6 +3,7 @@ package Controller;
 import Model.Autoridade;
 import Util.Manager;
 import java.util.List;
+import javax.ejb.DuplicateKeyException;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -10,7 +11,7 @@ import javax.persistence.Query;
 @Stateless
 public class AutoridadeEJB extends Manager{
 
-    public void salvar(Autoridade autoridade) {
+    public void salvar(Autoridade autoridade){
         em.merge(autoridade);
     }
     
