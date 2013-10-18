@@ -7,119 +7,121 @@
                 xmlns:f="http://java.sun.com/jsf/core">
 
            <ui:define name="centro">
-                <p:panel id="panelVistoriaVeiculo" header="Cadastro de Vistoria de Veiculos" toggleable="true">
-                    <h:form id="vistoriaVeiculo">
-                        <p:growl life="3000"/>
-                        <h:panelGrid columns="2" style="margin-right: 100%">
-                            <h:outputLabel value="Guia Pericial: "  for="guiaPericial"/>
-                            <p:selectOneMenu id="guiaPericial" value="#{vistoriaVeiculoMB.vistoriaVeiculo.guia}" required="true"
-                                             converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
-                                             style="250px">
-                                <f:selectItem itemLabel="Selecione..."/>
-                                <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
-                                               itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
-                            </p:selectOneMenu>
-                            <h:outputText value="Referência: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.vistoriaVeiculo.referencia}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="A referência não pode ficar em branco!"/>
-                            <h:outputText value="Local do Exame: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.vistoriaVeiculo.localExame}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="O local do exame não pode ficar em branco!"/>
-                            <h:outputText value="Data do Exame: "/>
-                            <p:calendar value="#{vistoriaVeiculoMB.vistoriaVeiculo.dataExame}" pattern="dd/MM/yyyy HH:mm" locale="br"
-                                        required="true" requiredMessage="A data do exame não pode ficar em branco!"/>
-                            <h:outputText value="Marca do Veiculo: "/>
-                            <p:inputText id="anoMarca" value="#{vistoriaVeiculoMB.veiculo.marca}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="A marca do veiculo não pode ficar em branco!"/>
-                            <h:outputText value="Modelo ano: "/>
-                            <p:inputMask value="#{vistoriaVeiculoMB.veiculo.modelo}" size="8" maxlength="4" required="true"
-                                         mask="9999" requiredMessage="O ano do modelo não pode ficar em branco!">
-                                <f:validateLength minimum="4" maximum="4"/>
-                            </p:inputMask>
-                            <h:outputText value="Cor do Veiculo: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.cor}" size="50" maxlength="20" required="true"
-                                                 requiredMessage="A cor do veiculo não pode ficar em branco!"/>
-                            <h:outputText value="Ano: "/>
-                            <p:inputMask id="ano" value="#{vistoriaVeiculoMB.veiculo.ano}" size="8" maxlength="4" 
-                                         required="true" requiredMessage="O ano não pode ficar em branco!" mask="9999">
-                                <f:validateLength minimum="4" maximum="4"/>
-                            </p:inputMask>
-                            <h:outputText value="Placa do Veiculo: "/>
-                            <p:inputMask value="#{vistoriaVeiculoMB.veiculo.placa}" size="8" maxlength="8"
-                                         required="true" requiredMessage="A placa não pode ficar em branco!" mask="a**-9999">
-                                <f:validateLength minimum="8" maximum="8"/>
-                            </p:inputMask>
-                            <h:outputText value="Estado dos Pneus: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.pneu}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="O estado dos não pode ficar em branco!"/>
-                            <h:outputText value="Chassi: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.chassis}" size="50" maxlength="17" required="true"
-                                                 requiredMessage="O chassi não pode ficar em branco!"/>
-                            <h:outputText value="Odometro: "/>
-                            <p:inputText value="#{vistoriaVeiculoMB.veiculo.odometro}" size="10"  maxlength="10" required="true"
-                                         requiredMessage="O odometro não pode ficar em branco!">
-                                
-                            </p:inputText>
-                            
-                            <p:commandButton value="Salvar" action="#{vistoriaVeiculoMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                        </h:panelGrid>
+               <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelVistoriaVeiculo" header="Cadastro de Vistoria de Veiculos" toggleable="true">
+                        <h:form id="vistoriaVeiculo">
+                            <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%">
+                                <h:outputLabel value="Guia Pericial: "  for="guiaPericial"/>
+                                <p:selectOneMenu id="guiaPericial" value="#{vistoriaVeiculoMB.vistoriaVeiculo.guia}" required="true"
+                                                 converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
+                                                 style="250px">
+                                    <f:selectItem itemLabel="Selecione..."/>
+                                    <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
+                                                   itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
+                                </p:selectOneMenu>
+                                <h:outputText value="Referência: "/>
+                                <p:inputText value="#{vistoriaVeiculoMB.vistoriaVeiculo.referencia}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="A referência não pode ficar em branco!"/>
+                                <h:outputText value="Local do Exame: "/>
+                                <p:inputText value="#{vistoriaVeiculoMB.vistoriaVeiculo.localExame}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="O local do exame não pode ficar em branco!"/>
+                                <h:outputText value="Data do Exame: "/>
+                                <p:calendar value="#{vistoriaVeiculoMB.vistoriaVeiculo.dataExame}" pattern="dd/MM/yyyy HH:mm" locale="br"
+                                            required="true" requiredMessage="A data do exame não pode ficar em branco!"/>
+                                <h:outputText value="Marca do Veiculo: "/>
+                                <p:inputText id="anoMarca" value="#{vistoriaVeiculoMB.veiculo.marca}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="A marca do veiculo não pode ficar em branco!"/>
+                                <h:outputText value="Modelo ano: "/>
+                                <p:inputMask value="#{vistoriaVeiculoMB.veiculo.modelo}" size="8" maxlength="4" required="true"
+                                             mask="9999" requiredMessage="O ano do modelo não pode ficar em branco!">
+                                    <f:validateLength minimum="4" maximum="4"/>
+                                </p:inputMask>
+                                <h:outputText value="Cor do Veiculo: "/>
+                                <p:inputText value="#{vistoriaVeiculoMB.veiculo.cor}" size="50" maxlength="20" required="true"
+                                                     requiredMessage="A cor do veiculo não pode ficar em branco!"/>
+                                <h:outputText value="Ano: "/>
+                                <p:inputMask id="ano" value="#{vistoriaVeiculoMB.veiculo.ano}" size="8" maxlength="4" 
+                                             required="true" requiredMessage="O ano não pode ficar em branco!" mask="9999">
+                                    <f:validateLength minimum="4" maximum="4"/>
+                                </p:inputMask>
+                                <h:outputText value="Placa do Veiculo: "/>
+                                <p:inputMask value="#{vistoriaVeiculoMB.veiculo.placa}" size="8" maxlength="8"
+                                             required="true" requiredMessage="A placa não pode ficar em branco!" mask="a**-9999">
+                                    <f:validateLength minimum="8" maximum="8"/>
+                                </p:inputMask>
+                                <h:outputText value="Estado dos Pneus: "/>
+                                <p:inputText value="#{vistoriaVeiculoMB.veiculo.pneu}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="O estado dos não pode ficar em branco!"/>
+                                <h:outputText value="Chassi: "/>
+                                <p:inputText value="#{vistoriaVeiculoMB.veiculo.chassis}" size="50" maxlength="17" required="true"
+                                                     requiredMessage="O chassi não pode ficar em branco!"/>
+                                <h:outputText value="Odometro: "/>
+                                <p:inputText value="#{vistoriaVeiculoMB.veiculo.odometro}" size="10"  maxlength="10" required="true"
+                                             requiredMessage="O odometro não pode ficar em branco!">
+
+                                </p:inputText>
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{vistoriaVeiculoMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                   <br />
+                   <br />
+                    <h:form id="listar">
+                        <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="vv" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                         emptyMessage="Nenhuma Vistoria de Veiculo Cadastrada">
+                            <f:facet name="header">
+                            Lista dos Veículos Cadastrados
+                            </f:facet>
+                            <p:column headerText="Autoridade Requisitante" filterBy="#{vv.guia.autoridade.nome}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.guia.autoridade.nome}" />
+                            </p:column>
+                            <p:column headerText="Natureza dos Exames" filterBy="#{vv.guia.tipoExame.descricaoExame}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.guia.tipoExame.descricaoExame}" />
+                            </p:column>
+                            <p:column headerText="Local dos Exames" filterBy="#{vv.guia.localExame}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.guia.localExame}" />
+                            </p:column>
+                            <p:column headerText="Municipio" filterBy="#{vv.guia.procedencia.descricao}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.guia.procedencia.descricao}" />
+                            </p:column>
+                            <p:column headerText="Data e Hora dos Exames" filterBy="#{vv.dataExame}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.dataExame}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Referencia Laudo" filterBy="#{vv.referencia}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.referencia}" />
+                            </p:column>
+                            <p:column headerText="Vitima" filterBy="#{vv.guia.vitima}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.guia.vitima}" />
+                            </p:column>
+                            <p:column headerText="Indiciado" filterBy="#{vv.guia.envolvido}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.guia.envolvido}" />
+                            </p:column>
+                            <p:column headerText="Destino do Laudo" filterBy="#{vv.guia.destino.nomeDestino}" filterMatchMode="contains">
+                                <h:outputText value="#{vv.guia.destino.nomeDestino}" />
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandButton action="#{vistoriaVeiculoMB.remover(vv)}"  icon="ui-icon-trash"
+                                               onclick="if(!confirm('Confirma a exclusão da guia #{vv.idLaudo}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":vistoriaVeiculo" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{vistoriaVeiculoMB.vistoriaVeiculo}" value="#{vv}"/>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Imprimir" style="text-align: center">
+                                <p:commandButton actionListener="#{vistoriaVeiculoMB.geraRelatorioVistoriaVeiculo(vv)}" icon="ui-icon-print"
+                                                onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
                     </h:form>
-                </p:panel>
-               <br />
-               <br />
-                <h:form id="listar">
-                    <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="vv" paginator="true" rows="10" 
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                     emptyMessage="Nenhuma Vistoria de Veiculo Cadastrada">
-                        <f:facet name="header">
-                        Lista dos Veículos Cadastrados
-                        </f:facet>
-                        <p:column headerText="Autoridade Requisitante" filterBy="#{vv.guia.autoridade.nome}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.guia.autoridade.nome}" />
-                        </p:column>
-                        <p:column headerText="Natureza dos Exames" filterBy="#{vv.guia.tipoExame.descricaoExame}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.guia.tipoExame.descricaoExame}" />
-                        </p:column>
-                        <p:column headerText="Local dos Exames" filterBy="#{vv.guia.localExame}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.guia.localExame}" />
-                        </p:column>
-                        <p:column headerText="Municipio" filterBy="#{vv.guia.procedencia.descricao}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.guia.procedencia.descricao}" />
-                        </p:column>
-                        <p:column headerText="Data e Hora dos Exames" filterBy="#{vv.dataExame}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.dataExame}">
-                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column headerText="Referencia Laudo" filterBy="#{vv.referencia}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.referencia}" />
-                        </p:column>
-                        <p:column headerText="Vitima" filterBy="#{vv.guia.vitima}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.guia.vitima}" />
-                        </p:column>
-                        <p:column headerText="Indiciado" filterBy="#{vv.guia.envolvido}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.guia.envolvido}" />
-                        </p:column>
-                        <p:column headerText="Destino do Laudo" filterBy="#{vv.guia.destino.nomeDestino}" filterMatchMode="contains">
-                            <h:outputText value="#{vv.guia.destino.nomeDestino}" />
-                        </p:column>
-                        <p:column headerText="Excluir" style="text-align: center">
-                            <p:commandButton action="#{vistoriaVeiculoMB.remover(vv)}"  icon="ui-icon-trash"
-                                           onclick="if(!confirm('Confirma a exclusão da guia #{vv.idLaudo}?')) return false" ajax="false">
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Editar" style="text-align: center">
-                            <p:commandButton update=":vistoriaVeiculo" icon="ui-icon-pencil">
-                                <f:setPropertyActionListener target="#{vistoriaVeiculoMB.vistoriaVeiculo}" value="#{vv}"/>
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Imprimir" style="text-align: center">
-                            <p:commandButton actionListener="#{vistoriaVeiculoMB.geraRelatorioVistoriaVeiculo(vv)}" icon="ui-icon-print"
-                                            onclick="this.form.target='_blank'" ajax="false"  process="@this">
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable> 
-                </h:form>
+               </p:layoutUnit>
             </ui:define>
         </ui:composition>

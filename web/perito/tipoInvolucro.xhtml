@@ -11,46 +11,48 @@
         <ui:composition template="./../WEB-INF/Template.xhtml">
 
             <ui:define name="centro">
-                <p:panel id="panelCadastroInvolucros" header="Cadastro de Involucros" toggleable="true">
-                    <h:form id="dadosTipoInvolucro">
-                        <p:growl life="3000"/>
-                        <h:panelGrid columns="2" style="margin-right: 100%">
-                            <h:outputText value="Descrição: "/>
-                            <p:inputText value="#{tipoInvolucroMB.tipoInvolucro.descricao}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="A descrição do Involucro não pode ficar em branco!"/>
-                            <p:commandButton value="Salvar" action="#{tipoInvolucroMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                            <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
-                        </h:panelGrid>
+                <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelCadastroInvolucros" header="Cadastro de Involucros" toggleable="true">
+                        <h:form id="dadosTipoInvolucro">
+                            <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%">
+                                <h:outputText value="Descrição: "/>
+                                <p:inputText value="#{tipoInvolucroMB.tipoInvolucro.descricao}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="A descrição do Involucro não pode ficar em branco!"/>
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{tipoInvolucroMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <br />
+                    <br />
+                    <h:form id="listar">
+                        <p:dataTable value="#{tipoInvolucroMB.listarTiposInvolucros()}" var="t" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                         emptyMessage="Nenhum Involucro Cadastrado">
+                             <f:facet name="header">
+                                Lista de Invólucros Cadastrados
+                            </f:facet>
+                            <p:column headerText="Codigo" filterBy="#{t.idTipoInvolucro}" filterMatchMode="contains">
+                                <h:outputText value="#{t.idTipoInvolucro}"/>
+                            </p:column>
+                            <p:column headerText="Nome" filterBy="#{t.descricao}" filterMatchMode="contains">
+                                <h:outputText value="#{t.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandButton action="#{tipoInvolucroMB.remover(t)}" icon="ui-icon-trash" 
+                                               onclick="if(!confirm('Confirma a exclusão de #{t.descricao}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":dadosTipoInvolucro" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{tipoInvolucroMB.tipoInvolucro}" value="#{t}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
                     </h:form>
-                </p:panel>
-                <br />
-                <br />
-                <h:form id="listar">
-                    <p:dataTable value="#{tipoInvolucroMB.listarTiposInvolucros()}" var="t" paginator="true" rows="10" 
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                     emptyMessage="Nenhum Involucro Cadastrado">
-                         <f:facet name="header">
-                            Lista de Invólucros Cadastrados
-                        </f:facet>
-                        <p:column headerText="Codigo" filterBy="#{t.idTipoInvolucro}" filterMatchMode="contains">
-                            <h:outputText value="#{t.idTipoInvolucro}"/>
-                        </p:column>
-                        <p:column headerText="Nome" filterBy="#{t.descricao}" filterMatchMode="contains">
-                            <h:outputText value="#{t.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Excluir" style="text-align: center">
-                            <p:commandButton action="#{tipoInvolucroMB.remover(t)}" icon="ui-icon-trash" 
-                                           onclick="if(!confirm('Confirma a exclusão de #{t.descricao}?')) return false" ajax="false">
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Editar" style="text-align: center">
-                            <p:commandButton update=":dadosTipoInvolucro" icon="ui-icon-pencil">
-                                <f:setPropertyActionListener target="#{tipoInvolucroMB.tipoInvolucro}" value="#{t}"/>
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable> 
-                </h:form>
+                </p:layoutUnit>
             </ui:define>
         </ui:composition>
     </body>

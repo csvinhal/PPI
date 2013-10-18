@@ -1,12 +1,7 @@
 package Beans;
 
 import Controller.GuiaPericialEJB;
-import Model.Autoridade;
-import Model.Destino;
 import Model.GuiaPericial;
-import Model.Procedencia;
-import Model.TipoDeExame;
-import Model.TipoDeMaterial;
 import Util.RelatorioFactory;
 import java.io.Serializable;
 import java.util.List;
@@ -23,11 +18,6 @@ public class GuiaPericialMB implements Serializable{
     private GuiaPericial guiaPericial;
     private GuiaPericial guiaSelecionada = new GuiaPericial();
     private List<GuiaPericial> listGuia;
-    private Autoridade autoridade;
-    private Destino destino;
-    private Procedencia procedencia;
-    private List<TipoDeMaterial> tipoMaterial;
-    private TipoDeExame tipoExame;
 
     public GuiaPericialMB() {
         guiaPericial = new GuiaPericial();
@@ -47,46 +37,6 @@ public class GuiaPericialMB implements Serializable{
 
     public void setGuiaPericial(GuiaPericial guiaPericial) {
         this.guiaPericial = guiaPericial;
-    }
-
-    public Autoridade getAutoridade() {
-        return autoridade;
-    }
-
-    public void setAutoridade(Autoridade autoridade) {
-        this.autoridade = autoridade;
-    }
-
-    public Destino getDestino() {
-        return destino;
-    }
-
-    public void setDestino(Destino destino) {
-        this.destino = destino;
-    }
-
-    public Procedencia getProcedencia() {
-        return procedencia;
-    }
-
-    public void setProcedencia(Procedencia procedencia) {
-        this.procedencia = procedencia;
-    }
-
-    public TipoDeExame getTipoExame() {
-        return tipoExame;
-    }
-
-    public void setTipoExame(TipoDeExame tipoExame) {
-        this.tipoExame = tipoExame;
-    }
-
-    public List<TipoDeMaterial> getTipoMaterial() {
-        return tipoMaterial;
-    }
-
-    public void setTipoMaterial(List<TipoDeMaterial> tipoMaterial) {
-        this.tipoMaterial = tipoMaterial;
     }
 
     public void setListGuia(List<GuiaPericial> listGuia) {

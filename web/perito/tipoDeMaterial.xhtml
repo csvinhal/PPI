@@ -11,45 +11,48 @@
         <ui:composition template="./../WEB-INF/Template.xhtml">
 
             <ui:define name="centro">
-                <p:panel id="panelCadastroMaterial" header="Cadastro de Materiais" toggleable="true">
-                    <h:form id="dadosTipoDeMaterial">
-                        <p:growl life="3000"/>
-                        <h:panelGrid columns="2" style="margin-right: 100%">
-                            <h:outputText value="Descrição: "/>
-                            <p:inputText value="#{tipoDeMaterialMB.tipoDeMaterial.descricaoMaterial}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="A descrição do material não pode ficar em branco!"/>
-                            <p:commandButton value="Salvar" action="#{tipoDeMaterialMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                        </h:panelGrid>
+                <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelCadastroMaterial" header="Cadastro de Materiais" toggleable="true">
+                        <h:form id="dadosTipoDeMaterial">
+                            <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%">
+                                <h:outputText value="Descrição: "/>
+                                <p:inputText value="#{tipoDeMaterialMB.tipoDeMaterial.descricaoMaterial}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="A descrição do material não pode ficar em branco!"/>
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{tipoDeMaterialMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <br />
+                    <br />
+                    <h:form id="listar">
+                            <p:dataTable value="#{tipoDeMaterialMB.listarTiposDeMateriais()}" var="t" paginator="true" rows="10" 
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                             emptyMessage="Nenhum Material Cadastrado">
+                            <f:facet name="header">
+                                Lista de Materiais Cadastrados
+                            </f:facet>
+                                <p:column headerText="Codigo" filterBy="#{t.idTipoMaterial}" filterMatchMode="contains">
+                                    <h:outputText value="#{t.idTipoMaterial}"/>
+                                </p:column>
+                                <p:column headerText="Nome" filterBy="#{t.descricaoMaterial}" filterMatchMode="contains">
+                                    <h:outputText value="#{t.descricaoMaterial}"/>
+                                </p:column>
+                                <p:column headerText="Excluir" style="text-align: center">
+                                    <p:commandButton action="#{tipoDeMaterialMB.remover(t)}" icon="ui-icon-trash"
+                                               onclick="if(!confirm('Confirma a exclusão de #{t.descricaoMaterial}?')) return false" ajax="false">
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Editar" style="text-align: center">
+                                    <p:commandButton update=":dadosTipoDeMaterial" icon="ui-icon-pencil">
+                                        <f:setPropertyActionListener target="#{tipoDeMaterialMB.tipoDeMaterial}" value="#{t}"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable> 
                     </h:form>
-                </p:panel>
-                <br />
-                <br />
-                <h:form id="listar">
-                        <p:dataTable value="#{tipoDeMaterialMB.listarTiposDeMateriais()}" var="t" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                         emptyMessage="Nenhum Material Cadastrado">
-                        <f:facet name="header">
-                            Lista de Materiais Cadastrados
-                        </f:facet>
-                            <p:column headerText="Codigo" filterBy="#{t.idTipoMaterial}" filterMatchMode="contains">
-                                <h:outputText value="#{t.idTipoMaterial}"/>
-                            </p:column>
-                            <p:column headerText="Nome" filterBy="#{t.descricaoMaterial}" filterMatchMode="contains">
-                                <h:outputText value="#{t.descricaoMaterial}"/>
-                            </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandButton action="#{tipoDeMaterialMB.remover(t)}" icon="ui-icon-trash"
-                                           onclick="if(!confirm('Confirma a exclusão de #{t.descricaoMaterial}?')) return false" ajax="false">
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Editar" style="text-align: center">
-                                <p:commandButton update=":dadosTipoDeMaterial" icon="ui-icon-pencil">
-                                    <f:setPropertyActionListener target="#{tipoDeMaterialMB.tipoDeMaterial}" value="#{t}"/>
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable> 
-                </h:form>
+                </p:layoutUnit>
             </ui:define>
         </ui:composition>
     </body>

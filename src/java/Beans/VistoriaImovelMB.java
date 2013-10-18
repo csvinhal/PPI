@@ -1,7 +1,7 @@
 package Beans;
 
 import Controller.VistoriaImovelEJB;
-import Model.Laudo;
+import Model.LocalImovel;
 import Model.VistoriaImovel;
 import java.io.Serializable;
 import java.util.List;
@@ -18,11 +18,11 @@ public class VistoriaImovelMB implements Serializable{
     @EJB
     VistoriaImovelEJB vistoriaImovelEJB;
     private VistoriaImovel vistoriaImovel;
-    private Laudo laudo;
+    private LocalImovel localImovel;
     
     public VistoriaImovelMB() {
-    vistoriaImovel = new VistoriaImovel();
-    laudo = new Laudo();
+        vistoriaImovel = new VistoriaImovel();
+        localImovel = new LocalImovel();
     }
 
     public VistoriaImovel getVistoriaImovel() {
@@ -33,17 +33,18 @@ public class VistoriaImovelMB implements Serializable{
         this.vistoriaImovel = vistoriaImovel;
     }
 
-    public Laudo getLaudo() {
-        return laudo;
+    public LocalImovel getLocalImovel() {
+        return localImovel;
     }
 
-    public void setLaudo(Laudo laudo) {
-        this.laudo = laudo;
+    public void setLocalImovel(LocalImovel localImovel) {
+        this.localImovel = localImovel;
     }
-    
+
     public void salvar(){
         if(vistoriaImovel.getIdLaudo() == null){
             try{
+                vistoriaImovel.setLocalImovel(localImovel);
                 vistoriaImovelEJB.salvar(vistoriaImovel);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
@@ -55,6 +56,7 @@ public class VistoriaImovelMB implements Serializable{
             }
         }else{
             try{
+                vistoriaImovel.setLocalImovel(localImovel);
                 vistoriaImovelEJB.salvar(vistoriaImovel);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Editado com sucesso!"));

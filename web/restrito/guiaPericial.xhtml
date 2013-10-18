@@ -11,137 +11,140 @@
         <ui:composition template="./../WEB-INF/Template.xhtml">
 
             <ui:define name="centro">
-                <p:panel id="panelCadastroGuia" header="Cadastro de Guias Periciais" toggleable="true">
-                    <h:form id="dadosGuia">
-                        <p:growl life="3000"/>
-                        <h:panelGrid columns="2" style="margin-right: 100%">
-                            <h:outputText value="Número da Guia: "/>
-                            <p:inputMask value="#{guiaPericialMB.guiaPericial.numeroGuia}" mask="9999/9999" required="true"  
-                                         size="9" maxlength="9" requiredMessage="O número da Guia não pode ficar em branco!">
-                            </p:inputMask>
-                            <h:outputText value="Vítima: "/>
-                            <p:inputText value="#{guiaPericialMB.guiaPericial.vitima}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="A vítima não pode ficar em branco!"/>
-                            <h:outputText value="Envolvido: " />
-                            <p:inputText value="#{guiaPericialMB.guiaPericial.envolvido}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="O envolvido não pode ficar em branco!" />
-                            <h:outputText value="Local do Exame: " />
-                            <p:inputText value="#{guiaPericialMB.guiaPericial.localExame}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="O local do exame não pode ficar em branco!" />
-                            <h:outputText value="Referência: " />
-                            <p:inputText value="#{guiaPericialMB.guiaPericial.referencia}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="A referência não pode ficar em branco!" />
-                            <h:outputLabel value="Autoridade: " for="autoridade"/>
-                            <p:selectOneMenu id="autoridade" value="#{guiaPericialMB.guiaPericial.autoridade}" required="true" 
-                                             converter="autoridadeConverter" requiredMessage="O campo autoridade é obrigatorio." 
-                                             style="width: 200px">
-                                             <f:selectItem itemLabel="Selecione..."/>
-                                             <f:selectItems value="#{autoridadeMB.listarAutoridades()}" var="a" 
-                                                            itemLabel="#{a.nome}" itemValue="#{a}"/>
-                            </p:selectOneMenu>
-                            <h:outputLabel value="Destino: " for="destino"/>
-                            <p:selectOneMenu id="destino" value="#{guiaPericialMB.guiaPericial.destino}" required="true" 
-                                             converter="destinoConverter" requiredMessage="O campo destino é obrigatorio." 
-                                             style="width: 200px">
-                                             <f:selectItem itemLabel="Selecione..."/>
-                                             <f:selectItems value="#{destinoMB.listarDestinos()}" var="d"
-                                                            itemLabel="#{d.nomeDestino}" itemValue="#{d}"/>
-                            </p:selectOneMenu>
-                            <h:outputLabel value="Procedencia: " for="procedencia"/>
-                            <p:selectOneMenu id="procedencia" value="#{guiaPericialMB.guiaPericial.procedencia}" required="true" 
-                                             converter="procedenciaConverter" requiredMessage="O campo procedencia é obrigatorio." style="width: 200px">
-                                             <f:selectItem itemLabel="Selecione..."/>
-                                             <f:selectItems value="#{procedenciaMB.listarProcedencias()}" var="p"
-                                                            itemLabel="#{p.descricao}" itemValue="#{p}"/>
-                            </p:selectOneMenu>
-                            <h:outputLabel value="Tipo de Material: " for="tipoMaterial"/>
-                            <p:selectManyCheckbox id="tipoMaterial" value="#{guiaPericialMB.guiaPericial.tipoDeMaterial}" required="true"
-                                             requiredMessage="O campo Tipo de Material é obrigatorio." 
-                                             converter="tipoDeMaterialConverter" style="width: 200px">
-                                <f:selectItems value="#{tipoDeMaterialMB.listarTiposDeMateriais()}" var="tp"
-                                               itemLabel="#{tp.descricaoMaterial}" itemValue="#{tp}"/>
-                            </p:selectManyCheckbox>
-                            <h:outputLabel value="Tipo de Exame: " for="tipodeExame"/>
-                            <p:selectOneMenu id="tipodeExame" value="#{guiaPericialMB.guiaPericial.tipoExame}" required="true" 
-                                             converter="tipoDeExameConverter" requiredMessage="O campo tipo de exame é obrigatorio." 
-                                             style="width: 200px">
-                                             <f:selectItem itemLabel="Selecione..."/>
-                                             <f:selectItems value="#{tipoDeExameMB.listarTiposDeExames()}" var="te"
-                                                            itemLabel="#{te.descricaoExame}" itemValue="#{te}"/>
-                            </p:selectOneMenu>                            
-                            <h:outputText value="Observação: " />
-                            <p:inputTextarea value="#{guiaPericialMB.guiaPericial.observacao}"  rows="5" cols="53" maxlength="255" autoResize="false" />
-                            <p:commandButton value="Salvar" action="#{guiaPericialMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                        </h:panelGrid>
+                <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelCadastroGuia" header="Cadastro de Guias Periciais" toggleable="true">
+                        <h:form id="dadosGuia">
+                            <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%">
+                                <h:outputText value="Número da Guia: "/>
+                                <p:inputMask value="#{guiaPericialMB.guiaPericial.numeroGuia}" mask="9999/9999" required="true"  
+                                             size="9" maxlength="9" requiredMessage="O número da Guia não pode ficar em branco!">
+                                </p:inputMask>
+                                <h:outputText value="Vítima: "/>
+                                <p:inputText value="#{guiaPericialMB.guiaPericial.vitima}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="A vítima não pode ficar em branco!"/>
+                                <h:outputText value="Envolvido: " />
+                                <p:inputText value="#{guiaPericialMB.guiaPericial.envolvido}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="O envolvido não pode ficar em branco!" />
+                                <h:outputText value="Local do Exame: " />
+                                <p:inputText value="#{guiaPericialMB.guiaPericial.localExame}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="O local do exame não pode ficar em branco!" />
+                                <h:outputText value="Referência: " />
+                                <p:inputText value="#{guiaPericialMB.guiaPericial.referencia}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="A referência não pode ficar em branco!" />
+                                <h:outputLabel value="Autoridade: " for="autoridade"/>
+                                <p:selectOneMenu id="autoridade" value="#{guiaPericialMB.guiaPericial.autoridade}" required="true" 
+                                                 converter="autoridadeConverter" requiredMessage="O campo autoridade é obrigatorio." 
+                                                 style="width: 200px">
+                                                 <f:selectItem itemLabel="Selecione..."/>
+                                                 <f:selectItems value="#{autoridadeMB.listarAutoridades()}" var="a" 
+                                                                itemLabel="#{a.nome}" itemValue="#{a}"/>
+                                </p:selectOneMenu>
+                                <h:outputLabel value="Destino: " for="destino"/>
+                                <p:selectOneMenu id="destino" value="#{guiaPericialMB.guiaPericial.destino}" required="true" 
+                                                 converter="destinoConverter" requiredMessage="O campo destino é obrigatorio." 
+                                                 style="width: 200px">
+                                                 <f:selectItem itemLabel="Selecione..."/>
+                                                 <f:selectItems value="#{destinoMB.listarDestinos()}" var="d"
+                                                                itemLabel="#{d.nomeDestino}" itemValue="#{d}"/>
+                                </p:selectOneMenu>
+                                <h:outputLabel value="Procedencia: " for="procedencia"/>
+                                <p:selectOneMenu id="procedencia" value="#{guiaPericialMB.guiaPericial.procedencia}" required="true" 
+                                                 converter="procedenciaConverter" requiredMessage="O campo procedencia é obrigatorio." style="width: 200px">
+                                                 <f:selectItem itemLabel="Selecione..."/>
+                                                 <f:selectItems value="#{procedenciaMB.listarProcedencias()}" var="p"
+                                                                itemLabel="#{p.descricao}" itemValue="#{p}"/>
+                                </p:selectOneMenu>
+                                <h:outputLabel value="Tipo de Material: " for="tipoMaterial"/>
+                                <p:selectManyCheckbox id="tipoMaterial" value="#{guiaPericialMB.guiaPericial.tipoDeMaterial}" required="true"
+                                                 requiredMessage="O campo Tipo de Material é obrigatorio." 
+                                                 converter="tipoDeMaterialConverter" style="width: 200px">
+                                    <f:selectItems value="#{tipoDeMaterialMB.listarTiposDeMateriais()}" var="tp"
+                                                   itemLabel="#{tp.descricaoMaterial}" itemValue="#{tp}"/>
+                                </p:selectManyCheckbox>
+                                <h:outputLabel value="Tipo de Exame: " for="tipodeExame"/>
+                                <p:selectOneMenu id="tipodeExame" value="#{guiaPericialMB.guiaPericial.tipoExame}" required="true" 
+                                                 converter="tipoDeExameConverter" requiredMessage="O campo tipo de exame é obrigatorio." 
+                                                 style="width: 200px">
+                                                 <f:selectItem itemLabel="Selecione..."/>
+                                                 <f:selectItems value="#{tipoDeExameMB.listarTiposDeExames()}" var="te"
+                                                                itemLabel="#{te.descricaoExame}" itemValue="#{te}"/>
+                                </p:selectOneMenu>                            
+                                <h:outputText value="Observação: " />
+                                <p:inputTextarea value="#{guiaPericialMB.guiaPericial.observacao}"  rows="5" cols="53" maxlength="255" autoResize="false" />
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{guiaPericialMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <br />
+                    <br />
+                    <h:form id="listar">
+                        <p:dataTable value="#{guiaPericialMB.listarGuias()}" var="g" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                         emptyMessage="Nenhuma Guia Cadastrada">
+                            <f:facet name="header">
+                            Lista das Guias Periciais Cadastradas
+                            </f:facet>
+                            <p:column headerText="Número da Guia" filterBy="#{g.numeroGuia}" filterMatchMode="contains">
+                                <h:outputText value="#{g.numeroGuia}"/>
+                            </p:column>
+                            <p:column headerText="Data de Entrada" filterBy="#{g.dataEntrada}" filterMatchMode="contains">
+                                <h:outputText value="#{g.dataEntrada}" >
+                                        <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </h:outputText> 
+                            </p:column>
+                            <p:column headerText="Vítima" filterBy="#{g.vitima}" filterMatchMode="contains">
+                                <h:outputText value="#{g.vitima}" />
+                            </p:column>
+                            <p:column headerText="Envolvido" filterBy="#{g.envolvido}" filterMatchMode="contains">
+                                <h:outputText value="#{g.envolvido}"/>
+                            </p:column>
+                            <p:column headerText="Local do Exame" filterBy="#{g.localExame}" filterMatchMode="contains">
+                                <h:outputText value="#{g.localExame}"/>
+                            </p:column>
+                            <p:column headerText="Referência" filterBy="#{g.referencia}" filterMatchMode="contains">
+                                <h:outputText value="#{g.referencia}"/>
+                            </p:column>
+                            <p:column headerText="Autoridade" filterBy="#{g.autoridade.nome}" filterMatchMode="contains">
+                                <h:outputText value="#{g.autoridade.nome}"/>
+                            </p:column>
+                            <p:column headerText="Destino" filterBy="#{g.destino.nomeDestino}" filterMatchMode="contains">
+                                <h:outputText value="#{g.destino.nomeDestino}"/>
+                            </p:column>
+                            <p:column headerText="Procedencia" filterBy="#{g.procedencia.descricao}" filterMatchMode="contains">
+                                <h:outputText value="#{g.procedencia.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Tipo de Material">
+                                <p:dataList value="#{g.tipoDeMaterial}" var="tipoDeMaterial">
+                                    #{tipoDeMaterial.descricaoMaterial}
+                                </p:dataList>
+                            </p:column>
+                            <p:column headerText="Tipo de Exame" filterBy="#{g.tipoExame.descricaoExame}" filterMatchMode="contains">
+                                <h:outputText value="#{g.tipoExame.descricaoExame}"/>
+                            </p:column>
+                            <p:column headerText="Observação">
+                                <h:outputText value="#{g.observacao}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandButton action="#{guiaPericialMB.remover(g)}" icon="ui-icon-trash"
+                                               onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Imprimir" style="text-align: center">
+                                <p:commandButton icon="ui-icon-print" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
+                                                onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
                     </h:form>
-                </p:panel>
-                <br />
-                <br />
-                <h:form id="listar">
-                    <p:dataTable value="#{guiaPericialMB.listarGuias()}" var="g" paginator="true" rows="10" 
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                     emptyMessage="Nenhuma Guia Cadastrada">
-                        <f:facet name="header">
-                        Lista das Guias Periciais Cadastradas
-                        </f:facet>
-                        <p:column headerText="Número da Guia" filterBy="#{g.numeroGuia}" filterMatchMode="contains">
-                            <h:outputText value="#{g.numeroGuia}"/>
-                        </p:column>
-                        <p:column headerText="Data de Entrada" filterBy="#{g.dataEntrada}" filterMatchMode="contains">
-                            <h:outputText value="#{g.dataEntrada}" >
-                                    <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
-                            </h:outputText> 
-                        </p:column>
-                        <p:column headerText="Vítima" filterBy="#{g.vitima}" filterMatchMode="contains">
-                            <h:outputText value="#{g.vitima}" />
-                        </p:column>
-                        <p:column headerText="Envolvido" filterBy="#{g.envolvido}" filterMatchMode="contains">
-                            <h:outputText value="#{g.envolvido}"/>
-                        </p:column>
-                        <p:column headerText="Local do Exame" filterBy="#{g.localExame}" filterMatchMode="contains">
-                            <h:outputText value="#{g.localExame}"/>
-                        </p:column>
-                        <p:column headerText="Referência" filterBy="#{g.referencia}" filterMatchMode="contains">
-                            <h:outputText value="#{g.referencia}"/>
-                        </p:column>
-                        <p:column headerText="Autoridade" filterBy="#{g.autoridade.nome}" filterMatchMode="contains">
-                            <h:outputText value="#{g.autoridade.nome}"/>
-                        </p:column>
-                        <p:column headerText="Destino" filterBy="#{g.destino.nomeDestino}" filterMatchMode="contains">
-                            <h:outputText value="#{g.destino.nomeDestino}"/>
-                        </p:column>
-                        <p:column headerText="Procedencia" filterBy="#{g.procedencia.descricao}" filterMatchMode="contains">
-                            <h:outputText value="#{g.procedencia.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Tipo de Material">
-                            <p:dataList value="#{g.tipoDeMaterial}" var="tipoDeMaterial">
-                                #{tipoDeMaterial.descricaoMaterial}
-                            </p:dataList>
-                        </p:column>
-                        <p:column headerText="Tipo de Exame" filterBy="#{g.tipoExame.descricaoExame}" filterMatchMode="contains">
-                            <h:outputText value="#{g.tipoExame.descricaoExame}"/>
-                        </p:column>
-                        <p:column headerText="Observação">
-                            <h:outputText value="#{g.observacao}"/>
-                        </p:column>
-                        <p:column headerText="Excluir" style="text-align: center">
-                            <p:commandButton action="#{guiaPericialMB.remover(g)}" icon="ui-icon-trash"
-                                           onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Editar" style="text-align: center">
-                            <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
-                                <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Imprimir" style="text-align: center">
-                            <p:commandButton icon="ui-icon-print" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
-                                            onclick="this.form.target='_blank'" ajax="false"  process="@this">
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable> 
-                </h:form>
+                </p:layoutUnit>
             </ui:define>
         </ui:composition>
     </body>

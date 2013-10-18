@@ -11,45 +11,48 @@
         <ui:composition template="./../WEB-INF/Template.xhtml">
 
             <ui:define name="centro">
-                <p:panel id="panelCadastroProcedencia" header="Cadastro de Procedentes" toggleable="true">
-                    <h:form id="dadosProcedencia">
-                        <p:growl life="3000"/>
-                        <h:panelGrid columns="2" style="margin-right: 100%">
-                            <h:outputText value="Descrição: "/>
-                            <p:inputText value="#{procedenciaMB.procedencia.descricao}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="A descrição da Procedencia não pode ficar em branco!"/>
-                            <p:commandButton value="Salvar" action="#{procedenciaMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                        </h:panelGrid>
+                <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelCadastroProcedencia" header="Cadastro de Procedentes" toggleable="true">
+                        <h:form id="dadosProcedencia">
+                            <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%">
+                                <h:outputText value="Descrição: "/>
+                                <p:inputText value="#{procedenciaMB.procedencia.descricao}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="A descrição da Procedencia não pode ficar em branco!"/>
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{procedenciaMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <br /> 
+                    <br />
+                    <h:form id="listar">
+                        <p:dataTable value="#{procedenciaMB.listarProcedencias()}" var="p" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                         emptyMessage="Nenhuma Procedencia Cadastrada">
+                            <f:facet name="header">
+                                Lista de Procedências Cadastradas
+                            </f:facet>
+                            <p:column headerText="Codigo" filterBy="#{p.idProcedencia}" filterMatchMode="contains">
+                                <h:outputText value="#{p.idProcedencia}"/>
+                            </p:column>
+                            <p:column headerText="Nome" filterBy="#{p.descricao}" filterMatchMode="contains">
+                                <h:outputText value="#{p.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandButton action="#{procedenciaMB.remover(p)}" icon="ui-icon-trash" 
+                                               onclick="if(!confirm('Confirma a exclusão de #{p.descricao}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":dadosProcedencia" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{procedenciaMB.procedencia}" value="#{p}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
                     </h:form>
-                </p:panel>
-                <br /> 
-                <br />
-                <h:form id="listar">
-                    <p:dataTable value="#{procedenciaMB.listarProcedencias()}" var="p" paginator="true" rows="10" 
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                     emptyMessage="Nenhuma Procedencia Cadastrada">
-                        <f:facet name="header">
-                            Lista de Procedências Cadastradas
-                        </f:facet>
-                        <p:column headerText="Codigo" filterBy="#{p.idProcedencia}" filterMatchMode="contains">
-                            <h:outputText value="#{p.idProcedencia}"/>
-                        </p:column>
-                        <p:column headerText="Nome" filterBy="#{p.descricao}" filterMatchMode="contains">
-                            <h:outputText value="#{p.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Excluir" style="text-align: center">
-                            <p:commandButton action="#{procedenciaMB.remover(p)}" icon="ui-icon-trash" 
-                                           onclick="if(!confirm('Confirma a exclusão de #{p.descricao}?')) return false" ajax="false">
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Editar" style="text-align: center">
-                            <p:commandButton update=":dadosProcedencia" icon="ui-icon-pencil">
-                                <f:setPropertyActionListener target="#{procedenciaMB.procedencia}" value="#{p}"/>
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable> 
-                </h:form>
+                </p:layoutUnit>
             </ui:define>
         </ui:composition>
     </body>

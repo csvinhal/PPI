@@ -4,7 +4,6 @@ import Controller.AutoridadeEJB;
 import Model.Autoridade;
 import java.io.Serializable;
 import java.util.List;
-import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;

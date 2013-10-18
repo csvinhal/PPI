@@ -11,47 +11,49 @@
         <ui:composition template="./../WEB-INF/Template.xhtml">
 
             <ui:define name="centro">
-                <p:panel id="panelCadastroDestino" header="Cadastro Destino" toggleable="true">
-                    <h:form id="dadosDestino">
-                        <p:growl life="3000"/>
-                        <h:panelGrid columns="2" style="margin-right: 100%">
-                            <h:outputText value="Destino"/>
-                            <p:inputText value="#{destinoMB.destino.nomeDestino}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="O destino não pode ficar em branco!"/>
-                        <p:commandButton value="Salvar" action="#{destinoMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                       </h:panelGrid>
+                <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelCadastroDestino" header="Cadastro Destino" toggleable="true">
+                        <h:form id="dadosDestino">
+                            <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%">
+                                <h:outputText value="Destino"/>
+                                <p:inputText value="#{destinoMB.destino.nomeDestino}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="O destino não pode ficar em branco!"/>
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{destinoMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                           </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <br/>
+                    <br/>
+                    <h:form id="listar">
+                        <p:dataTable value="#{destinoMB.listarDestinos()}" var="d" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15" 
+                                         emptyMessage="Nenhum Destino Cadastrado">
+                            <f:facet name="header">
+                                Lista de Destinos Cadastrados
+                            </f:facet>
+                            <p:column headerText="Codigo" filterBy="#{d.idDestino}" filterMatchMode="contains">
+                                <h:outputText value="#{d.idDestino}"/>
+                            </p:column>
+                            <p:column headerText="Nome" filterBy="#{d.nomeDestino}" filterMatchMode="contains">
+                                <h:outputText value="#{d.nomeDestino}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandButton action="#{destinoMB.remover(d)}" icon="ui-icon-trash"
+                                               onclick="if(!confirm('Confirma a exclusão de #{d.nomeDestino}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":dadosDestino" icon="ui-icon-pencil">
+                                <f:setPropertyActionListener target="#{destinoMB.destino}" value="#{d}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
                     </h:form>
-                </p:panel>
-                <br/>
-                <br/>
-                <h:form id="listar">
-                    <p:dataTable value="#{destinoMB.listarDestinos()}" var="d" paginator="true" rows="10" 
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15" 
-                                     emptyMessage="Nenhum Destino Cadastrado">
-                        <f:facet name="header">
-                            Lista de Destinos Cadastrados
-                        </f:facet>
-                        <p:column headerText="Codigo" filterBy="#{d.idDestino}" filterMatchMode="contains">
-                            <h:outputText value="#{d.idDestino}"/>
-                        </p:column>
-                        <p:column headerText="Nome" filterBy="#{d.nomeDestino}" filterMatchMode="contains">
-                            <h:outputText value="#{d.nomeDestino}"/>
-                        </p:column>
-                        <p:column headerText="Excluir" style="text-align: center">
-                            <p:commandButton action="#{destinoMB.remover(d)}" icon="ui-icon-trash"
-                                           onclick="if(!confirm('Confirma a exclusão de #{d.nomeDestino}?')) return false" ajax="false">
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Editar" style="text-align: center">
-                            <p:commandButton update=":dadosDestino" icon="ui-icon-pencil">
-                            <f:setPropertyActionListener target="#{destinoMB.destino}" value="#{d}"/>
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable> 
-                </h:form>
+                </p:layoutUnit>
             </ui:define>
-
         </ui:composition>
 
     </body>

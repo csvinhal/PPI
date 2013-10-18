@@ -11,143 +11,145 @@
         <ui:composition template="./../WEB-INF/Template.xhtml">
 
             <ui:define name="centro">
-                <p:panel id="panelToxicologicoPreliminar" header="Cadastro de Toxicologico Preliminar" toggleable="true">
-                    <h:form id="dadosGuia">
-                        <p:growl life="3000"/>
-                        <h:panelGrid columns="2" style="margin-right: 100%">
-                            <h:outputLabel value="Guia Pericial: " for="guiaPericial"/>
-                            <p:selectOneMenu id="guiaPericial" value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.guia}" required="true"
-                                             converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
-                                             style="250px">
-                                <f:selectItem itemLabel="Selecione..."/>
-                                <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
-                                               itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
-                            </p:selectOneMenu>
-                            
-                            <h:outputLabel value="Data da Ocorrência: " for="dataOcorrencia"/>
-                            <p:calendar value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.dataOcorrencia}" 
-                                        id="dataOcorrencia" required="true" requiredMessage="O campo Data da Ocorrência não pode ficar em branco">
-                            </p:calendar>
-                            
-                             <h:outputLabel  value="Referência: " for="referencia"/>
-                             <p:inputText id="referencia" label="Referência" value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.referencia}" size="50" maxlength="150"
-                                          required="false" requiredMessage="Campo Referência inválido!">
-                            </p:inputText>
-                            
-                            <h:outputLabel  value="Local do Exame: " />
-                            <p:inputText id="localExame" label="Local do Exame" value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.localExame}" size="50" maxlength="150"
-                                         required="false" requiredMessage="Campo Local do Exame inválido!">
-                            </p:inputText>                            
-                                                                  
-                            <h:outputLabel value="Substancia: " for="substancia"/>
-                            <p:selectOneMenu id="substancia" value="#{toxicologicoPreliminarMB.involucro.substancia}" required="true"
-                                             converter="substanciaConverter" requiredMessage="Campo Substancia é obrigatorio."
-                                             style="width:160px">
-                                <f:selectItem itemLabel="Selecione..." />
-                                <f:selectItems value="#{substanciaMB.listarSubstancias()}" var="s"
-                                               itemLabel="#{s.tipoSubstancia}" itemValue="#{s}"/>
-                            </p:selectOneMenu>
-                            
-                            <h:outputLabel value="Qtde. de Invólucros: " for="quantidade" />
-                            <p:inputText id="quantidade" label="Quantidade" 
-                                         value="#{toxicologicoPreliminarMB.involucro.quantidade}" size="20" required="true">
-					<f:convertNumber minFractionDigits="1"/>
-                            </p:inputText>
-                            
-                            <h:outputLabel value="Peso Bruto(g): " for="peso" />
-                            <p:inputText id="peso" label="Peso" value="#{toxicologicoPreliminarMB.involucro.peso}"
-					size="20" required="true">
-					<f:convertNumber pattern="#0.00"/>
-                            </p:inputText>
-                            
-                            <h:outputLabel value="Tipo do Involucro: " for="tipoInvolucro" />
-                            <p:selectOneMenu id="tipoInvolucro" 
-                                             value="#{toxicologicoPreliminarMB.involucro.tipoInvolucro}"
-                                             converter="tipoInvolucroConverter" required="true" requiredMessage="Campo Tipo de Involucro é obrigatorio." 
-                                             style="width:160px">
-                                <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                <f:selectItems value="#{tipoInvolucroMB.listarTiposInvolucros()}"
-                                               var="ti" itemLabel="#{ti.descricao}" 
-                                               itemValue="#{ti}" />
-                            </p:selectOneMenu>
-                            
-                            <h:outputLabel value="Cor do invólucro: " for="cor" />
-                            <p:selectOneMenu id="cor" 
-                                             value="#{toxicologicoPreliminarMB.involucro.cor}"
-                                             converter="corConverter" required="true" requiredMessage="Campo Cor é obrigatorio."
-                                             style="width:160px">
-                                <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                <f:selectItems value="#{corInvolucroMB.listarCores()}" var="c" 
-                                               itemLabel="#{c.descricao}" itemValue="#{c}" />
-                            </p:selectOneMenu>
-                            
-                            <h:outputText value="Observação: " />
-                            <p:inputTextarea value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.observacao}"  
-                                             rows="5" cols="53" maxlength="255" autoResize="false" />
-                            
-                            <p:commandButton value="Salvar" action="#{toxicologicoPreliminarMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                        </h:panelGrid>
+                <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelToxicologicoPreliminar" header="Cadastro de Toxicologico Preliminar" toggleable="true">
+                        <h:form id="dadosGuia">
+                            <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%">
+                                <h:outputLabel value="Guia Pericial: " for="guiaPericial"/>
+                                <p:selectOneMenu id="guiaPericial" value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.guia}" required="true"
+                                                 converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
+                                                 style="250px">
+                                    <f:selectItem itemLabel="Selecione..."/>
+                                    <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
+                                                   itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Data da Ocorrência: " for="dataOcorrencia"/>
+                                <p:calendar value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.dataOcorrencia}" 
+                                            id="dataOcorrencia" required="true" requiredMessage="O campo Data da Ocorrência não pode ficar em branco">
+                                </p:calendar>
+
+                                 <h:outputLabel  value="Referência: " for="referencia"/>
+                                 <p:inputText id="referencia" label="Referência" value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.referencia}" size="50" maxlength="150"
+                                              required="true" requiredMessage="Campo Referência inválido!">
+                                </p:inputText>
+
+                                <h:outputLabel  value="Local do Exame: " />
+                                <p:inputText id="localExame" label="Local do Exame" value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.localExame}" size="50" maxlength="150"
+                                             required="false" requiredMessage="Campo Local do Exame inválido!">
+                                </p:inputText>                            
+
+                                <h:outputLabel value="Substancia: " for="substancia"/>
+                                <p:selectOneMenu id="substancia" value="#{toxicologicoPreliminarMB.involucro.substancia}" required="true"
+                                                 converter="substanciaConverter" requiredMessage="Campo Substancia é obrigatorio."
+                                                 style="width:160px">
+                                    <f:selectItem itemLabel="Selecione..." />
+                                    <f:selectItems value="#{substanciaMB.listarSubstancias()}" var="s"
+                                                   itemLabel="#{s.tipoSubstancia}" itemValue="#{s}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Qtde. de Invólucros: " for="quantidade" />
+                                <p:inputText id="quantidade" label="Quantidade" 
+                                             value="#{toxicologicoPreliminarMB.involucro.quantidade}" size="20" required="true">
+                                            <f:convertNumber minFractionDigits="1"/>
+                                </p:inputText>
+
+                                <h:outputLabel value="Peso Bruto(g): " for="peso" />
+                                <p:inputText id="peso" label="Peso" value="#{toxicologicoPreliminarMB.involucro.peso}"
+                                            size="20" required="true">
+                                            <f:convertNumber pattern="#0.00"/>
+                                </p:inputText>
+
+                                <h:outputLabel value="Tipo do Involucro: " for="tipoInvolucro" />
+                                <p:selectOneMenu id="tipoInvolucro" 
+                                                 value="#{toxicologicoPreliminarMB.involucro.tipoInvolucro}"
+                                                 converter="tipoInvolucroConverter" required="true" requiredMessage="Campo Tipo de Involucro é obrigatorio." 
+                                                 style="width:160px">
+                                    <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                    <f:selectItems value="#{tipoInvolucroMB.listarTiposInvolucros()}"
+                                                   var="ti" itemLabel="#{ti.descricao}" 
+                                                   itemValue="#{ti}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Cor do invólucro: " for="cor" />
+                                <p:selectOneMenu id="cor" 
+                                                 value="#{toxicologicoPreliminarMB.involucro.cor}"
+                                                 converter="corConverter" required="true" requiredMessage="Campo Cor é obrigatorio."
+                                                 style="width:160px">
+                                    <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                    <f:selectItems value="#{corInvolucroMB.listarCores()}" var="c" 
+                                                   itemLabel="#{c.descricao}" itemValue="#{c}" />
+                                </p:selectOneMenu>
+
+                                <h:outputText value="Observação: " />
+                                <p:inputTextarea value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.observacao}"  
+                                                 rows="5" cols="53" maxlength="255" autoResize="false" />
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{toxicologicoPreliminarMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <br />
+                    <br />
+                    <h:form id="listar">
+                        <p:dataTable value="#{toxicologicoPreliminarMB.listarToxicologicosPremilinares()}" var="ti" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                         emptyMessage="Nenhum Toxicologico Cadastrado">
+                            <f:facet name="header">
+                                Lista de Exames Toxicológicos Cadastrados
+                            </f:facet>
+                            <p:column headerText="Laudo Número / Guia Número" filterBy="#{ti.idLaudo} - #{ti.guia.idGuia}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.idLaudo} - #{ti.guia.numeroGuia}"/>
+                            </p:column>
+                            <p:column headerText="Procedencia" filterBy="#{ti.guia.procedencia.descricao}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.guia.procedencia.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Autoridade Requisitante" filterBy="#{ti.guia.autoridade.nome}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.guia.autoridade.nome}" />
+                            </p:column>
+                            <p:column headerText="Destino Laudo" filterBy="#{ti.guia.destino.nomeDestino}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.guia.destino.nomeDestino}"/>
+                            </p:column>
+                            <p:column headerText="Data da Ocorrência" filterBy="#{ti.dataOcorrencia}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.dataOcorrencia}">
+                                    <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Referência" filterBy="#{ti.referencia}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.referencia}"/>
+                            </p:column>
+                            <p:column headerText="Indiciado" filterBy="#{ti.guia.envolvido}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.guia.envolvido}"/>
+                            </p:column>
+                            <p:column headerText="Substancia / Descrição" filterBy="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Qtd Invólucros" filterBy="#{ti.involucro.quantidade}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.involucro.quantidade}"/>
+                            </p:column>
+                            <p:column headerText="Peso Bruto(g)" filterBy="#{ti.involucro.peso}" filterMatchMode="contains">
+                                <h:outputText value="#{ti.involucro.peso}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandButton action="#{toxicologicoPreliminarMB.remover(ti)}" icon="ui-icon-trash" 
+                                                 onclick="if(!confirm('Confirma a exclusão do Toxicologico #{ti.idLaudo}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{toxicologicoPreliminarMB.toxicologicoPreliminar}" value="#{ti}"/>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Imprimir" style="text-align: center">
+                                <p:commandButton actionListener="#{toxicologicoPreliminarMB.geraRelatorioToxicologicoPreliminar(ti)}" icon="ui-icon-print"
+                                                onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
                     </h:form>
-                </p:panel>
-                <br />
-                <br />
-                <h:form id="listar">
-                    <p:dataTable value="#{toxicologicoPreliminarMB.listarToxicologicosPremilinares()}" var="ti" paginator="true" rows="10" 
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                     emptyMessage="Nenhum Toxicologico Cadastrado">
-                        <f:facet name="header">
-                            Lista de Exames Toxicológicos Cadastrados
-                        </f:facet>
-                        <p:column headerText="Laudo Número / Guia Número" filterBy="#{ti.idLaudo} - #{ti.guia.idGuia}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.idLaudo} - #{ti.guia.numeroGuia}"/>
-                        </p:column>
-                        <p:column headerText="Procedencia" filterBy="#{ti.guia.procedencia.descricao}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.guia.procedencia.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Autoridade Requisitante" filterBy="#{ti.guia.autoridade.nome}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.guia.autoridade.nome}" />
-                        </p:column>
-                        <p:column headerText="Destino Laudo" filterBy="#{ti.guia.destino.nomeDestino}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.guia.destino.nomeDestino}"/>
-                        </p:column>
-                        <p:column headerText="Data da Ocorrência" filterBy="#{ti.dataOcorrencia}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.dataOcorrencia}">
-                                <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column headerText="Referência" filterBy="#{ti.referencia}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.referencia}"/>
-                        </p:column>
-                        <p:column headerText="Indiciado" filterBy="#{ti.guia.envolvido}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.guia.envolvido}"/>
-                        </p:column>
-                        <p:column headerText="Substancia / Descrição" filterBy="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Qtd Invólucros" filterBy="#{ti.involucro.quantidade}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.involucro.quantidade}"/>
-                        </p:column>
-                        <p:column headerText="Peso Bruto(g)" filterBy="#{ti.involucro.peso}" filterMatchMode="contains">
-                            <h:outputText value="#{ti.involucro.peso}"/>
-                        </p:column>
-                        <p:column headerText="Excluir" style="text-align: center">
-                            <p:commandButton action="#{toxicologicoPreliminarMB.remover(ti)}" icon="ui-icon-trash" 
-                                             onclick="if(!confirm('Confirma a exclusão do Toxicologico #{ti.idLaudo}?')) return false" ajax="false">
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Editar" style="text-align: center">
-                            <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
-                                <f:setPropertyActionListener target="#{toxicologicoPreliminarMB.toxicologicoPreliminar}" value="#{ti}"/>
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Imprimir" style="text-align: center">
-                            <p:commandButton actionListener="#{toxicologicoPreliminarMB.geraRelatorioToxicologicoPreliminar(ti)}" icon="ui-icon-print"
-                                            onclick="this.form.target='_blank'" ajax="false"  process="@this">
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable> 
-                </h:form>
+                </p:layoutUnit>
             </ui:define>
         </ui:composition>
     </body>

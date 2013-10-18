@@ -46,9 +46,9 @@ public class UsuarioEJB extends Manager{
         return query.getResultList();
     }
     
-    public Usuario findUsuarioPorLogin(String login) {
-        Query query = em.createQuery("SELECT  u FROM Usuario u where u.login=:login");
-        query.setParameter("login", login);
+    public Usuario findUsuarioPorLogin(String email) {
+        Query query = em.createQuery("SELECT  u FROM Usuario u where u.email=:email");
+        query.setParameter("email", email);
         Usuario usuario = (Usuario) query.getResultList().get(0);
         return usuario;
     }

@@ -11,45 +11,48 @@
         <ui:composition template="./../WEB-INF/Template.xhtml">
 
             <ui:define name="centro">
-                <p:panel id="panelCadastroTipoDeExame" header="Cadastro Tipo de Exame" toggleable="true">
-                    <h:form id="dadosTipoDeExame">
-                        <p:growl life="3000"/>
-                            <h:panelGrid columns="2" style="margin-right: 100%">
-                                <h:outputText value="Descrição: "/>
-                                <p:inputText value="#{tipoDeExameMB.tipoDeExame.descricaoExame}" size="50" maxlength="100" required="true"
-                                             requiredMessage="A descrição não pode ficar em branco!"/>
-                                <p:commandButton value="Salvar" action="#{tipoDeExameMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                            </h:panelGrid>
-                     </h:form>
-                </p:panel>
-                <br />
-                <br />
-                    <h:form id="listar">
-                        <p:dataTable value="#{tipoDeExameMB.listarTiposDeExames()}" var="t" paginator="true" rows="10" 
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                 {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                 emptyMessage="Nenhum Exame Cadastrado">
-                        <f:facet name="header">
-                            Lista de Exames Cadastrados
-                        </f:facet>
-                            <p:column headerText="Codigo" filterBy="#{t.idTipoExame}" filterMatchMode="contains">
-                                <h:outputText value="#{t.idTipoExame}"/>
-                            </p:column>
-                            <p:column headerText="Nome" filterBy="#{t.descricaoExame}" filterMatchMode="contains">
-                                <h:outputText value="#{t.descricaoExame}" />
-                            </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandButton action="#{tipoDeExameMB.remover(t)}" icon="ui-icon-trash" 
-                                               onclick="if(!confirm('Confirma a exclusão de #{t.descricaoExame}?')) return false" ajax="false">
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Editar" style="text-align: center">
-                                <p:commandButton update=":dadosTipoDeExame" icon="ui-icon-pencil">
-                                    <f:setPropertyActionListener target="#{tipoDeExameMB.tipoDeExame}" value="#{t}"/>
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable> 
-                    </h:form>
+                <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelCadastroTipoDeExame" header="Cadastro Tipo de Exame" toggleable="true">
+                        <h:form id="dadosTipoDeExame">
+                            <p:growl life="3000"/>
+                                <h:panelGrid columns="2" style="margin-right: 100%">
+                                    <h:outputText value="Descrição: "/>
+                                    <p:inputText value="#{tipoDeExameMB.tipoDeExame.descricaoExame}" size="50" maxlength="100" required="true"
+                                                 requiredMessage="A descrição não pode ficar em branco!"/>
+                                    <h:inputHidden />
+                                    <p:commandButton value="Salvar" action="#{tipoDeExameMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                                </h:panelGrid>
+                         </h:form>
+                    </p:panel>
+                    <br />
+                    <br />
+                        <h:form id="listar">
+                            <p:dataTable value="#{tipoDeExameMB.listarTiposDeExames()}" var="t" paginator="true" rows="10" 
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                     emptyMessage="Nenhum Exame Cadastrado">
+                            <f:facet name="header">
+                                Lista de Exames Cadastrados
+                            </f:facet>
+                                <p:column headerText="Codigo" filterBy="#{t.idTipoExame}" filterMatchMode="contains">
+                                    <h:outputText value="#{t.idTipoExame}"/>
+                                </p:column>
+                                <p:column headerText="Nome" filterBy="#{t.descricaoExame}" filterMatchMode="contains">
+                                    <h:outputText value="#{t.descricaoExame}" />
+                                </p:column>
+                                <p:column headerText="Excluir" style="text-align: center">
+                                    <p:commandButton action="#{tipoDeExameMB.remover(t)}" icon="ui-icon-trash" 
+                                                   onclick="if(!confirm('Confirma a exclusão de #{t.descricaoExame}?')) return false" ajax="false">
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Editar" style="text-align: center">
+                                    <p:commandButton update=":dadosTipoDeExame" icon="ui-icon-pencil">
+                                        <f:setPropertyActionListener target="#{tipoDeExameMB.tipoDeExame}" value="#{t}"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable> 
+                        </h:form>
+                </p:layoutUnit>
             </ui:define>
 
         </ui:composition>

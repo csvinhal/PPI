@@ -11,47 +11,49 @@
         <ui:composition template="./../WEB-INF/Template.xhtml">
 
             <ui:define name="centro">
-                <p:panel id="panelCadastroCorInvolucro" header="Cadastro Cor de Involucro" toggleable="true">
-                    <h:form id="dadosCorInvolucro">
-                        <p:growl life="3000"/>
-                        <h:panelGrid columns="2" style="margin-right: 100%">
-                            <h:outputText value="Descrição: "/>
-                            <p:inputText value="#{corInvolucroMB.cor.descricao}" size="50" maxlength="100" required="true"
-                                                 requiredMessage="A descrição não pode ficar em branco!"/>
-                            <p:commandButton value="Salvar" action="#{corInvolucroMB.salvar()}" ajax="false" style="margin-right: 100%"/>
-                            <p:commandButton value="Listar" oncomplete="dlgListar.show()" style="margin-right: 100%"/>
-                        </h:panelGrid>
-                    </h:form>
-                </p:panel>
-                <br />
-                <br />
-                <h:form id="listar">
-                    <p:dataTable emptyMessage="Nenhuma Cor Cadastrada"
-                                     value="#{corInvolucroMB.listarCores()}" var="c" paginator="true" rows="10" 
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
-                        <f:facet name="header">
-                            Lista de Cores de Invólucros Cadastrados
-                        </f:facet>
-                        <p:column headerText="Codigo" filterBy="#{c.idCor}" filterMatchMode="contains">
-                            <h:outputText value="#{c.idCor}" />
-                        </p:column>
-                        <p:column headerText="Nome" filterBy="#{c.descricao}" filterMatchMode="contains">
-                            <h:outputText value="#{c.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Excluir" style="text-align: center">
-                            <p:commandButton action="#{corInvolucroMB.remover(c)}" icon="ui-icon-trash" 
-                                           onclick="if(!confirm('Confirma a exclusão de #{c.descricao}?')) return false" ajax="false">
+                <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelCadastroCorInvolucro" header="Cadastro Cor de Involucro" toggleable="true">
+                        <h:form id="dadosCorInvolucro">
+                            <p:growl life="3000"/>
+                            <h:panelGrid columns="2" style="margin-right: 100%">
+                                <h:outputText value="Descrição: "/>
+                                <p:inputText value="#{corInvolucroMB.cor.descricao}" size="50" maxlength="100" required="true"
+                                                     requiredMessage="A descrição não pode ficar em branco!"/>
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{corInvolucroMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <br />
+                    <br />
+                    <h:form id="listar">
+                        <p:dataTable emptyMessage="Nenhuma Cor Cadastrada"
+                                         value="#{corInvolucroMB.listarCores()}" var="c" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                            <f:facet name="header">
+                                Lista de Cores de Invólucros Cadastrados
+                            </f:facet>
+                            <p:column headerText="Codigo" filterBy="#{c.idCor}" filterMatchMode="contains">
+                                <h:outputText value="#{c.idCor}" />
+                            </p:column>
+                            <p:column headerText="Nome" filterBy="#{c.descricao}" filterMatchMode="contains">
+                                <h:outputText value="#{c.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandButton action="#{corInvolucroMB.remover(c)}" icon="ui-icon-trash" 
+                                               onclick="if(!confirm('Confirma a exclusão de #{c.descricao}?')) return false" ajax="false">
 
-                            </p:commandButton>
-                        </p:column>
-                        <p:column headerText="Editar" style="text-align: center">
-                            <p:commandButton update=":dadosCorInvolucro" icon="ui-icon-pencil">
-                                <f:setPropertyActionListener target="#{corInvolucroMB.cor}" value="#{c}"/>
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable> 
-                </h:form>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":dadosCorInvolucro" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{corInvolucroMB.cor}" value="#{c}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
+                    </h:form>
+                </p:layoutUnit>
             </ui:define>
         </ui:composition>
     </body>
