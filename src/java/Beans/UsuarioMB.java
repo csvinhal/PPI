@@ -56,6 +56,7 @@ public class UsuarioMB implements Serializable{
     
     public void novo(){
         this.usuario = new Usuario();
+        this.usuario.setAtivo(false);
     }
     
     public String cadastraUsuario(){
@@ -76,7 +77,7 @@ public class UsuarioMB implements Serializable{
        }else{
             try{
                 usuario.setSenha(c.criptografa(usuario.getSenha()));
-                usuario.setAtivo(true);
+                usuario.setAtivo(false);
                 usuEJB.salvar(usuario);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Usuario salvo com sucesso!"));

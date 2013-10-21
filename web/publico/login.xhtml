@@ -8,21 +8,23 @@
         <title>PPI</title>
         <link type="text/css" rel="stylesheet" href="dot-luv/skin.css"/>
     </h:head>
-    <h:body style="background-image:url('./relatorio/civilmg.gif');background-position: 50% 0%;background-repeat: no-repeat">
+    <h:body style="background-image:url('./../relatorio/civilmg.gif');background-position: 50% 0%;background-repeat: no-repeat">
         <p:dialog header="Login" visible="true" closable="false" draggable="false" resizable="false" width="420">
+            <h:form>
+                <h:commandButton action="#{usuarioMB.cadastraUsuario()}" value="Registre-se" style="text-align: center; height: 30px; width: 80px;"/>
+            </h:form>
             <form method="post" action="#{request.contextPath}/j_spring_security_check">
-                <h:panelGrid columns="2" cellpadding="5">
                     <h:panelGroup rendered="#{!empty param.login_error}">
                         <span style="font-color:red"> Erro ao efetuar o login.</span><br />
                         <br/>
                         Motivo: #{SPRING_SECURITY_LAST_EXCEPTION.message}
                     </h:panelGroup>
-                    <h:outputLabel for="j_username" value="Email: *" /> 
-                    <h:inputText id="j_username" required="true" autocomplete="false"/>
-                    <h:outputLabel for="j_password" value="Password: * " />
-                    <h:inputSecret id="j_password" required="true" autocomplete="false"/>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="j_username" value="Email: " /> 
+                    <p:inputText id="j_username" required="true" autocomplete="false"/>
+                    <p:outputLabel for="j_password" value="Senha:  " />
+                    <p:password id="j_password" required="true" autocomplete="false" feedback="true" promptLabel="Entre com a senha"/>
                     <h:commandButton value="Login" style="text-align: center; height: 30px; width: 80px;"/>
-                    <h:commandButton value="Registre-se" action="#{usuarioMB.cadastraUsuario()}" style="text-align: center; height: 30px; width: 80px;"/>
                 <script>
                     document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}";
                 </script>

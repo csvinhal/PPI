@@ -15,25 +15,24 @@
         <p:panel id="panelEdicaoUsuario" header="Cadastro de Usuarios">
             <h:form id="cadastro">
                 <p:messages />
-                <h:inputHidden value="#{usuarioBean.usuario.idUsuario}"/>
-                <h:inputHidden value="#{usuarioBean.usuario.ativo}"/>
+                <h:inputHidden value="#{usuarioMB.usuario.idUsuario}"/>
+                <h:inputHidden value="#{usuarioMB.usuario.ativo}"/>
                 <p:panelGrid columns="2">
-                <h:outputLabel value="Nome: " for="nome"/>
-                <h:inputText id="nome" size="40" maxlength="100" value="#{usuarioBean.usuario.nome}" 
+                    <p:outputLabel value="Nome: " for="nome"/>
+                    <p:inputText id="nome" size="40" maxlength="100" value="#{usuarioMB.usuario.nome}" 
                 		     required="true" requiredMessage="Campo Nome em branco!" />
-                    <h:outputLabel  value="e-Mail: " for="email"/>
-                    <h:inputText id="email" label="e-Mail" value="#{usuarioBean.usuario.email}" size="40" maxlength="100"
-                                 required="true" requiredMessage="Campo e-Mail invalido!" redisplay="true">
+                    <p:outputLabel  value="e-Mail: " for="email"/>
+                    <p:inputText id="email" label="e-Mail" value="#{usuarioMB.usuario.email}" size="40" maxlength="100"
+                                 required="true" requiredMessage="Campo e-Mail invalido!">
                         <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"/>
-                    </h:inputText>
-                    <h:outputLabel value="Senha:" for="senha"/>
-				<h:inputSecret id="senha" label="Senha" value="#{usuarioBean.usuario.senha}" size="40" maxlength="40" required="true" redisplay="true"/>
-				
-				<h:outputLabel value="Confirmar Senha:" for="confirmarsenha"/>
-				<h:inputSecret id="confirmarsenha" label="Confirmar Senha" value="#{usuarioBean.confirmarSenha}" size="40" 
-							   maxlength="40" required="true" redisplay="true"/>
-                    <h:button value="Voltar" outcome="/publico/login"/>
-                    <h:commandButton value="Salvar" action="#{usuarioBean.salvar}"/>            
+                    </p:inputText>
+                    <p:outputLabel value="Senha:" for="pw1"/>
+                    <p:password id="pw1" label="Senha" value="#{usuarioMB.usuario.senha}"  match="pw2"
+                                size="40" maxlength="40" required="true" redisplay="true"/>
+                    <p:outputLabel value="Confirmar Senha:" for="pw2"/>
+                    <p:password id="pw2" label="Confirmar Senha" value="#{usuarioMB.usuario.senha}" size="40" maxlength="40" required="true" redisplay="true"/>
+                    <p:button value="Voltar" outcome="/publico/login.jsf"/>
+                    <p:commandButton value="Salvar" actionListener="#{usuarioMB.salvar}"/>            
                 </p:panelGrid>
             </h:form>
         </p:panel>

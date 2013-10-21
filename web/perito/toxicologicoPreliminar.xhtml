@@ -18,8 +18,7 @@
                             <h:panelGrid columns="2" style="margin-right: 100%">
                                 <h:outputLabel value="Guia Pericial: " for="guiaPericial"/>
                                 <p:selectOneMenu id="guiaPericial" value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.guia}" required="true"
-                                                 converter="guiaConverter" requiredMessage="É necessário informar a guia pericial"
-                                                 style="250px">
+                                                 converter="guiaConverter" requiredMessage="É necessário informar a guia pericial" >
                                     <f:selectItem itemLabel="Selecione..."/>
                                     <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
                                                    itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
