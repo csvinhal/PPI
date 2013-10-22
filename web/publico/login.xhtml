@@ -23,7 +23,7 @@
                     <p:outputLabel for="j_username" value="Email: " /> 
                     <p:inputText id="j_username" required="true" autocomplete="false"/>
                     <p:outputLabel for="j_password" value="Senha:  " />
-                    <p:password id="j_password" required="true" autocomplete="false" feedback="true" promptLabel="Entre com a senha"/>
+                    <p:password id="j_password" required="true" autocomplete="false"/>
                     <h:commandButton value="Login" style="text-align: center; height: 30px; width: 80px;"/>
                 <script>
                     document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}";

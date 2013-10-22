@@ -28,11 +28,13 @@
                     </p:inputText>
                     <p:outputLabel value="Senha:" for="pw1"/>
                     <p:password id="pw1" label="Senha" value="#{usuarioMB.usuario.senha}"  match="pw2"
-                                size="40" maxlength="40" required="true" redisplay="true"/>
+                                size="40" maxlength="40" required="true" redisplay="true" feedback="true" 
+                                promptLabel="Entre com a senha"/>
                     <p:outputLabel value="Confirmar Senha:" for="pw2"/>
-                    <p:password id="pw2" label="Confirmar Senha" value="#{usuarioMB.usuario.senha}" size="40" maxlength="40" required="true" redisplay="true"/>
+                    <p:password id="pw2" label="Confirmar Senha" value="#{usuarioMB.usuario.senha}" size="40" maxlength="40" required="true" redisplay="true"
+                                feedback="true" promptLabel="Entre com a senha"/>
                     <p:button value="Voltar" outcome="/publico/login.jsf"/>
-                    <p:commandButton value="Salvar" actionListener="#{usuarioMB.salvar}"/>            
+                    <p:commandButton value="Salvar" action="#{usuarioMB.salvar}" ajax="false" icon="ui-icon-disk"/>            
                 </p:panelGrid>
             </h:form>
         </p:panel>

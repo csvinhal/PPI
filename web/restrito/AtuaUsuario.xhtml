@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+
+        <ui:composition template="./../WEB-INF/Template.xhtml">
+
+            <ui:define name="centro">
+                <p:layoutUnit id="center" position="center">
+                    <h:form id="listar">
+                        <p:dataTable value="#{usuarioMB.findAllUsuario()}" var="u" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                         emptyMessage="Nenhum usuario cadastrado">
+                            <f:facet name="header">
+                            Lista dos Usuários Cadastrados
+                            </f:facet>
+                            <p:column headerText="Número do Usuario" filterBy="#{u.idUsuario}" filterMatchMode="contains">
+                                <h:outputText value="#{u.idUsuario}"/>
+                            </p:column>
+                            <p:column headerText="Nome" filterBy="#{u.nome}" filterMatchMode="contains">
+                                <h:outputText value="#{u.nome}" />
+                            </p:column>
+                            <p:column headerText="Status" filterBy="#{u.ativo}" filterMatchMode="contains">
+                                <h:outputText value="#{u.ativo}" />
+                            </p:column>
+                            <p:column headerText="E-mail" filterBy="#{u.email}" filterMatchMode="contains">
+                                <h:outputText value="#{u.email}"/>
+                            </p:column>
+                            <p:column headerText="Excluir" style="text-align: center">
+                                <p:commandButton action="#{usuarioMB.remover(u)}" icon="ui-icon-trash"
+                                                 onclick="if(!confirm('Confirma a exclusão da guia #{u.nome}?')) return false" ajax="false">
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable> 
+                    </h:form>
+                </p:layoutUnit>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

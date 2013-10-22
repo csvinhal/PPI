@@ -48,16 +48,14 @@ public class Usuario implements Serializable {
     private String senha;
     @ManyToOne(optional=false)
     private Permissao permissao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario")
     private List<VistoriaVeiculo> vistoriaVeiculoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario")
     private List<VistoriaImovel> vistoriaImovelList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario")
     private List<ToxicologicoPreliminar> toxicologicoPreliminarList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario")
     private List<GuiaPericial> guiaPericialList;
-    @OneToMany(mappedBy = "responsavel")
-    private List<GuiaPericial> guiaPericialList1;
 
     public Usuario() {
     }
@@ -159,15 +157,6 @@ public class Usuario implements Serializable {
 
     public void setGuiaPericialList(List<GuiaPericial> guiaPericialList) {
         this.guiaPericialList = guiaPericialList;
-    }
-
-    @XmlTransient
-    public List<GuiaPericial> getGuiaPericialList1() {
-        return guiaPericialList1;
-    }
-
-    public void setGuiaPericialList1(List<GuiaPericial> guiaPericialList1) {
-        this.guiaPericialList1 = guiaPericialList1;
     }
 
     @Override

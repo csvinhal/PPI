@@ -24,7 +24,7 @@ public class UsuarioMB implements Serializable{
     
     public UsuarioMB() {
         usuario = new Usuario();
-        permissao = new Permissao();
+        permissao = new Permissao();       
     }
 
     public Usuario getUsuario() {
@@ -64,20 +64,18 @@ public class UsuarioMB implements Serializable{
         return "usuario";
     }
     
+    public List<Usuario> findAllUsuario(){
+        return usuEJB.findAllUsuario();
+    }
+    
     public List<Permissao> getListPermissoes(){
         return usuEJB.findAllPermissao();
     }
            
     public void salvar(){
-       String senha = this.usuario.getSenha();
-       
-       if(!senha.equals(this.confirmaSenha)){
-           FacesContext fc = FacesContext.getCurrentInstance();
-           fc.addMessage(null, new FacesMessage("A senha confirmada não conrresponde a senha digitada"));
-       }else{
+        String senha = usuario.getSenha();
             try{
-                usuario.setSenha(c.criptografa(usuario.getSenha()));
-                usuario.setAtivo(false);
+                usuario.setSenha(c.criptografa(senha));
                 usuEJB.salvar(usuario);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Usuario salvo com sucesso!"));
@@ -88,7 +86,16 @@ public class UsuarioMB implements Serializable{
                 fc.addMessage(null, new FacesMessage("Erro ao salvar usuário!"));
             }
        }
+    
+    public void remover(Usuario usuario){
+        try{
+            usuEJB.excluir(usuario);
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage("Usuário excluido com sucesso!"));
+        }catch(Exception e){
+             e.printStackTrace();
+             FacesContext fc = FacesContext.getCurrentInstance();
+             fc.addMessage(null, new FacesMessage("Erro ao excluir Usuário!"));
+        }
     }
-    
-    
 }
