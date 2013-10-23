@@ -37,7 +37,7 @@
         <authentication-provider>
             <password-encoder hash="md5" />
             <jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="SELECT email, senha, 'true' as ativo FROM usuario WHERE email = ?"
+                               users-by-username-query="SELECT email, senha, ativo FROM usuario WHERE email = ?"
                                authorities-by-username-query="SELECT u.email, p.role FROM usuario u inner join permissao p on u.permissao_id = p.id WHERE u.email = ?" />                                                         
         </authentication-provider>
     </authentication-manager>

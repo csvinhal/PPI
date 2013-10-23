@@ -18,7 +18,7 @@ public class UsuarioMB implements Serializable{
     @EJB
     private UsuarioEJB usuEJB;
     private Usuario usuario;
-    private String confirmaSenha;
+    private String novaSenha;
     private Permissao permissao;
     Crypt c = new Crypt();
     
@@ -38,12 +38,12 @@ public class UsuarioMB implements Serializable{
         this.usuario = usuario;
     }
 
-    public String getConfirmaSenha() {
-        return confirmaSenha;
+    public String getNovaSenha() {
+        return novaSenha;
     }
 
-    public void setConfirmaSenha(String confirmaSenha) {
-        this.confirmaSenha = confirmaSenha;
+    public void setNovaSenha(String novaSenha) {
+        this.novaSenha = novaSenha;
     }
 
     public Permissao getPermissao() {
@@ -74,8 +74,10 @@ public class UsuarioMB implements Serializable{
            
     public void salvar(){
         String senha = usuario.getSenha();
+        if(usuario.getIdUsuario() == null){
             try{
                 usuario.setSenha(c.criptografa(senha));
+                usuario.setAtivo(false);
                 usuEJB.salvar(usuario);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Usuario salvo com sucesso!"));
@@ -85,7 +87,22 @@ public class UsuarioMB implements Serializable{
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Erro ao salvar usuário!"));
             }
-       }
+       }else{
+            try{
+                usuario.setPermissao(permissao);
+                usuEJB.salvar(usuario);
+                FacesContext fc = FacesContext.getCurrentInstance();
+                fc.addMessage(null, new FacesMessage("Usuario editado com sucesso!"));
+                usuario = new Usuario();
+                permissao = new Permissao();
+            }catch(Exception e){
+                e.printStackTrace();
+                FacesContext fc = FacesContext.getCurrentInstance();
+                fc.addMessage(null, new FacesMessage("Erro ao editar usuário!"));
+            }
+            
+        }
+    }
     
     public void remover(Usuario usuario){
         try{

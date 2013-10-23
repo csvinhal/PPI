@@ -12,6 +12,35 @@
 
             <ui:define name="centro">
                 <p:layoutUnit id="center" position="center">
+                    <p:panel id="panelUsuario" header="Gerenciamento de Usuários">
+                        <h:form id="atuaUsu">
+                            <p:growl id="growl"/>
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Nome: " for="nome"/>
+                                <p:inputText id="nome" size="40" maxlength="100" value="#{usuarioMB.usuario.nome}" 
+                                                 required="true" requiredMessage="Campo Nome em branco!" />
+                                <p:outputLabel  value="e-Mail: " for="email"/>
+                                <p:inputText id="email" label="e-Mail" value="#{usuarioMB.usuario.email}" size="40" maxlength="100"
+                                             required="true" requiredMessage="Campo e-Mail invalido!">
+                                    <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"/>
+                                </p:inputText>
+                                <p:outputLabel value="Status: " for="status"/>
+                                <p:selectBooleanButton id="status" value="#{usuarioMB.usuario.ativo}" 
+                                                       onLabel="Ativar" offLabel="Desativar" />
+                                <p:outputLabel value="Permissão: " for="papel" />
+                                <p:selectOneMenu id="papel" value="#{usuarioMB.permissao}" converter="permissaoConverter"
+                                                 required="true" requiredMessage="O campo Permissao é obrigatorio." 
+                                                 style="width: 200px">
+                                                 <f:selectItem itemLabel="Selecione..."/>
+                                                 <f:selectItems value="#{usuarioMB.listPermissoes}" var="p"
+                                                                itemLabel="#{p.descricao}" itemValue="#{p}"/>
+                                </p:selectOneMenu>
+                                <p:commandButton value="Salvar" action="#{usuarioMB.salvar}" ajax="false" icon="ui-icon-disk"/>            
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    <br />
+                    <br />
                     <h:form id="listar">
                         <p:dataTable value="#{usuarioMB.findAllUsuario()}" var="u" paginator="true" rows="10" 
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
@@ -27,10 +56,18 @@
                                 <h:outputText value="#{u.nome}" />
                             </p:column>
                             <p:column headerText="Status" filterBy="#{u.ativo}" filterMatchMode="contains">
-                                <h:outputText value="#{u.ativo}" />
+                                <h:outputText value="#{u.ativo==false?'Inativo' : 'Ativo'}" />
                             </p:column>
                             <p:column headerText="E-mail" filterBy="#{u.email}" filterMatchMode="contains">
                                 <h:outputText value="#{u.email}"/>
+                            </p:column>
+                            <p:column headerText="Permissão" filterBy="#{u.permissao.descricao}" filterMatchMode="contains">
+                                <h:outputText value="#{u.permissao.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Editar" style="text-align: center">
+                                <p:commandButton update=":atuaUsu" icon="ui-icon-pencil">
+                                    <f:setPropertyActionListener target="#{usuarioMB.usuario}" value="#{u}"/>
+                                </p:commandButton>
                             </p:column>
                             <p:column headerText="Excluir" style="text-align: center">
                                 <p:commandButton action="#{usuarioMB.remover(u)}" icon="ui-icon-trash"
