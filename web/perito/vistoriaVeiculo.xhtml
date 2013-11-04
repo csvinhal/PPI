@@ -60,7 +60,6 @@
                                              requiredMessage="O odometro não pode ficar em branco!">
 
                                 </p:inputText>
-                                <h:inputHidden />
                                 <p:commandButton value="Salvar" action="#{vistoriaVeiculoMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
                             </h:panelGrid>
                         </h:form>
@@ -119,7 +118,66 @@
                                                 onclick="this.form.target='_blank'" ajax="false"  process="@this">
                                 </p:commandButton>
                             </p:column>
-                        </p:dataTable> 
+                            <p:column headerText="Imagens">
+                                <center>
+                                <p:commandButton value="Visualizar Imagens" 
+                                                 icon="ui-icon-search"  
+                                                 oncomplete="eventoDialog.show()"/>
+                                <p:commandButton value="Adicionar Imagens" 
+                                                 action="#{vistoriaVeiculoMB.selecionarVistoriaVeiculo(vv)}"
+                                                 oncomplete="fotoDialog.show()"
+                                                 icon="ui-icon-plus"/>
+                                </center>
+                            </p:column>
+                        </p:dataTable>
+                        
+                        
+                         <!-- Visualizar danos -->
+                                <h:form id="VisualizaFoto"  enctype="multipart/form-data">
+		
+                                    <p:dialog header="Imagens do Laudo" widgetVar="eventoDialog"
+                                                            resizable="false" id="eventoDlg" showEffect="fade"
+                                                            hideEffect="fade" modal="false" draggable="true" maximizable="false"
+                                                            minimizable="false">
+
+                                        <h:panelGrid id="infoEvento" columns="2" style="margin:0 auto;">
+
+                                            <p:galleria value="#{danosMB.listarDanos()}" var="image" panelWidth="500" panelHeight="313" showCaption="true">  
+                                                <p:graphicImage value="//resources//uploaded//#{danosMB.danos.imagem}" 
+                                                                alt="Descrição do Dano: #{danosMB.danos.descricao}"/>  
+                                            </p:galleria>  
+                                        </h:panelGrid>
+                                    </p:dialog>
+                                </h:form>
+                         
+                                <h:form id="AdicionaFoto"  enctype="multipart/form-data">
+                                    <!-- Adicionar danos -->
+                                    <p:dialog header="Adicionar Imagens" widgetVar="fotoDialog"
+                                            position="center" resizable="false" id="fotoDlg" showEffect="fade"
+                                            hideEffect="fade" modal="false" width="650">
+
+                                            <h:panelGrid id="infoFoto" columns="2">
+
+                                                    <h:outputText value="Foto: " />
+                                                    <p:fileUpload fileUploadListener="#{danosMB.handleFileUpload}" label="Escolher" 
+                                                                  cancelLabel="Cancelar" uploadLabel="Enviar"
+                                                                  mode="advanced" dragDropSupport="false" update="messages" 
+                                                                  sizeLimit="100000" fileLimit="3" 
+                                                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
+
+                                                    <p:growl id="messages" showDetail="true"/>  
+                                                    <h:inputHidden />
+
+                                                    <h:outputText value="Descrição: " />
+                                                    <p:inputText value="#{danosMB.danos.descricao}" />
+
+
+                                                    <p:commandButton value="Adicionar" icon="ui-icon-plus" update=":vistoriaVeiculo, :listar"
+                                                                     actionListener="#{danosMB.salvar()}" onclick="fotoDialog.hide()"/>
+
+                                            </h:panelGrid>
+                                    </p:dialog>   
+                                </h:form>
                     </h:form>
                </p:layoutUnit>
             </ui:define>

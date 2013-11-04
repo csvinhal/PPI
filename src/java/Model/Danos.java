@@ -29,7 +29,7 @@ public class Danos implements Serializable {
     @Size(max = 50)
     private String descricao;
     @Lob
-    private byte[] imagem;
+    private String imagem;
     @JoinColumn(name = "laudo", referencedColumnName = "idLaudo")
     @ManyToOne(optional = false)
     private Laudo laudo;
@@ -57,11 +57,11 @@ public class Danos implements Serializable {
         this.descricao = descricao;
     }
 
-    public byte[] getImagem() {
+    public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(byte[] imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
     }
 
