@@ -72,77 +72,112 @@
                                 </p:selectOneMenu>                            
                                 <h:outputText value="Observação: " />
                                 <p:inputTextarea value="#{guiaPericialMB.guiaPericial.observacao}"  rows="5" cols="53" maxlength="255" autoResize="false" />
-                                <h:inputHidden />
+                                
+                                <h:inputHidden value="#{guiaPericialMB.usuario}" converter="usuarioConverter"/>
+                                
                                 <p:commandButton value="Salvar" action="#{guiaPericialMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
                             </h:panelGrid>
                         </h:form>
                     </p:panel>
                     <br />
                     <br />
-                    <h:form id="listar">
-                        <p:dataTable value="#{guiaPericialMB.listarGuias()}" var="g" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                         emptyMessage="Nenhuma Guia Cadastrada">
-                            <f:facet name="header">
-                            Lista das Guias Periciais Cadastradas
-                            </f:facet>
-                            <p:column headerText="Número da Guia" filterBy="#{g.numeroGuia}" filterMatchMode="contains">
-                                <h:outputText value="#{g.numeroGuia}"/>
-                            </p:column>
-                            <p:column headerText="Data de Entrada" filterBy="#{g.dataEntrada}" filterMatchMode="contains">
-                                <h:outputText value="#{g.dataEntrada}" >
-                                        <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
-                                </h:outputText> 
-                            </p:column>
-                            <p:column headerText="Vítima" filterBy="#{g.vitima}" filterMatchMode="contains">
-                                <h:outputText value="#{g.vitima}" />
-                            </p:column>
-                            <p:column headerText="Envolvido" filterBy="#{g.envolvido}" filterMatchMode="contains">
-                                <h:outputText value="#{g.envolvido}"/>
-                            </p:column>
-                            <p:column headerText="Local do Exame" filterBy="#{g.localExame}" filterMatchMode="contains">
-                                <h:outputText value="#{g.localExame}"/>
-                            </p:column>
-                            <p:column headerText="Referência" filterBy="#{g.referencia}" filterMatchMode="contains">
-                                <h:outputText value="#{g.referencia}"/>
-                            </p:column>
-                            <p:column headerText="Autoridade" filterBy="#{g.autoridade.nome}" filterMatchMode="contains">
-                                <h:outputText value="#{g.autoridade.nome}"/>
-                            </p:column>
-                            <p:column headerText="Destino" filterBy="#{g.destino.nomeDestino}" filterMatchMode="contains">
-                                <h:outputText value="#{g.destino.nomeDestino}"/>
-                            </p:column>
-                            <p:column headerText="Procedencia" filterBy="#{g.procedencia.descricao}" filterMatchMode="contains">
-                                <h:outputText value="#{g.procedencia.descricao}"/>
-                            </p:column>
-                            <p:column headerText="Tipo de Material">
-                                <p:dataList value="#{g.tipoDeMaterial}" var="tipoDeMaterial">
-                                    #{tipoDeMaterial.descricaoMaterial}
-                                </p:dataList>
-                            </p:column>
-                            <p:column headerText="Tipo de Exame" filterBy="#{g.tipoExame.descricaoExame}" filterMatchMode="contains">
-                                <h:outputText value="#{g.tipoExame.descricaoExame}"/>
-                            </p:column>
-                            <p:column headerText="Observação">
-                                <h:outputText value="#{g.observacao}"/>
-                            </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandButton action="#{guiaPericialMB.remover(g)}" icon="ui-icon-trash"
-                                               onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Editar" style="text-align: center">
-                                <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
-                                    <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Imprimir" style="text-align: center">
-                                <p:commandButton icon="ui-icon-print" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
-                                                onclick="this.form.target='_blank'" ajax="false"  process="@this">
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable> 
+                    
+                    
+                    <p:panel id="panelListagemGuiaPericial" header="Lista de Guias Periciais Cadastradas" toggleable="true">
+                        <h:form id="listar">
+                            <p:dataTable value="#{guiaPericialMB.listarGuias()}" var="g" paginator="true" rows="10" 
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                             emptyMessage="Nenhuma Guia Cadastrada">
+
+                                <p:column headerText="Número da Guia" filterBy="#{g.numeroGuia}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.numeroGuia}"/>
+                                </p:column>
+                                <p:column headerText="Data de Entrada" filterBy="#{g.dataEntrada}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.dataEntrada}" >
+                                            <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                                    </h:outputText> 
+                                </p:column>
+                                <p:column headerText="Vítima" filterBy="#{g.vitima}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.vitima}" />
+                                </p:column>
+                                <p:column headerText="Envolvido" filterBy="#{g.envolvido}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.envolvido}"/>
+                                </p:column>
+                                <p:column headerText="Local do Exame" filterBy="#{g.localExame}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.localExame}"/>
+                                </p:column>
+                                <p:column headerText="Referência" filterBy="#{g.referencia}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.referencia}"/>
+                                </p:column>
+                                <p:column headerText="Autoridade" filterBy="#{g.autoridade.nome}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.autoridade.nome}"/>
+                                </p:column>
+                                <p:column headerText="Destino" filterBy="#{g.destino.nomeDestino}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.destino.nomeDestino}"/>
+                                </p:column>
+                                <p:column headerText="Procedencia" filterBy="#{g.procedencia.descricao}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.procedencia.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Tipo de Material">
+                                    <p:dataList value="#{g.tipoDeMaterial}" var="tipoDeMaterial">
+                                        #{tipoDeMaterial.descricaoMaterial}
+                                    </p:dataList>
+                                </p:column>
+                                <p:column headerText="Tipo de Exame" filterBy="#{g.tipoExame.descricaoExame}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.tipoExame.descricaoExame}"/>
+                                </p:column>
+                                <p:column headerText="Status" filterBy="#{g.status}" filterMatchMode="contains">
+                                    <h:outputText value="#{g.status==false?'Inativa' : 'Ativa'}"/>
+                                </p:column>
+                                <p:column headerText="Usuário">
+                                    <h:outputText value="#{g.usuario.nome}"/>
+                                </p:column>
+                                <p:column headerText="Excluir" style="text-align: center">
+                                    <p:commandButton action="#{guiaPericialMB.remover(g)}" icon="ui-icon-trash"
+                                                   onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Editar" style="text-align: center">
+                                    <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
+                                        <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Imprimir" style="text-align: center">
+                                    <p:commandButton icon="ui-icon-print" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
+                                                    onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column style="text-align: center" headerText="Vincular Usuario" >
+                                        <p:commandButton id="addButton" oncomplete="usuarioDialog.show()" update=":usuario"
+                                                icon="ui-icon-plus" title="Vincular Usuario" >
+                                                <f:setPropertyActionListener value="#{g}"
+                                                             target="#{guiaPericialMB.guiaSelecionada}" />
+                                        </p:commandButton>				
+                                </p:column>
+                            </p:dataTable> 
+                        </h:form>
+                    </p:panel>
+                    
+                    
+                    <h:form id="usuario" enctype="multipart/form-data">							
+                        <p:dialog header="Vincular Usuario" widgetVar="usuarioDialog"
+                                position="center" resizable="false" id="usuDlg" showEffect="fade"
+                                hideEffect="fade" modal="false" width="650">					
+                                <h:panelGrid id="infoUsuario" columns="2">				
+                                        <h:outputLabel value="Usuario: " for="guiaPericial"/>
+                                        <p:selectOneMenu id="guiaPericial" required="true" value="#{guiaPericialMB.guiaPericial.responsavel}"
+                                               converter="guiaConverter"
+                                               style="width:250px">
+                                  <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                  <f:selectItems value="#{usuarioMB.findAllUsuario()}" var="u"
+                                                 itemLabel="#{u.nome}" itemValue="#{u}"/>
+                              </p:selectOneMenu>									
+                                        <p:commandButton value="Adicionar" icon="ui-icon-plus"
+                                                         action="#{guiaPericialMB.vinculaResponsavel()}" update="infoUsuario, :dadosGuia, :listar" 
+                                                         oncomplete="usuarioDialog.hide()" />				
+                                </h:panelGrid>
+                        </p:dialog>				
                     </h:form>
                 </p:layoutUnit>
             </ui:define>

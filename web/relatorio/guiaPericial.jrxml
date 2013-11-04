@@ -226,8 +226,8 @@ WHERE
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement uuid="7a618c12-fe4f-43a5-8e65-27fa5f403a69" x="0" y="2" width="555" height="77"/>
-				<imageExpression><![CDATA["\\timbre.JPG"]]></imageExpression>
+				<reportElement uuid="f973ee70-5edf-44a0-af9b-3fc25c188310" x="0" y="0" width="555" height="79"/>
+				<imageExpression><![CDATA["\\relatorio\\timbre.JPG"]]></imageExpression>
 			</image>
 		</band>
 	</title>

@@ -68,7 +68,9 @@ public class GuiaPericial implements Serializable {
     @NotNull
     @Size(min = 1, max = 100)
     private String referencia;
-    private Integer status;
+    @Basic(optional = false)
+    @NotNull
+    private boolean status;
     @Size(max = 100)
     private String vitima;
     @JoinTable(name = "guiamaterial", joinColumns = {
@@ -168,14 +170,14 @@ public class GuiaPericial implements Serializable {
         this.referencia = referencia;
     }
 
-    public Integer getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
-
+    
     public String getVitima() {
         return vitima;
     }

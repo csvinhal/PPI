@@ -1,13 +1,16 @@
 package Beans;
 
 import Controller.GuiaPericialEJB;
+import Controller.UsuarioEJB;
 import Model.GuiaPericial;
+import Model.Usuario;
 import Util.RelatorioFactory;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "guiaPericialMB")
@@ -16,19 +19,15 @@ public class GuiaPericialMB implements Serializable{
     @EJB
     GuiaPericialEJB guiaPericialEJB;
     private GuiaPericial guiaPericial;
-    private GuiaPericial guiaSelecionada = new GuiaPericial();
     private List<GuiaPericial> listGuia;
+    private Usuario usuario;
+    @EJB
+    public UsuarioEJB usuEJB;
+    private GuiaPericial guiaSelecionada;
 
     public GuiaPericialMB() {
         guiaPericial = new GuiaPericial();
-        }
-
-    public GuiaPericial getGuiaSelecionada() {
-        return guiaSelecionada;
-    }
-
-    public void setGuiaSelecionada(GuiaPericial guiaSelecionada) {
-        this.guiaSelecionada = guiaSelecionada;
+        usuario = new Usuario();
     }
 
     public GuiaPericial getGuiaPericial() {
@@ -39,6 +38,22 @@ public class GuiaPericialMB implements Serializable{
         this.guiaPericial = guiaPericial;
     }
 
+    public GuiaPericial getGuiaSelecionada() {
+        return guiaSelecionada;
+    }
+
+    public void setGuiaSelecionada(GuiaPericial guiaSelecionada) {
+        this.guiaSelecionada = guiaSelecionada;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = getUserLogado();
+    }
+    
     public void setListGuia(List<GuiaPericial> listGuia) {
         this.listGuia = listGuia;
     }
@@ -59,6 +74,8 @@ public class GuiaPericialMB implements Serializable{
     public void salvar(){
         if (guiaPericial.getIdGuia() == null) {
             try {
+                guiaPericial.setStatus(true);
+                guiaPericial.setUsuario(usuario);
                 guiaPericialEJB.salvar(guiaPericial);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
@@ -81,6 +98,11 @@ public class GuiaPericialMB implements Serializable{
             }
         }
     }
+    
+    public void vinculaResponsavel(){
+        guiaPericial.setResponsavel(usuario);
+        guiaPericialEJB.salvar(guiaPericial);
+    }
 
     public void remover(GuiaPericial guiaPericial) {
         try {
@@ -91,6 +113,19 @@ public class GuiaPericialMB implements Serializable{
             FacesContext fc = FacesContext.getCurrentInstance();
             fc.addMessage(null, new FacesMessage("Erro ao excluir Guia Pericial"));
         }
+    }
+    
+    public Usuario getUserLogado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext external = context.getExternalContext();
+        String login = external.getRemoteUser();
+
+        if (usuario == null || !login.equals(usuario.getEmail())) {
+            if (login != null) {
+                usuario = usuEJB.findUsuarioPorLogin(login);                
+            }
+        }
+        return usuario;
     }
 
     public void geraRelatorioGuia(GuiaPericial guiaPericial) {
