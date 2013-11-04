@@ -122,7 +122,7 @@
                                     
                                     <h:outputLabel value="Marca: " for="marca1" />
                                     <p:inputText id="marca1" value="#{vistoriaImovelMB.localImovel.marca1}" size="40" required="true"
-                                                 requiredMessage="Campo Marca inválido!" converter="localImovelConverter">
+                                                 requiredMessage="Campo Marca inválido!">
                                     </p:inputText>
                                     <h:inputHidden />
                                     <h:outputLabel value="Vias de acesso ao interior do terreno: " for="viasTerreno2"/>
@@ -153,8 +153,8 @@
                                         <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento2 != 'Outro'}"/>
                                     </h:outputLabel>
                                     <h:outputLabel value="Marca: " for="marca2" />
-                                    <p:inputText id="marca2" value="#{vistoriaImovelMB.localImovel.marca2}" size="40" required="true"
-                                                 requiredMessage="Campo Marca inválido!" converter="localImovelConverter">
+                                    <p:inputText id="marca2" value="#{vistoriaImovelMB.localImovel.marca2}" size="40" 
+                                                 converter="localImovelConverter">
                                     </p:inputText>
                                 </h:panelGrid>
                             </p:fieldset>
@@ -191,8 +191,8 @@
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Marca: " for="marca3" />
-                                    <p:inputText id="marca3" value="#{vistoriaImovelMB.localImovel.marca3}" size="40" required="true"
-                                                 requiredMessage="Campo Marca inválido!" converter="localImovelConverter">
+                                    <p:inputText id="marca3" value="#{vistoriaImovelMB.localImovel.marca3}" size="40"
+                                                 converter="localImovelConverter">
                                     </p:inputText>
                                     <h:inputHidden />
                                     <h:outputLabel value="Porta: " for="viasEdificacao2"/>
@@ -224,8 +224,8 @@
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Marca: " for="marca4" />
-                                    <p:inputText id="marca4" value="#{vistoriaImovelMB.localImovel.marca4}" size="40" required="true"
-                                                 requiredMessage="Campo Marca inválido!" converter="localImovelConverter">
+                                    <p:inputText id="marca4" value="#{vistoriaImovelMB.localImovel.marca4}" size="40"
+                                                 converter="localImovelConverter">
                                     </p:inputText>
                                     <h:inputHidden />
                                     <h:outputLabel value="Vias de clarificação natural: " for="classificacao"/>
@@ -339,10 +339,8 @@
                                 <h:outputLabel value="Acompanhou(aram) os exames: " for="esclarecimentos3" />
                                 <p:inputTextarea id="esclarecimentos3" rows="5" cols="52" maxlength="255" autoResize="false"
                                                  value="#{vistoriaImovelMB.vistoriaImovel.esclarecimento3}" />
-                                <h:inputHidden />
-                                <p:commandButton value="Salvar" action="#{vistoriaImovelMB.salvar()}" update=":edicaoVistoriaImovel" icon="ui-icon-disk"/>
-                                
                             </h:panelGrid>
+                            <p:commandButton value="Salvar" action="#{vistoriaImovelMB.salvar()}" update=":edicaoVistoriaImovel" icon="ui-icon-disk"/>
                         </h:form>
                     </p:panel> 
               </p:layoutUnit>

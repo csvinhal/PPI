@@ -91,63 +91,62 @@
                     </p:panel>
                     <br />
                     <br />
-                    <h:form id="listar">
-                        <p:dataTable value="#{toxicologicoPreliminarMB.listarToxicologicosPremilinares()}" var="ti" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                         emptyMessage="Nenhum Toxicologico Cadastrado">
-                            <f:facet name="header">
-                                Lista de Exames Toxicológicos Cadastrados
-                            </f:facet>
-                            <p:column headerText="Laudo Número / Guia Número" filterBy="#{ti.idLaudo} - #{ti.guia.idGuia}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.idLaudo} - #{ti.guia.numeroGuia}"/>
-                            </p:column>
-                            <p:column headerText="Procedencia" filterBy="#{ti.guia.procedencia.descricao}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.guia.procedencia.descricao}"/>
-                            </p:column>
-                            <p:column headerText="Autoridade Requisitante" filterBy="#{ti.guia.autoridade.nome}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.guia.autoridade.nome}" />
-                            </p:column>
-                            <p:column headerText="Destino Laudo" filterBy="#{ti.guia.destino.nomeDestino}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.guia.destino.nomeDestino}"/>
-                            </p:column>
-                            <p:column headerText="Data da Ocorrência" filterBy="#{ti.dataOcorrencia}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.dataOcorrencia}">
-                                    <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column headerText="Referência" filterBy="#{ti.referencia}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.referencia}"/>
-                            </p:column>
-                            <p:column headerText="Indiciado" filterBy="#{ti.guia.envolvido}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.guia.envolvido}"/>
-                            </p:column>
-                            <p:column headerText="Substancia / Descrição" filterBy="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}"/>
-                            </p:column>
-                            <p:column headerText="Qtd Invólucros" filterBy="#{ti.involucro.quantidade}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.involucro.quantidade}"/>
-                            </p:column>
-                            <p:column headerText="Peso Bruto(g)" filterBy="#{ti.involucro.peso}" filterMatchMode="contains">
-                                <h:outputText value="#{ti.involucro.peso}"/>
-                            </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
-                                <p:commandButton action="#{toxicologicoPreliminarMB.remover(ti)}" icon="ui-icon-trash" 
-                                                 onclick="if(!confirm('Confirma a exclusão do Toxicologico #{ti.idLaudo}?')) return false" ajax="false">
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Editar" style="text-align: center">
-                                <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
-                                    <f:setPropertyActionListener target="#{toxicologicoPreliminarMB.toxicologicoPreliminar}" value="#{ti}"/>
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Imprimir" style="text-align: center">
-                                <p:commandButton actionListener="#{toxicologicoPreliminarMB.geraRelatorioToxicologicoPreliminar(ti)}" icon="ui-icon-print"
-                                                onclick="this.form.target='_blank'" ajax="false"  process="@this">
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable> 
-                    </h:form>
+                    <p:panel id="panelListagemGuiaPericial" header="Lista de Guias Periciais Cadastradas" toggleable="true">
+                        <h:form id="listar">
+                            <p:dataTable value="#{toxicologicoPreliminarMB.listarToxicologicosPremilinares()}" var="ti" paginator="true" rows="10" 
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                             emptyMessage="Nenhum Toxicologico Cadastrado">
+                                <p:column headerText="Laudo Número / Guia Número" filterBy="#{ti.idLaudo} - #{ti.guia.idGuia}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.idLaudo} - #{ti.guia.numeroGuia}"/>
+                                </p:column>
+                                <p:column headerText="Procedencia" filterBy="#{ti.guia.procedencia.descricao}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.guia.procedencia.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Autoridade Requisitante" filterBy="#{ti.guia.autoridade.nome}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.guia.autoridade.nome}" />
+                                </p:column>
+                                <p:column headerText="Destino Laudo" filterBy="#{ti.guia.destino.nomeDestino}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.guia.destino.nomeDestino}"/>
+                                </p:column>
+                                <p:column headerText="Data da Ocorrência" filterBy="#{ti.dataOcorrencia}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.dataOcorrencia}">
+                                        <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Referência" filterBy="#{ti.referencia}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.referencia}"/>
+                                </p:column>
+                                <p:column headerText="Indiciado" filterBy="#{ti.guia.envolvido}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.guia.envolvido}"/>
+                                </p:column>
+                                <p:column headerText="Substancia / Descrição" filterBy="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.involucro.substancia.tipoSubstancia} - #{ti.involucro.substancia.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Qtd Invólucros" filterBy="#{ti.involucro.quantidade}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.involucro.quantidade}"/>
+                                </p:column>
+                                <p:column headerText="Peso Bruto(g)" filterBy="#{ti.involucro.peso}" filterMatchMode="contains">
+                                    <h:outputText value="#{ti.involucro.peso}"/>
+                                </p:column>
+                                <p:column headerText="Excluir" style="text-align: center">
+                                    <p:commandButton action="#{toxicologicoPreliminarMB.remover(ti)}" icon="ui-icon-trash" 
+                                                     onclick="if(!confirm('Confirma a exclusão do Toxicologico #{ti.idLaudo}?')) return false" ajax="false">
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Editar" style="text-align: center">
+                                    <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
+                                        <f:setPropertyActionListener target="#{toxicologicoPreliminarMB.toxicologicoPreliminar}" value="#{ti}"/>
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Imprimir" style="text-align: center">
+                                    <p:commandButton actionListener="#{toxicologicoPreliminarMB.geraRelatorioToxicologicoPreliminar(ti)}" icon="ui-icon-print"
+                                                    onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable> 
+                        </h:form>
+                    </p:panel>
                 </p:layoutUnit>
             </ui:define>
         </ui:composition>
