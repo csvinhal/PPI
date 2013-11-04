@@ -30,6 +30,7 @@ public class GuiaPericialMB implements Serializable{
         usuario = new Usuario();
     }
 
+    //GETS E SETS
     public GuiaPericial getGuiaPericial() {
         return guiaPericial;
     }
@@ -71,6 +72,7 @@ public class GuiaPericialMB implements Serializable{
         this.guiaPericial = guiaPericial;
     }
 
+    //MÉTODOS
     public void salvar(){
         if (guiaPericial.getIdGuia() == null) {
             try {

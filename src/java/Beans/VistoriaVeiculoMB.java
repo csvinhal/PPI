@@ -20,12 +20,15 @@ public class VistoriaVeiculoMB implements Serializable {
     VistoriaVeiculoEJB vistoriaVeiculoEJB;
     private VistoriaVeiculo vistoriaVeiculo;
     private Veiculo veiculo;
+    private VistoriaVeiculo vistoriaSelecionada;
+    
     
     public VistoriaVeiculoMB() {
     vistoriaVeiculo = new VistoriaVeiculo();
     veiculo = new Veiculo();    
     }
 
+    //GETS E SETS
     public VistoriaVeiculo getVistoriaVeiculo() {
         return vistoriaVeiculo;
     }
@@ -41,7 +44,17 @@ public class VistoriaVeiculoMB implements Serializable {
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
     }
+
+    public VistoriaVeiculo getVistoriaSelecionada() {
+        return vistoriaSelecionada;
+    }
+
+    public void setVistoriaSelecionada(VistoriaVeiculo vistoriaSelecionada) {
+        this.vistoriaSelecionada = vistoriaSelecionada;
+    }
     
+    
+    //MÉTODOS
     public void salvar(){
         if(vistoriaVeiculo.getIdLaudo() == null){
             try{

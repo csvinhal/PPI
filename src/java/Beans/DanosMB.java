@@ -27,7 +27,7 @@ public class DanosMB implements Serializable{
     private Laudo laudo;
     
     public DanosMB() {
-    danos = new Danos();
+        danos = new Danos();
     }
 
     public Danos getDanos() {

@@ -13,7 +13,7 @@
                     <p:panel id="vistoriaImovel" header="Cadastro de Vistoria de Imovel" toggleable="true">
                         <h:form id="edicaoVistoriaImovel">
                             <p:growl autoUpdate="true" />
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="3">
                                 <h:outputLabel value="Guia Pericial: " for="guiaPericial"/>
                                 <p:selectOneMenu id="guiaPericial" value="#{vistoriaImovelMB.vistoriaImovel.guia}" required="true"
                                                  converter="guiaConverter" requiredMessage="É necessário informar a guia pericial">
@@ -21,25 +21,35 @@
                                     <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
                                                    itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
                                 </p:selectOneMenu>
+                                <h:inputHidden />
                                 <h:outputLabel value="Referencia: " for="referencia" />
                                 <p:inputText id="referencia" value="#{vistoriaImovelMB.vistoriaImovel.referencia}" required="true"
                                              requiredMessage="É necessário informar uma referência" size="50" maxlength="50" />
+                                <h:inputHidden />
                                 <h:outputLabel value="Local do Exame: " for="localExame" />
                                 <p:inputText id="localExame" value="#{vistoriaImovelMB.vistoriaImovel.localExame}" required="true"
                                              requiredMessage="É necessário informar o local do exame!" size="50" maxlength="50" />
+                                <h:inputHidden />
                                 <h:outputLabel value="Natureza da Perícia: " for="naturezaPericia" />
                                 <p:selectOneRadio id="naturezaPericia" value="#{vistoriaImovelMB.vistoriaImovel.natureza}">  
                                     <f:selectItem itemLabel="Arrombamento" itemValue="Arrombamento" />  
                                     <f:selectItem itemLabel="Danos" itemValue="Danos" />  
                                     <f:selectItem itemLabel="Escalada" itemValue="Escalada" /> 
                                     <f:selectItem itemLabel="Outros" itemValue="Outros" />
+                                    <p:ajax update="nat" event="change"/>																													
                                 </p:selectOneRadio>
+                                    <h:outputLabel id="nat" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.vistoriaImovel.natureza != 'Outros'}"/>
+                                    </h:outputLabel>
+                                            
                                 <h:outputLabel value="Data do Fato: " for="dataFato" />
                                 <p:calendar id="dataFato" value="#{vistoriaImovelMB.vistoriaImovel.dataFato}" required="true"
                                              requiredMessage="É necessário informar a data do fato!" pattern="dd/MM/yyyy" />
+                                <h:inputHidden />
                                 <h:outputLabel value="Data e hora do exame: " for="dataExame" />
                                 <p:calendar id="dataExame" value="#{vistoriaImovelMB.vistoriaImovel.dataExame}" required="true"
                                              requiredMessage="É necessário informar a data do exame!" pattern="dd/MM/yyyy HH:mm" />
+                                <h:inputHidden />
                             </h:panelGrid>
                             <br />
                             <br />
@@ -81,19 +91,21 @@
                             <br />
                             <br />
                             <p:fieldset legend="Vias de Acesso ao Interior do Terreno">
-                                <h:panelGrid columns="2">
+                                <h:panelGrid columns="3">
                                     <h:outputLabel value="Vias de acesso ao interior do terreno: " for="viasTerreno1"/>
                                     <p:selectOneRadio id="viasTerreno1" value="#{vistoriaImovelMB.localImovel.viasTerreno1}"
                                                       converter="localImovelConverter">  
                                         <f:selectItem itemLabel="Portão social" itemValue="Portão social" />  
                                         <f:selectItem itemLabel="Garagem" itemValue="Garagem" />  
                                     </p:selectOneRadio> 
+                                    <h:inputHidden />
                                     <h:outputLabel value="Estrutura: " for="estrutura1" />
                                     <p:selectOneRadio id="estrutura1" value="#{vistoriaImovelMB.localImovel.estrutura1}"
                                                       converter="localImovelConverter">  
                                         <f:selectItem itemLabel="Metálica" itemValue="Metálica" />  
                                         <f:selectItem itemLabel="Madeira" itemValue="Madeira" />
                                     </p:selectOneRadio>
+                                    <h:inputHidden />
                                     <h:outputLabel value="Sistema de trancamento: " for="trancamento1" />
                                     <p:selectOneRadio id="trancamento1" value="#{vistoriaImovelMB.localImovel.trancamento1}"
                                                       converter="localImovelConverter">  
@@ -101,23 +113,32 @@
                                         <f:selectItem itemLabel="Cadeado" itemValue="Cadeado" />  
                                         <f:selectItem itemLabel="Nenhum" itemValue="Nenhum" />  
                                         <f:selectItem itemLabel="Outro" itemValue="Outro" />  
+                                        <p:ajax update="tranc1" event="change"/>
                                     </p:selectOneRadio>
+                                    
+                                    <h:outputLabel id="tranc1" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento1 != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Marca: " for="marca1" />
                                     <p:inputText id="marca1" value="#{vistoriaImovelMB.localImovel.marca1}" size="40" required="true"
                                                  requiredMessage="Campo Marca inválido!" converter="localImovelConverter">
                                     </p:inputText>
+                                    <h:inputHidden />
                                     <h:outputLabel value="Vias de acesso ao interior do terreno: " for="viasTerreno2"/>
                                     <p:selectOneRadio id="viasTerreno2" value="#{vistoriaImovelMB.localImovel.viasTerreno2}"
                                                       converter="localImovelConverter">  
                                         <f:selectItem itemLabel="Portão social" itemValue="Portão social" />  
                                         <f:selectItem itemLabel="Garagem" itemValue="Garagem" />  
-                                    </p:selectOneRadio> 
+                                    </p:selectOneRadio>
+                                    <h:inputHidden />
                                     <h:outputLabel value="Estrutura: " for="estrutura2" />
                                     <p:selectOneRadio id="estrutura2" value="#{vistoriaImovelMB.localImovel.estrutura2}"
                                                       converter="localImovelConverter">  
                                         <f:selectItem itemLabel="Metálica" itemValue="Metálica" />  
                                         <f:selectItem itemLabel="Madeira" itemValue="Madeira" />
                                     </p:selectOneRadio>
+                                    <h:inputHidden />
                                     <h:outputLabel value="Sistema de trancamento: " for="trancamento2" />
                                     <p:selectOneRadio id="trancamento2" value="#{vistoriaImovelMB.localImovel.trancamento2}"
                                                       converter="localImovelConverter">  
@@ -125,7 +146,12 @@
                                         <f:selectItem itemLabel="Cadeado" itemValue="Cadeado" />  
                                         <f:selectItem itemLabel="Nenhum" itemValue="Nenhum" />  
                                         <f:selectItem itemLabel="Outro" itemValue="Outro" />  
+                                        <p:ajax update="tranc2" event="change" />
                                     </p:selectOneRadio>
+                                    
+                                    <h:outputLabel id="tranc2" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento2 != 'Outro'}"/>
+                                    </h:outputLabel>
                                     <h:outputLabel value="Marca: " for="marca2" />
                                     <p:inputText id="marca2" value="#{vistoriaImovelMB.localImovel.marca2}" size="40" required="true"
                                                  requiredMessage="Campo Marca inválido!" converter="localImovelConverter">
@@ -135,15 +161,21 @@
                             <br />
                             <br />
                             <p:fieldset legend="Vias de Acesso ao Interior da Edificação: Estrutura / Sistema de Trancamento">
-                                <h:panelGrid columns="2">
+                                <h:panelGrid columns="3">
                                     <h:outputLabel value="Porta: " for="viasEdificacao1"/>
                                     <p:selectOneRadio id="viasEdificacao1" value="#{vistoriaImovelMB.localImovel.viasEdificacao1}"
                                                       converter="localImovelConverter">  
                                         <f:selectItem itemLabel="Metálica" itemValue="Metálica" />  
                                         <f:selectItem itemLabel="Madeira" itemValue="Madeira" /> 
                                         <f:selectItem itemLabel="Nenhum" itemValue="Nenhum" />  
-                                        <f:selectItem itemLabel="Outro" itemValue="Outro" />  
+                                        <f:selectItem itemLabel="Outro" itemValue="Outro" />
+                                        <p:ajax update="edif1" event="change" />
                                     </p:selectOneRadio> 
+                                    
+                                    <h:outputLabel id="edif1" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.viasEdificacao1 != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Sistema de trancamento: " for="trancamento3" />
                                     <p:selectOneRadio id="trancamento3" value="#{vistoriaImovelMB.localImovel.trancamento3}"
                                                       converter="localImovelConverter">  
@@ -151,37 +183,63 @@
                                         <f:selectItem itemLabel="Cadeado" itemValue="Cadeado" />  
                                         <f:selectItem itemLabel="Nenhum" itemValue="Nenhum" />  
                                         <f:selectItem itemLabel="Outro" itemValue="Outro" />  
+                                        <p:ajax update="tranc3" event="change" />
                                     </p:selectOneRadio>
+                                    
+                                    <h:outputLabel id="tranc3" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento3 != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Marca: " for="marca3" />
                                     <p:inputText id="marca3" value="#{vistoriaImovelMB.localImovel.marca3}" size="40" required="true"
                                                  requiredMessage="Campo Marca inválido!" converter="localImovelConverter">
                                     </p:inputText>
+                                    <h:inputHidden />
                                     <h:outputLabel value="Porta: " for="viasEdificacao2"/>
                                     <p:selectOneRadio id="viasEdificacao2" value="#{vistoriaImovelMB.localImovel.viasEdificacao2}"
                                                       converter="localImovelConverter">  
                                         <f:selectItem itemLabel="Metálica" itemValue="Metálica" />  
                                         <f:selectItem itemLabel="Madeira" itemValue="Madeira" /> 
                                         <f:selectItem itemLabel="Nenhum" itemValue="Nenhum" />  
-                                        <f:selectItem itemLabel="Outro" itemValue="Outro" />  
+                                        <f:selectItem itemLabel="Outro" itemValue="Outro" />
+                                        <p:ajax update="edif2" event="change" />
                                     </p:selectOneRadio> 
+                                    
+                                    <h:outputLabel id="edif2" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.viasEdificacao2 != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Sistema de trancamento: " for="trancamento4" />
                                     <p:selectOneRadio id="trancamento4" value="#{vistoriaImovelMB.localImovel.trancamento4}" 
                                                       converter="localImovelConverter">  
                                         <f:selectItem itemLabel="Cilíndrico" itemValue="Cilíndrico" />  
                                         <f:selectItem itemLabel="Cadeado" itemValue="Cadeado" />  
                                         <f:selectItem itemLabel="Nenhum" itemValue="Nenhum" />  
-                                        <f:selectItem itemLabel="Outro" itemValue="Outro" />  
+                                        <f:selectItem itemLabel="Outro" itemValue="Outro" />
+                                        <p:ajax update="tranc4" event="change" />
                                     </p:selectOneRadio>
+                                    
+                                    <h:outputLabel id="tranc4" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento4 != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Marca: " for="marca4" />
                                     <p:inputText id="marca4" value="#{vistoriaImovelMB.localImovel.marca4}" size="40" required="true"
                                                  requiredMessage="Campo Marca inválido!" converter="localImovelConverter">
                                     </p:inputText>
+                                    <h:inputHidden />
                                     <h:outputLabel value="Vias de clarificação natural: " for="classificacao"/>
                                     <p:selectOneRadio id="classificacao" value="#{vistoriaImovelMB.localImovel.clarificacao}"
                                                       converter="localImovelConverter">  
                                         <f:selectItem itemLabel="Janelas" itemValue="Janelas" />
-                                        <f:selectItem itemLabel="Outro" itemValue="Outro" />  
+                                        <f:selectItem itemLabel="Outro" itemValue="Outro" />
+                                        <p:ajax update="clar" event="change" />
                                     </p:selectOneRadio> 
+                                    
+                                    <h:outputLabel id="clar" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.clarificacao != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Estrutura (Vias de clarificação natural): " for="estruturaJanela" />
                                     <p:selectOneRadio id="estruturaJanela" value="#{vistoriaImovelMB.localImovel.estruturaJanela}"
                                                       converter="localImovelConverter">  
@@ -189,17 +247,23 @@
                                         <f:selectItem itemLabel="Madeira" itemValue="Madeira" />  
                                         <f:selectItem itemLabel="Lâmina vítrea" itemValue="Lâmina vítrea" />  
                                         <f:selectItem itemLabel="Outro" itemValue="Outro" />  
+                                        <p:ajax update="estrutJan" event="change" />
                                     </p:selectOneRadio>
+                                    
+                                    <h:outputLabel id="estrutJan" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.estruturaJanela != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Nº de cômodos: " for="numComodos" />
                                     <p:inputText id="numComodos" value="#{vistoriaImovelMB.localImovel.comodos}" size="30" required="true"
-                                                 requiredMessage="Campo Número de Comodos inválido!" converter="localImovelConverter">
+                                                 requiredMessage="Campo Número de Comodos inválido!">
                                     </p:inputText>
                                 </h:panelGrid>
                             </p:fieldset>
                             <br />
                             <br />
                             <p:fieldset legend="Características Construtivas">
-                                <h:panelGrid columns="2">
+                                <h:panelGrid columns="3">
                                     <h:outputLabel value="Paredes: " for="paredes" />
                                     <p:selectOneRadio id="paredes" value="#{vistoriaImovelMB.localImovel.paredes}"
                                                       converter="localImovelConverter">  
@@ -207,7 +271,13 @@
                                         <f:selectItem itemLabel="Argamassa" itemValue="Argamassa" />
                                         <f:selectItem itemLabel="Pintura" itemValue="Pintura" />  
                                         <f:selectItem itemLabel="Outro" itemValue="Outro" />
+                                        <p:ajax update="parede" event="change" />
                                     </p:selectOneRadio> 
+                                    
+                                    <h:outputLabel id="parede" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.paredes != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Teto: " for="Teto" />
                                     <p:selectOneRadio id="Teto" value="#{vistoriaImovelMB.localImovel.teto}"
                                                       converter="localImovelConverter">  
@@ -215,7 +285,13 @@
                                         <f:selectItem itemLabel="Telhas" itemValue="Telhas" />  
                                         <f:selectItem itemLabel="PVC" itemValue="PVC" /> 
                                         <f:selectItem itemLabel="Outro" itemValue="Outro" />
+                                        <p:ajax update="tet" event="change" />
                                     </p:selectOneRadio>
+                                    
+                                    <h:outputLabel id="tet" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.teto != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Piso: " for="piso" />
                                     <p:selectOneRadio id="piso" value="#{vistoriaImovelMB.localImovel.piso}"
                                                       converter="localImovelConverter">  
@@ -223,7 +299,13 @@
                                         <f:selectItem itemLabel="Cimento" itemValue="Cimento" />  
                                         <f:selectItem itemLabel="Chão batido" itemValue="Chão batido" />  
                                         <f:selectItem itemLabel="Outro" itemValue="Outro" /> 
+                                        <p:ajax update="pis" event="change" />
                                     </p:selectOneRadio>
+                                    
+                                    <h:outputLabel id="pis" >
+                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.piso != 'Outro'}"/>
+                                    </h:outputLabel>
+                                    
                                     <h:outputLabel value="Instalações: " for="instalacao" />
                                     <p:selectOneRadio id="instalacao" value="#{vistoriaImovelMB.localImovel.instalacoes}"
                                                       converter="localImovelConverter">  
