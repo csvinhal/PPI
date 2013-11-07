@@ -23,8 +23,8 @@
                                       showEffect="clip" hideEffect="clip"> 
                                 <p:dataTable var="ti" value="#{toxicologicoPreliminarMB.listarToxicologicosPremilinares()}"
                                              emptyMessage="Não existe Toxicológicos Preliminares cadastrados." style="font-size: 14px;">  
-                                    <p:column headerText="Laudo Número / Guia Número" filterBy="#{ti.idLaudo} - #{ti.guia.idGuia}" filterMatchMode="contains">
-                                        <h:outputText value="#{ti.idLaudo} - #{ti.guia.numeroGuia}"/>
+                                    <p:column headerText="Laudo Número / Guia Número" filterBy="#{ti.idLaudo} - #{ti.guia.numeroGuia}" filterMatchMode="contains">
+                                        <h:outputText value="#{ti.idLaudo} - #{ti.guia.numeroGuia}" converter="guiaConverter" />
                                     </p:column>
                                     <p:column headerText="Procedencia" filterBy="#{ti.guia.procedencia.descricao}" filterMatchMode="contains">
                                         <h:outputText value="#{ti.guia.procedencia.descricao}"/>
@@ -58,7 +58,12 @@
                                     <p:column headerText="Selecionar" style="text-align: center;">  
                                         <p:commandButton action="#{toxicologicoPreliminarMB.selecionaToxicologicoPreliminar(ti)}" icon="ui-icon-circle-check" 
                                                          oncomplete="buscaPreliminar.hide()" title="Icon Only" update=":dadostoxicologicoDefinitivo">  
-                                            <f:setPropertyActionListener value="#{ti}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo}" />
+                                            <f:setPropertyActionListener value="#{ti}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.laudo}" />
+                                            <f:setPropertyActionListener value="#{ti.guia}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.guia}" />
+                                            <f:setPropertyActionListener value="#{ti.dataOcorrencia}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.dataocorrencia}" />
+                                            <f:setPropertyActionListener  value="#{ti.referencia}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.referencia}" />
+                                            <f:setPropertyActionListener value="#{ti.localExame}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.localexame}" />
+                                            <f:setPropertyActionListener value="#{ti.involucro}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.involucro}" />
                                         </p:commandButton>
                                     </p:column>  
                                 </p:dataTable>
@@ -70,8 +75,9 @@
                         <br />
                         <h:form id="dadostoxicologicoDefinitivo">
                             <h:panelGrid columns="2">
+                                
                                 <h:outputLabel value="Data da Ocorrência: " for="dataOcorrencia"/>
-                                <p:calendar value="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.dataocorrencia}" 
+                                <p:calendar value="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.dataocorrencia}"  
                                             id="dataOcorrencia" required="true" requiredMessage="O campo Data da Ocorrência não pode ficar em branco">
                                 </p:calendar>
 
@@ -134,7 +140,65 @@
                                 <p:commandButton value="Salvar" action="#{toxicologicoDefinitivoMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
                             </h:panelGrid>
                         </h:form>
-                    </p:panel>                    
+                    </p:panel>
+                        
+                        <br />
+                        <br />
+                        <p:panel id="panelListagemToxicologicoDefinitivo" header="Lista de Toxicológicos Cadastrados" toggleable="true">
+                            <h:form id="listar">
+                                <p:dataTable value="#{toxicologicoDefinitivoMB.listarToxicologicosDefinitivos()}" var="td" paginator="true" rows="10" 
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                             emptyMessage="Nenhum Toxicologico Cadastrado">
+                                    <p:column headerText="Laudo Número / Guia Número" filterBy="#{td.idLaudo} - #{td.guia.idGuia}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.idLaudo} - #{td.guia.numeroGuia}"/>
+                                    </p:column>
+                                    <p:column headerText="Procedencia" filterBy="#{td.guia.procedencia.descricao}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.guia.procedencia.descricao}"/>
+                                    </p:column>
+                                    <p:column headerText="Autoridade Requisitante" filterBy="#{td.guia.autoridade.nome}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.guia.autoridade.nome}" />
+                                    </p:column>
+                                    <p:column headerText="Destino Laudo" filterBy="#{td.guia.destino.nomeDestino}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.guia.destino.nomeDestino}"/>
+                                    </p:column>
+                                    <p:column headerText="Data da Ocorrência" filterBy="#{td.dataOcorrencia}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.dataOcorrencia}">
+                                            <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Referência" filterBy="#{td.referencia}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.referencia}"/>
+                                    </p:column>
+                                    <p:column headerText="Indiciado" filterBy="#{td.guia.envolvido}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.guia.envolvido}"/>
+                                    </p:column>
+                                    <p:column headerText="Substancia / Descrição" filterBy="#{td.involucro.substancia.tipoSubstancia} - #{td.involucro.substancia.descricao}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.involucro.substancia.tipoSubstancia} - #{td.involucro.substancia.descricao}"/>
+                                    </p:column>
+                                    <p:column headerText="Qtd Invólucros" filterBy="#{td.involucro.quantidade}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.involucro.quantidade}"/>
+                                    </p:column>
+                                    <p:column headerText="Peso Bruto(g)" filterBy="#{td.involucro.peso}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.involucro.peso}"/>
+                                    </p:column>
+                                    <p:column headerText="Usuário">
+                                        <h:outputText value="#{ti.usuario.nome}"/>
+                                    </p:column>
+                                    <p:column headerText="Comandos" style="text-align: center">
+                                        <p:commandButton action="#{toxicologicoPreliminarMB.remover(ti)}" icon="ui-icon-trash" 
+                                                         onclick="if(!confirm('Confirma a exclusão do Toxicologico #{td.idLaudo}?')) return false" ajax="false">
+                                        </p:commandButton>
+                                         <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
+                                             <f:setPropertyActionListener target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo}" value="#{td}"/>
+                                        </p:commandButton>
+                                        <p:commandButton actionListener="#{toxicologicoPreliminarMB.geraRelatorioToxicologicoPreliminar(td)}" icon="ui-icon-print"
+                                                        onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable> 
+                            </h:form>
+                        </p:panel>                    
                 </p:layoutUnit>
             </ui:define>
         </ui:composition>

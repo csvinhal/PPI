@@ -10,11 +10,11 @@
 	 
     <http auto-config="true" access-denied-page="/negado/negado.xhtml"> 
         
-        <intercept-url pattern="/comum/**" access="ROLE_PERITO, ROLE_COMUM"/> 
+        <intercept-url pattern="/comum/**" access="ROLE_ADMIN,ROLE_PERITO, ROLE_COMUM"/> 
        
-        <intercept-url pattern="/perito/**" access="ROLE_PERITO" />
+        <intercept-url pattern="/perito/**" access="ROLE_ADMIN,ROLE_PERITO" />
         
-        <intercept-url pattern="/principal/**" access="ROLE_PERITO, ROLE_COMUM" />
+        <intercept-url pattern="/principal/**" access="ROLE_ADMIN, ROLE_PERITO, ROLE_COMUM" />
       
         <form-login login-page="/publico/login.jsf" always-use-default-target="true"
                     default-target-url="/principal/index.jsf" authentication-failure-url="/publico/login.jsf?login_error=1" /> 
