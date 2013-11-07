@@ -4,13 +4,16 @@ import Model.VistoriaVeiculo;
 import Util.Manager;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.Query;
 
 @Stateless
 public class VistoriaVeiculoEJB extends Manager{
 
-    public void salvar(VistoriaVeiculo vistoriaVeiculo) {
-        em.merge(vistoriaVeiculo);
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public VistoriaVeiculo salvar(VistoriaVeiculo vistoriaVeiculo) {
+        return em.merge(vistoriaVeiculo);
     }
     
     public List<VistoriaVeiculo> listarVistoriaVeiculos(){

@@ -49,6 +49,7 @@ public class VistoriaImovelMB implements Serializable{
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
                 vistoriaImovel = new VistoriaImovel();
+                localImovel = new LocalImovel();
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();
@@ -61,6 +62,7 @@ public class VistoriaImovelMB implements Serializable{
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Editado com sucesso!"));
                 vistoriaImovel = new VistoriaImovel();
+                localImovel = new LocalImovel();
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();

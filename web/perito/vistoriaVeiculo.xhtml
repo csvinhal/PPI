@@ -66,7 +66,7 @@
                     </p:panel>
                    <br />
                    <br />
-                    <h:form id="listar">
+                    <h:form id="listar" enctype="multipart/form-data">
                         <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="vv" paginator="true" rows="10" 
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
                                          {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
@@ -74,11 +74,13 @@
                             <f:facet name="header">
                             Lista dos Veículos Cadastrados
                             </f:facet>
+                            
                             <p:column headerText="Autoridade Requisitante" filterBy="#{vv.guia.autoridade.nome}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.guia.autoridade.nome}" />
+                                <h:outputText value="#{vv.guia.autoridade.nome}"/>
                             </p:column>
                             <p:column headerText="Natureza dos Exames" filterBy="#{vv.guia.tipoExame.descricaoExame}" filterMatchMode="contains">
                                 <h:outputText value="#{vv.guia.tipoExame.descricaoExame}" />
+                                
                             </p:column>
                             <p:column headerText="Local dos Exames" filterBy="#{vv.guia.localExame}" filterMatchMode="contains">
                                 <h:outputText value="#{vv.guia.localExame}" />
@@ -103,17 +105,13 @@
                             <p:column headerText="Destino do Laudo" filterBy="#{vv.guia.destino.nomeDestino}" filterMatchMode="contains">
                                 <h:outputText value="#{vv.guia.destino.nomeDestino}" />
                             </p:column>
-                            <p:column headerText="Excluir" style="text-align: center">
+                            <p:column headerText="Comandos" style="text-align: center">
                                 <p:commandButton action="#{vistoriaVeiculoMB.remover(vv)}"  icon="ui-icon-trash"
                                                onclick="if(!confirm('Confirma a exclusão da guia #{vv.idLaudo}?')) return false" ajax="false">
                                 </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Editar" style="text-align: center">
                                 <p:commandButton update=":vistoriaVeiculo" icon="ui-icon-pencil">
                                     <f:setPropertyActionListener target="#{vistoriaVeiculoMB.vistoriaVeiculo}" value="#{vv}"/>
                                 </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Imprimir" style="text-align: center">
                                 <p:commandButton actionListener="#{vistoriaVeiculoMB.geraRelatorioVistoriaVeiculo(vv)}" icon="ui-icon-print"
                                                 onclick="this.form.target='_blank'" ajax="false"  process="@this">
                                 </p:commandButton>
@@ -124,11 +122,9 @@
                                                  icon="ui-icon-search"  
                                                  oncomplete="eventoDialog.show()"/>
                                 <p:commandButton value="Adicionar Imagens" 
-                                                 action="#{vistoriaVeiculoMB.selecionarVistoriaVeiculo(vv)}"
                                                  oncomplete="fotoDialog.show()"
-                                                 icon="ui-icon-plus">
-                                    <f:setPropertyActionListener value="#{vv}"
-                                                                 target="#{vistoriaVeiculoMB.vistoriaSelecionada}" />
+                                    icon="ui-icon-plus">
+                                    <f:setPropertyActionListener value="#{vv}" target="#{danosMB.danos.laudo}" />
                                 </p:commandButton>
                                 </center>
                             </p:column>
@@ -136,52 +132,48 @@
                         
                         
                          <!-- Visualizar danos -->
-                                <h:form id="VisualizaFoto"  enctype="multipart/form-data">
-		
-                                    <p:dialog header="Imagens do Laudo" widgetVar="eventoDialog"
-                                                            resizable="false" id="eventoDlg" showEffect="fade"
-                                                            hideEffect="fade" modal="false" draggable="true" maximizable="false"
-                                                            minimizable="false">
+                               
+                        <p:dialog header="Imagens do Laudo" widgetVar="eventoDialog"
+                                                resizable="false" id="eventoDlg" showEffect="fade"
+                                                hideEffect="fade" modal="false" draggable="true" maximizable="false"
+                                                minimizable="false">
 
-                                        <h:panelGrid id="infoEvento" columns="2" style="margin:0 auto;">
-                                            
-                                            <p:galleria value="#{danosMB.listarDanos()}" var="image" panelWidth="500" panelHeight="313" showCaption="true">  
-                                                <p:graphicImage value="//resources//uploaded//#{danosMB.danos.imagem}" 
-                                                                alt="Descrição do Dano: #{danosMB.danos.descricao}"/>  
-                                            </p:galleria>  
-                                        </h:panelGrid>
-                                    </p:dialog>
-                                </h:form>
-                         
-                                <h:form id="AdicionaFoto"  enctype="multipart/form-data">
-                                    <!-- Adicionar danos -->
-                                    <p:dialog header="Adicionar Imagens" widgetVar="fotoDialog"
-                                            position="center" resizable="false" id="fotoDlg" showEffect="fade"
-                                            hideEffect="fade" modal="false" width="650">
+                            <h:panelGrid id="infoEvento" columns="2" style="margin:0 auto;">
 
-                                            <h:panelGrid id="infoFoto" columns="2">
-
-                                                    <h:outputText value="Foto: " />
-                                                    <p:fileUpload fileUploadListener="#{danosMB.handleFileUpload}" label="Escolher" 
-                                                                  cancelLabel="Cancelar" uploadLabel="Enviar"
-                                                                  mode="advanced" dragDropSupport="false" update="messages" 
-                                                                  sizeLimit="100000" fileLimit="3" 
-                                                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
-
-                                                    <p:growl id="messages" showDetail="true"/>  
-                                                    <h:inputHidden />
-
-                                                    <h:outputText value="Descrição: " />
-                                                    <p:inputText value="#{danosMB.danos.descricao}" />
-
-
-                                                    <p:commandButton value="Adicionar" icon="ui-icon-plus" update=":vistoriaVeiculo, :listar"
-                                                                     actionListener="#{danosMB.salvar()}" onclick="fotoDialog.hide()"/>
-
-                                            </h:panelGrid>
-                                    </p:dialog>   
-                                </h:form>
+                                <p:galleria value="#{danosMB.listarDanos()}" var="image" panelWidth="500" panelHeight="313" showCaption="true">  
+                                    <p:graphicImage value="//resources//uploaded//#{danosMB.danos.imagem}" 
+                                                    alt="Descrição do Dano: #{danosMB.danos.descricao}"/>  
+                                </p:galleria>  
+                            </h:panelGrid>
+                        </p:dialog>        
                     </h:form>
+                   <h:form enctype="multipart/form-data">
+                       <!-- Adicionar danos -->
+                        <p:dialog header="Adicionar Imagens" widgetVar="fotoDialog"
+                                position="center" resizable="false" id="fotoDlg" showEffect="fade"
+                                hideEffect="fade" modal="false" width="650">
+
+                                <h:panelGrid id="infoFoto" columns="2">
+
+                                        <h:outputText value="Foto: " />
+                                        <p:fileUpload fileUploadListener="#{danosMB.handleFileUpload}" label="Escolher" 
+                                                      cancelLabel="Cancelar" uploadLabel="Enviar"
+                                                      mode="advanced" dragDropSupport="false" update="messages" 
+                                                      sizeLimit="4000000" fileLimit="3" 
+                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
+
+                                        <p:growl id="messages" showDetail="true"/>  
+                                        <h:inputHidden />
+
+                                        <h:outputText value="Descrição: " />
+                                        <p:inputText value="#{danosMB.danos.descricao}" />
+
+                                        <p:commandButton value="Adicionar" ajax="false" icon="ui-icon-plus" update=":vistoriaVeiculo, :listar"
+                                                         actionListener="#{danosMB.salvar()}" onclick="fotoDialog.hide()"/>
+
+                                </h:panelGrid>
+                        </p:dialog>
+                   </h:form>
                </p:layoutUnit>
             </ui:define>
         </ui:composition>

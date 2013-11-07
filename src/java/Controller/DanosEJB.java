@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 @Stateless
 public class DanosEJB extends Manager{
-
+    
     public void salvar(Danos danos){
         em.merge(danos);
     }

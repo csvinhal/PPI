@@ -9,11 +9,11 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name="vistoriaVeiculoMB")
-@ViewScoped
+@SessionScoped
 public class VistoriaVeiculoMB implements Serializable {
 
     @EJB
@@ -21,7 +21,7 @@ public class VistoriaVeiculoMB implements Serializable {
     private VistoriaVeiculo vistoriaVeiculo;
     private Veiculo veiculo;
     private VistoriaVeiculo vistoriaSelecionada;
-    
+    private Long id;
     
     public VistoriaVeiculoMB() {
     vistoriaVeiculo = new VistoriaVeiculo();
@@ -29,6 +29,15 @@ public class VistoriaVeiculoMB implements Serializable {
     }
 
     //GETS E SETS
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
     public VistoriaVeiculo getVistoriaVeiculo() {
         return vistoriaVeiculo;
     }
@@ -59,11 +68,11 @@ public class VistoriaVeiculoMB implements Serializable {
         if(vistoriaVeiculo.getIdLaudo() == null){
             try{
                 vistoriaVeiculo.setVeiculo(veiculo);
-                vistoriaVeiculoEJB.salvar(vistoriaVeiculo);
+                vistoriaVeiculo = vistoriaVeiculoEJB.salvar(vistoriaVeiculo);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
-                vistoriaVeiculo = new VistoriaVeiculo();
-                veiculo = new Veiculo();
+                //vistoriaVeiculo = new VistoriaVeiculo();
+                //veiculo = new Veiculo();
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();
