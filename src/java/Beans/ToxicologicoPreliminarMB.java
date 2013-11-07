@@ -101,7 +101,7 @@ public class ToxicologicoPreliminarMB implements Serializable{
         return this.toxicologicoPreliminar = toxicologicoPreliminar;
     }
     
-    public void Remover(ToxicologicoPreliminar toxicologicoPreliminar){
+    public void remover(ToxicologicoPreliminar toxicologicoPreliminar){
         try{
             toxiPreliminarEJB.excluir(toxicologicoPreliminar);
             FacesContext fc = FacesContext.getCurrentInstance();

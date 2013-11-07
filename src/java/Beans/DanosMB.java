@@ -29,6 +29,7 @@ public class DanosMB implements Serializable{
         danos = new Danos();
     }
 
+
     //SETS E GETS
     public Danos getDanos() {
         return danos;
@@ -57,15 +58,21 @@ public class DanosMB implements Serializable{
         return danosEJB.listarDanos();
     }
     
-    public List<Danos> listarDanosLaudo(Laudo laudo){
-        return danosEJB.listarDanosLaudo(laudo.getIdLaudo());
+    public List<Danos> listarDanosLaudo(){
+        Integer id = 0;
+        if(danos.getLaudo() != null){
+            id = danos.getLaudo().getIdLaudo();
+        }
+        System.out.println(id);
+        return danosEJB.listarDanosLaudo(id);
+
     }
 
     public void selecionarDanos(Danos danos) {
         this.danos = danos;
     }
     
-    public void Remover(Danos danos){
+    public void remover(Danos danos){
         try{
             danosEJB.excluir(danos);
             FacesContext fc = FacesContext.getCurrentInstance();
@@ -77,9 +84,9 @@ public class DanosMB implements Serializable{
     }
     
     public void handleFileUpload(FileUploadEvent event) {
-        ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
-        File result = new File(extContext.getRealPath("//resources//uploaded//" + event.getFile().getFileName()));
-        System.out.println(extContext.getRealPath("//resources//uploaded//" + event.getFile().getFileName()));
+        Long nomeImagem = System.currentTimeMillis();
+        File result = new File("C:/Users/Cristiano/Documents/NetBeansProjects/Upload/" 
+                + nomeImagem.toString() + ".jpg");
  
         try {
             InputStream inputStream;
@@ -98,9 +105,9 @@ public class DanosMB implements Serializable{
             }
             inputStream.close();
  
-            FacesMessage msg = new FacesMessage("O arquivo: " + event.getFile().getFileName() + " foi upado com sucesso!.");
+            FacesMessage msg = new FacesMessage("O arquivo: " + nomeImagem + ".jpg " + " foi upado com sucesso!.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
-            danos.setImagem(event.getFile().getFileName());
+            danos.setImagem(nomeImagem + ".jpg");
  
         } catch (IOException e) {
             e.printStackTrace();

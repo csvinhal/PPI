@@ -20,7 +20,7 @@ public class DanosEJB extends Manager{
     }
     
     public List<Danos> listarDanosLaudo(Integer idLaudo){
-        Query query = em.createQuery("Select d From Danos d WHERE d.idLaudo = :idLaudo")
+        Query query = em.createQuery("Select d From Danos d WHERE d.laudo.idLaudo = :idLaudo")
                 .setParameter("idLaudo", idLaudo);
         return query.getResultList();
     }

@@ -14,17 +14,18 @@
                 <p:layoutUnit id="center" position="center">
                     <p:panel id="panelToxicologicoPreliminar" header="Cadastro de Toxicologico Definitivo" toggleable="true">
                         <h:form id="dadosGuia">
+                            <p:growl life="3000" autoUpdate="true"/>
                             <p:commandButton value="Buscar Produto" oncomplete="buscaPreliminar.show()" icon="ui-icon-search" style="margin-top: 20px;"/>
                         </h:form>
                         
                         <!--Dialog Buscar ToxicologicosPreliminares-->
                         <h:form id="formDialogBuscarPreliminares">
-                            <p:dialog header="Buscar Produto" widgetVar="buscaPreliminar" resizable="false" id="buscaProDlg"  
+                            <p:dialog header="Buscar Toxicologico Preliminar" widgetVar="buscaPreliminar" resizable="false" id="buscaProDlg"  
                                       showEffect="clip" hideEffect="clip"> 
-                                <p:dataTable var="ti" value="#{toxicologicoPreliminarMB.listarToxicologicosPremilinares()}"
+                                <p:dataTable var="ti" value="#{toxicologicoPreliminarMB.listarToxicologicosPremilinares()}" 
                                              emptyMessage="Não existe Toxicológicos Preliminares cadastrados." style="font-size: 14px;">  
-                                    <p:column headerText="Laudo Número / Guia Número" filterBy="#{ti.idLaudo} - #{ti.guia.numeroGuia}" filterMatchMode="contains">
-                                        <h:outputText value="#{ti.idLaudo} - #{ti.guia.numeroGuia}" converter="guiaConverter" />
+                                    <p:column headerText="Laudo Número / Guia Número" filterBy="#{ti.idLaudo} - #{ti.guia.idGuia}" filterMatchMode="contains">
+                                        <h:outputText value="#{ti.idLaudo} - #{ti.guia.numeroGuia}"/>
                                     </p:column>
                                     <p:column headerText="Procedencia" filterBy="#{ti.guia.procedencia.descricao}" filterMatchMode="contains">
                                         <h:outputText value="#{ti.guia.procedencia.descricao}"/>
@@ -56,7 +57,7 @@
                                         <h:outputText value="#{ti.involucro.peso}"/>
                                     </p:column>
                                     <p:column headerText="Selecionar" style="text-align: center;">  
-                                        <p:commandButton action="#{toxicologicoPreliminarMB.selecionaToxicologicoPreliminar(ti)}" icon="ui-icon-circle-check" 
+                                        <p:commandButton action="#{toxicologicoDefinitivoMB.selecionaToxicologicoPreliminar(ti)}" icon="ui-icon-circle-check" 
                                                          oncomplete="buscaPreliminar.hide()" title="Icon Only" update=":dadostoxicologicoDefinitivo">  
                                             <f:setPropertyActionListener value="#{ti}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.laudo}" />
                                             <f:setPropertyActionListener value="#{ti.guia}" target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.guia}" />
@@ -73,9 +74,16 @@
                             </p:dialog>
                         </h:form>  
                         <br />
+                        
                         <h:form id="dadostoxicologicoDefinitivo">
                             <h:panelGrid columns="2">
-                                
+                                <h:outputLabel value="Guia Pericial: " for="guiaPericial"/>
+                                <p:selectOneMenu id="guiaPericial" value="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.guia}" required="true"
+                                                 converter="guiaConverter" requiredMessage="É necessário informar a guia pericial" disabled="true">
+                                    <f:selectItem itemLabel="Selecione..."/>
+                                    <f:selectItems value="#{guiaPericialMB.listGuia}" var="g"
+                                                   itemLabel="#{g.numeroGuia} - #{g.tipoExame.descricaoExame}" itemValue="#{g}"/>
+                                </p:selectOneMenu>
                                 <h:outputLabel value="Data da Ocorrência: " for="dataOcorrencia"/>
                                 <p:calendar value="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo.dataocorrencia}"  
                                             id="dataOcorrencia" required="true" requiredMessage="O campo Data da Ocorrência não pode ficar em branco">
@@ -151,7 +159,7 @@
                                              {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
                                              emptyMessage="Nenhum Toxicologico Cadastrado">
                                     <p:column headerText="Laudo Número / Guia Número" filterBy="#{td.idLaudo} - #{td.guia.idGuia}" filterMatchMode="contains">
-                                        <h:outputText value="#{td.idLaudo} - #{td.guia.numeroGuia}"/>
+                                        <h:outputText value="#{td.laudo.idLaudo} - #{td.guia.numeroGuia}"/>
                                     </p:column>
                                     <p:column headerText="Procedencia" filterBy="#{td.guia.procedencia.descricao}" filterMatchMode="contains">
                                         <h:outputText value="#{td.guia.procedencia.descricao}"/>
@@ -162,8 +170,8 @@
                                     <p:column headerText="Destino Laudo" filterBy="#{td.guia.destino.nomeDestino}" filterMatchMode="contains">
                                         <h:outputText value="#{td.guia.destino.nomeDestino}"/>
                                     </p:column>
-                                    <p:column headerText="Data da Ocorrência" filterBy="#{td.dataOcorrencia}" filterMatchMode="contains">
-                                        <h:outputText value="#{td.dataOcorrencia}">
+                                    <p:column headerText="Data da Ocorrência" filterBy="#{td.dataocorrencia}" filterMatchMode="contains">
+                                        <h:outputText value="#{td.dataocorrencia}">
                                             <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy" />
                                         </h:outputText>
                                     </p:column>
@@ -183,11 +191,11 @@
                                         <h:outputText value="#{td.involucro.peso}"/>
                                     </p:column>
                                     <p:column headerText="Usuário">
-                                        <h:outputText value="#{ti.usuario.nome}"/>
+                                        <h:outputText value="#{td.usuario.nome}"/>
                                     </p:column>
                                     <p:column headerText="Comandos" style="text-align: center">
-                                        <p:commandButton action="#{toxicologicoPreliminarMB.remover(ti)}" icon="ui-icon-trash" 
-                                                         onclick="if(!confirm('Confirma a exclusão do Toxicologico #{td.idLaudo}?')) return false" ajax="false">
+                                        <p:commandButton action="#{toxicologicoDefinitivoMB.remover(td)}" icon="ui-icon-trash"
+                                                         onclick="if(!confirm('Confirma a exclusão do Toxicologico #{td.idDefinitivo}?')) return false" ajax="false">
                                         </p:commandButton>
                                          <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
                                              <f:setPropertyActionListener target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo}" value="#{td}"/>

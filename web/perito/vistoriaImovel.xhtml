@@ -391,10 +391,12 @@
                                         <p:column headerText="Imagens">
                                             <center>
                                             <p:commandButton value="Visualizar Imagens" 
-                                                             icon="ui-icon-search"  
-                                                             oncomplete="eventoDialog.show()"/>
+                                                             icon="ui-icon-search"  update=":imagens:eventoDlg"
+                                                oncomplete="eventoDialog.show()">
+                                                         <f:setPropertyActionListener value="#{vi}" target="#{danosMB.danos.laudo}" />
+                                            </p:commandButton>
                                             <p:commandButton value="Adicionar Imagens" 
-                                                             oncomplete="fotoDialog.show()"
+                                                             oncomplete="fotoDialog.show()" update=":imagens:fotoDlg"
                                                              icon="ui-icon-plus">
                                                 <f:setPropertyActionListener value="#{vi}" target="#{danosMB.danos.laudo}" />
                                             </p:commandButton>
@@ -403,24 +405,21 @@
                                 </p:dataTable>                         
                             </h:form>
                             
-                             <h:form enctype="multipart/form-data">
-                               <!-- Visualizar danos -->
+                            <h:form enctype="multipart/form-data" id="imagens">
+                                <!-- Visualizar danos -->
                                 <p:dialog header="Imagens do Laudo" widgetVar="eventoDialog"
                                                         resizable="false" id="eventoDlg" showEffect="fade"
                                                         hideEffect="fade" modal="false" draggable="true" maximizable="false"
                                                         minimizable="false">
 
                                     <h:panelGrid id="infoEvento" columns="2" style="margin:0 auto;">
-
-                                        <p:galleria value="#{danosMB.listarDanos()}" var="image" panelWidth="500" panelHeight="313" showCaption="true">  
-                                            <p:graphicImage value="//resources//uploaded//#{danosMB.danos.imagem}" 
-                                                            alt="Descrição do Dano: #{danosMB.danos.descricao}"/>  
+                                        <p:galleria value="#{danosMB.listarDanosLaudo()}" var="image" panelWidth="500" panelHeight="313" showCaption="true">  
+                                            <p:graphicImage value="http://localhost:8080/PPI/#{image.imagem}" 
+                                                            alt="Descrição do Dano: #{image.descricao}"/>  
                                         </p:galleria>  
                                     </h:panelGrid>
-                                </p:dialog>   
-                              </h:form>
-                            
-                            <h:form enctype="multipart/form-data">
+                                </p:dialog> 
+                                
                                 <!-- Adicionar danos -->
                                 <p:dialog header="Adicionar Imagens" widgetVar="fotoDialog"
                                         position="center" resizable="false" id="fotoDlg" showEffect="fade"

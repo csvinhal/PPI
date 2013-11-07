@@ -1,15 +1,20 @@
 package Beans;
 
 import Controller.ToxicologicoDefinitivoEJB;
+import Controller.UsuarioEJB;
+import Model.GuiaPericial;
 import Model.Involucro;
 import Util.RelatorioFactory;
 import Model.ToxicologicoDefinitivo;
+import Model.ToxicologicoPreliminar;
+import Model.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name="toxicologicoDefinitivoMB")
@@ -19,7 +24,12 @@ public class ToxicologicoDefinitivoMB implements Serializable{
     @EJB
     ToxicologicoDefinitivoEJB toxiDefinitivoEJB;
     private ToxicologicoDefinitivo toxicologicoDefinitivo;
+    private GuiaPericial guia;
     private Involucro involucro;
+    private ToxicologicoPreliminar toxicologicoPreliminar;
+    private Usuario usuario;
+    @EJB
+    public UsuarioEJB usuEJB;
     
     public ToxicologicoDefinitivoMB() {
         toxicologicoDefinitivo = new ToxicologicoDefinitivo();
@@ -27,6 +37,30 @@ public class ToxicologicoDefinitivoMB implements Serializable{
     }
     
     //GETS E SETS
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = getUserLogado();
+    }
+    
+    public GuiaPericial getGuia() {
+        return guia;
+    }
+
+    public void setGuia(GuiaPericial guia) {
+        this.guia = guia;
+    }
+    public ToxicologicoPreliminar getToxicologicoPreliminar() {
+        return toxicologicoPreliminar;
+    }
+
+    public void setToxicologicoPreliminar(ToxicologicoPreliminar toxicologicoPreliminar) {
+        this.toxicologicoPreliminar = toxicologicoPreliminar;
+    }
+    
     public ToxicologicoDefinitivo getToxicologicoDefinitivo() {
         return toxicologicoDefinitivo;
     }
@@ -75,6 +109,14 @@ public class ToxicologicoDefinitivoMB implements Serializable{
         }
     }
     
+    public ToxicologicoPreliminar selecionaToxicologicoPreliminar(ToxicologicoPreliminar toxicologicoPreliminar){
+        toxicologicoDefinitivo.setGuia(toxicologicoPreliminar.getGuia());
+        toxicologicoDefinitivo.setInvolucro(toxicologicoPreliminar.getInvolucro());
+        involucro = toxicologicoDefinitivo.getInvolucro();
+        guia = toxicologicoDefinitivo.getGuia();
+        return this.toxicologicoPreliminar = toxicologicoPreliminar;
+    }
+    
      public List<ToxicologicoDefinitivo> listarToxicologicosDefinitivos(){
         return toxiDefinitivoEJB.listarToxicologicoDefinitivo();
     }
@@ -83,7 +125,7 @@ public class ToxicologicoDefinitivoMB implements Serializable{
         return this.toxicologicoDefinitivo = toxicologicoDefinitivo;
     }
     
-    public void Remover(ToxicologicoDefinitivo toxicologicoDefinitivo){
+    public void remover(ToxicologicoDefinitivo toxicologicoDefinitivo){
         try{
             toxiDefinitivoEJB.excluir(toxicologicoDefinitivo);
             FacesContext fc = FacesContext.getCurrentInstance();
@@ -98,5 +140,18 @@ public class ToxicologicoDefinitivoMB implements Serializable{
     public void geraRelatorioToxicologicoDefinitivo(ToxicologicoDefinitivo preliminar) {
         RelatorioFactory relatorioFactory = new RelatorioFactory();
         relatorioFactory.geraRelatorioPreliminar(preliminar.getIdDefinitivo());
+    }
+    
+        public Usuario getUserLogado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext external = context.getExternalContext();
+        String login = external.getRemoteUser();
+
+        if (usuario == null || !login.equals(usuario.getEmail())) {
+            if (login != null) {
+                usuario = usuEJB.findUsuarioPorLogin(login);                
+            }
+        }
+        return usuario;
     }
 }

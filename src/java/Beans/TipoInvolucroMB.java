@@ -64,7 +64,7 @@ public class TipoInvolucroMB implements Serializable {
         return this.tipoInvolucro = tipoInvolucro;
     }
     
-    public void Remover(TipoInvolucro tipoInvolucro){
+    public void remover(TipoInvolucro tipoInvolucro){
         try{
             tipoInvolucroEJB.excluir(tipoInvolucro);
             FacesContext fc = FacesContext.getCurrentInstance();

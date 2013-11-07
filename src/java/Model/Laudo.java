@@ -102,6 +102,14 @@ public class Laudo implements Serializable {
         this.danosList = danosList;
     }
 
+    public List<ToxicologicoDefinitivo> getToxicologicoDefinitivos() {
+        return toxicologicoDefinitivos;
+    }
+
+    public void setToxicologicoDefinitivos(List<ToxicologicoDefinitivo> toxicologicoDefinitivos) {
+        this.toxicologicoDefinitivos = toxicologicoDefinitivos;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

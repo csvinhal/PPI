@@ -64,7 +64,7 @@ public class AutoridadeMB implements Serializable{
         this.autoridade = autoridade;
     }
     
-    public void Remover(Autoridade autoridade){
+    public void remover(Autoridade autoridade){
         try{
             autEJB.excluir(autoridade);
             FacesContext fc = FacesContext.getCurrentInstance();

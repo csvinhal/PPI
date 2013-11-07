@@ -33,6 +33,7 @@ public class Danos implements Serializable {
     @JoinColumn(name = "laudo", referencedColumnName = "idLaudo")
     @ManyToOne(optional = false)
     private Laudo laudo;
+    
 
     public Danos() {
     }
