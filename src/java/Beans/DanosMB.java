@@ -2,6 +2,7 @@ package Beans;
 
 import Controller.DanosEJB;
 import Model.Danos;
+import Model.Laudo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,6 +55,10 @@ public class DanosMB implements Serializable{
     
     public List<Danos> listarDanos(){
         return danosEJB.listarDanos();
+    }
+    
+    public List<Danos> listarDanosLaudo(Laudo laudo){
+        return danosEJB.listarDanosLaudo(laudo.getIdLaudo());
     }
 
     public void selecionarDanos(Danos danos) {

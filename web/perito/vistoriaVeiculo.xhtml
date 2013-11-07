@@ -126,7 +126,9 @@
                                     <center>
                                     <p:commandButton value="Visualizar Imagens" 
                                                      icon="ui-icon-search"  
-                                                     oncomplete="eventoDialog.show()"/>
+                                                     oncomplete="eventoDialog.show()">
+                                         <f:setPropertyActionListener value="#{vv}" target="#{danosMB.danos.laudo}" />
+                                    </p:commandButton>
                                     <p:commandButton value="Adicionar Imagens" 
                                                      oncomplete="fotoDialog.show()"
                                         icon="ui-icon-plus">
@@ -148,7 +150,7 @@
                                 <h:panelGrid id="infoEvento" columns="2" style="margin:0 auto;">
 
                                     <p:galleria value="#{danosMB.listarDanos()}" var="image" panelWidth="500" panelHeight="313" showCaption="true">  
-                                        <p:graphicImage value="//resources//uploaded//#{danosMB.danos.imagem}" 
+                                        <p:graphicImage value="#{getRealPath}//resources//uploaded//#{danosMB.danos.imagem}" 
                                                         alt="Descrição do Dano: #{danosMB.danos.descricao}"/>  
                                     </p:galleria>  
                                 </h:panelGrid>

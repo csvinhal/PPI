@@ -19,6 +19,12 @@ public class DanosEJB extends Manager{
         return query.getResultList();
     }
     
+    public List<Danos> listarDanosLaudo(Integer idLaudo){
+        Query query = em.createQuery("Select d From Danos d WHERE d.idLaudo = :idLaudo")
+                .setParameter("idLaudo", idLaudo);
+        return query.getResultList();
+    }
+    
     public void excluir(Danos danos){
          danos = em.find(Danos.class, danos.getIdDanos());
          em.remove(danos);
