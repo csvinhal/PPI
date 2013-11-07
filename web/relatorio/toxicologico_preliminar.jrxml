@@ -62,7 +62,7 @@ WHERE
 			</textField>
 			<image>
 				<reportElement uuid="51ceed13-b8ae-49cc-97e2-93456887e5d1" x="-1" y="0" width="554" height="91"/>
-				<imageExpression><![CDATA["C:\\Users\\Cristiano\\Documents\\NetBeansProjects\\PPi0\\web\\relatorio\\timbre.JPG"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\Cristiano\\Documents\\NetBeansProjects\\PPI\\build\\web\\relatorio\\timbre.JPG"]]></imageExpression>
 			</image>
 		</band>
 	</title>

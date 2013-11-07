@@ -340,7 +340,8 @@
                                 <p:inputTextarea id="esclarecimentos3" rows="5" cols="52" maxlength="255" autoResize="false"
                                                  value="#{vistoriaImovelMB.vistoriaImovel.esclarecimento3}" />
                                 
-                                <h:inputHidden />
+                                <h:inputHidden value="#{vistoriaVeiculoMB.usuario}" converter="usuarioConverter"/>
+                                
                                 <p:commandButton value="Salvar" action="#{vistoriaImovelMB.salvar()}" 
                                              update=":edicaoVistoriaImovel" icon="ui-icon-disk" ajax="false" />
                             </h:panelGrid>
@@ -374,6 +375,9 @@
                                                 <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
                                             </h:outputText>
                                         </p:column>
+                                        <p:column headerText="Usuário">
+                                            <h:outputText value="#{vi.usuario.nome}"/>
+                                        </p:column>
 
                                         <p:column headerText="Comandos" style="text-align: center">
                                             <p:commandButton action="#{vistoriaImovelMB.remover(vi)}"  icon="ui-icon-trash"
@@ -392,7 +396,7 @@
                                             <p:commandButton value="Adicionar Imagens" 
                                                              oncomplete="fotoDialog.show()"
                                                              icon="ui-icon-plus">
-                                                <f:setPropertyActionListener value="#{vv}" target="#{danosMB.danos.laudo}" />
+                                                <f:setPropertyActionListener value="#{vi}" target="#{danosMB.danos.laudo}" />
                                             </p:commandButton>
                                             </center>
                                         </p:column>

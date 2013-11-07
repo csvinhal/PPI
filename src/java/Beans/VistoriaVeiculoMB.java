@@ -1,6 +1,8 @@
 package Beans;
 
+import Controller.UsuarioEJB;
 import Controller.VistoriaVeiculoEJB;
+import Model.Usuario;
 import Model.Veiculo;
 import Model.VistoriaVeiculo;
 import Util.RelatorioFactory;
@@ -10,6 +12,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name="vistoriaVeiculoMB")
@@ -18,8 +21,11 @@ public class VistoriaVeiculoMB implements Serializable {
 
     @EJB
     VistoriaVeiculoEJB vistoriaVeiculoEJB;
+    @EJB
+    public UsuarioEJB usuEJB;
     private VistoriaVeiculo vistoriaVeiculo;
     private Veiculo veiculo;
+    private Usuario usuario;
     
     public VistoriaVeiculoMB() {
     vistoriaVeiculo = new VistoriaVeiculo();
@@ -27,6 +33,15 @@ public class VistoriaVeiculoMB implements Serializable {
     }
 
     //GETS E SETS
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = getUserLogado();
+    }
+    
     public VistoriaVeiculo getVistoriaVeiculo() {
         return vistoriaVeiculo;
     }
@@ -49,6 +64,7 @@ public class VistoriaVeiculoMB implements Serializable {
         if(vistoriaVeiculo.getIdLaudo() == null){
             try{
                 vistoriaVeiculo.setVeiculo(veiculo);
+                vistoriaVeiculo.setUsuario(usuario);
                 vistoriaVeiculo = vistoriaVeiculoEJB.salvar(vistoriaVeiculo);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
@@ -62,6 +78,7 @@ public class VistoriaVeiculoMB implements Serializable {
         }else{
             try{
                 vistoriaVeiculo.setVeiculo(veiculo);
+                vistoriaVeiculo.setUsuario(usuario);
                 vistoriaVeiculoEJB.salvar(vistoriaVeiculo);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Editado com sucesso!"));
@@ -98,5 +115,18 @@ public class VistoriaVeiculoMB implements Serializable {
     public void geraRelatorioVistoriaVeiculo(VistoriaVeiculo veiculo) {
         RelatorioFactory relatorioFactory = new RelatorioFactory();
         relatorioFactory.geraRelatorioPreliminar(veiculo.getIdLaudo());
+    }
+    
+    public Usuario getUserLogado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext external = context.getExternalContext();
+        String login = external.getRemoteUser();
+
+        if (usuario == null || !login.equals(usuario.getEmail())) {
+            if (login != null) {
+                usuario = usuEJB.findUsuarioPorLogin(login);                
+            }
+        }
+        return usuario;
     }
 }

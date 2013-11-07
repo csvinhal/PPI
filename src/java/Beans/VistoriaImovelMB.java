@@ -1,7 +1,9 @@
 package Beans;
 
+import Controller.UsuarioEJB;
 import Controller.VistoriaImovelEJB;
 import Model.LocalImovel;
+import Model.Usuario;
 import Model.VistoriaImovel;
 import java.io.Serializable;
 import java.util.List;
@@ -9,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name="vistoriaImovelMB")
@@ -17,14 +20,26 @@ public class VistoriaImovelMB implements Serializable{
 
     @EJB
     VistoriaImovelEJB vistoriaImovelEJB;
+    @EJB
+    public UsuarioEJB usuEJB;
     private VistoriaImovel vistoriaImovel;
     private LocalImovel localImovel;
+    private Usuario usuario;
     
     public VistoriaImovelMB() {
         vistoriaImovel = new VistoriaImovel();
         localImovel = new LocalImovel();
     }
 
+    //GETS E SETS
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
     public VistoriaImovel getVistoriaImovel() {
         return vistoriaImovel;
     }
@@ -40,11 +55,13 @@ public class VistoriaImovelMB implements Serializable{
     public void setLocalImovel(LocalImovel localImovel) {
         this.localImovel = localImovel;
     }
-
+    
+    //METODOS
     public void salvar(){
         if(vistoriaImovel.getIdLaudo() == null){
             try{
                 vistoriaImovel.setLocalImovel(localImovel);
+                vistoriaImovel.setUsuario(usuario);
                 vistoriaImovelEJB.salvar(vistoriaImovel);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
@@ -58,6 +75,7 @@ public class VistoriaImovelMB implements Serializable{
         }else{
             try{
                 vistoriaImovel.setLocalImovel(localImovel);
+                vistoriaImovel.setUsuario(usuario);
                 vistoriaImovelEJB.salvar(vistoriaImovel);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Editado com sucesso!"));
@@ -89,5 +107,18 @@ public class VistoriaImovelMB implements Serializable{
              FacesContext fc = FacesContext.getCurrentInstance();
              fc.addMessage(null, new FacesMessage("Erro ao excluir vistoria do veiculo!"));
         }
+    }
+    
+    public Usuario getUserLogado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext external = context.getExternalContext();
+        String login = external.getRemoteUser();
+
+        if (usuario == null || !login.equals(usuario.getEmail())) {
+            if (login != null) {
+                usuario = usuEJB.findUsuarioPorLogin(login);                
+            }
+        }
+        return usuario;
     }
 }

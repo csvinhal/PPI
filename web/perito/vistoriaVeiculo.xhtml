@@ -59,7 +59,8 @@
                                 <p:inputText value="#{vistoriaVeiculoMB.veiculo.odometro}" size="12"  maxlength="10" required="true"
                                              requiredMessage="O odometro não pode ficar em branco!">
                                 </p:inputText>
-                                <h:inputHidden />
+                                
+                                <h:inputHidden value="#{vistoriaVeiculoMB.usuario}" converter="usuarioConverter"/>
                                 <p:commandButton value="Salvar" action="#{vistoriaVeiculoMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
                             </h:panelGrid>
                         </h:form>
@@ -106,6 +107,9 @@
                                 </p:column>
                                 <p:column headerText="Destino do Laudo" filterBy="#{vv.guia.destino.nomeDestino}" filterMatchMode="contains">
                                     <h:outputText value="#{vv.guia.destino.nomeDestino}" />
+                                </p:column>
+                                <p:column headerText="Usuário">
+                                    <h:outputText value="#{vv.usuario.nome}"/>
                                 </p:column>
                                 <p:column headerText="Comandos" style="text-align: center">
                                     <p:commandButton action="#{vistoriaVeiculoMB.remover(vv)}"  icon="ui-icon-trash"
