@@ -33,12 +33,10 @@ public class UsuarioEJB extends Manager{
         return query.getResultList();
     }
     
-    public Permissao findPermissaoPorId(String id) {
-        Query query = em.createQuery("SELECT  p FROM Permissao p where p.id =:id");
-        Long idPermissao = Long.parseLong(id);
-        query.setParameter("id", idPermissao);
-        Permissao pap = (Permissao) query.getResultList().get(0);
-        return pap;
+    public Permissao findPermissaoPorId(Long id) {
+        Query query = em.createQuery("SELECT  p FROM Permissao p where p.id =:id")
+                .setParameter("id", id);
+        return (Permissao) query.getSingleResult();
     }
 
     public List<Permissao> findAllPermissao() {

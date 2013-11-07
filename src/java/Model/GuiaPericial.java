@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -80,6 +79,8 @@ public class GuiaPericial implements Serializable {
     private List<TipoDeMaterial> tipoDeMaterial;
     @OneToMany(mappedBy = "guia")
     private List<Laudo> laudoList;
+    @OneToMany(mappedBy = "guia")
+    private List<ToxicologicoDefinitivo> toxicologicoDefinitivos;
     @JoinColumn(name = "usuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuario usuario;
@@ -202,6 +203,14 @@ public class GuiaPericial implements Serializable {
 
     public void setLaudoList(List<Laudo> laudoList) {
         this.laudoList = laudoList;
+    }
+
+    public List<ToxicologicoDefinitivo> getToxicologicoDefinitivos() {
+        return toxicologicoDefinitivos;
+    }
+
+    public void setToxicologicoDefinitivos(List<ToxicologicoDefinitivo> toxicologicoDefinitivos) {
+        this.toxicologicoDefinitivos = toxicologicoDefinitivos;
     }
 
     public Usuario getUsuario() {

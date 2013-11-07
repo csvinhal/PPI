@@ -18,8 +18,10 @@ public class UsuarioMB implements Serializable{
     @EJB
     private UsuarioEJB usuEJB;
     private Usuario usuario;
-    private String novaSenha;
     private Permissao permissao;
+    
+    
+    
     Crypt c = new Crypt();
     
     public UsuarioMB() {
@@ -38,13 +40,6 @@ public class UsuarioMB implements Serializable{
         this.usuario = usuario;
     }
 
-    public String getNovaSenha() {
-        return novaSenha;
-    }
-
-    public void setNovaSenha(String novaSenha) {
-        this.novaSenha = novaSenha;
-    }
 
     public Permissao getPermissao() {
         return permissao;
@@ -57,6 +52,7 @@ public class UsuarioMB implements Serializable{
     public void novo(){
         this.usuario = new Usuario();
         this.usuario.setAtivo(false);
+        this.permissao = new Permissao();
     }
     
     public String cadastraUsuario(){
@@ -71,6 +67,10 @@ public class UsuarioMB implements Serializable{
     public List<Permissao> getListPermissoes(){
         return usuEJB.findAllPermissao();
     }
+    
+    public Permissao findPermissaoID(Long id){
+        return usuEJB.findPermissaoPorId(id);
+    }
            
     public void salvar(){
         String senha = usuario.getSenha();
@@ -78,6 +78,7 @@ public class UsuarioMB implements Serializable{
             try{
                 usuario.setSenha(c.criptografa(senha));
                 usuario.setAtivo(false);
+                usuario.setPermissao(permissao);
                 usuEJB.salvar(usuario);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Usuario salvo com sucesso!"));

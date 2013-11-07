@@ -23,9 +23,17 @@
                 		     required="true" requiredMessage="Campo Nome em branco!" />
                     <p:outputLabel  value="e-Mail: " for="email"/>
                     <p:inputText id="email" label="e-Mail" value="#{usuarioMB.usuario.email}" size="40" maxlength="100"
-                                 required="true" requiredMessage="Campo e-Mail invalido!">
+                                 required="true" requiredMessage="Campo e-Mail invalido!" >
                         <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"/>
                     </p:inputText>
+                    <p:outputLabel  value="Papel: " for="papel"/>
+                    <p:selectOneMenu id="papel" value="#{usuarioMB.permissao}" converter="permissaoConverter"
+                                                 required="true" requiredMessage="O campo Permissao é obrigatorio." 
+                                                 style="width: 200px">
+                        <f:selectItem itemLabel="Selecione..."/>
+                        <f:selectItems value="#{usuarioMB.listPermissoes}" var="p"
+                                       itemLabel="#{p.descricao}" itemValue="#{p}" rendered="#{p.id==3}" />
+                    </p:selectOneMenu>
                     <p:outputLabel value="Senha:" for="pw1"/>
                     <p:password id="pw1" label="Senha" value="#{usuarioMB.usuario.senha}"  match="pw2"
                                 size="40" maxlength="40" required="true" redisplay="true" feedback="true" 

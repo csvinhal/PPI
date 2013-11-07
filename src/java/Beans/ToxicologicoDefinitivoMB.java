@@ -46,7 +46,7 @@ public class ToxicologicoDefinitivoMB implements Serializable{
         
     //METODOS
     public void salvar(){
-        if(toxicologicoDefinitivo.getIdLaudo() == null){
+        if(toxicologicoDefinitivo.getIdDefinitivo()== null){
             try{
                 toxicologicoDefinitivo.setInvolucro(involucro);
                 toxiDefinitivoEJB.salvar(toxicologicoDefinitivo);
@@ -57,14 +57,14 @@ public class ToxicologicoDefinitivoMB implements Serializable{
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();
-                fc.addMessage(null, new FacesMessage("Erro ao salvar Toxicologico Preliminar!"));
+                fc.addMessage(null, new FacesMessage("Erro ao salvar Toxicologico Definitivo!"));
             }
         }else{
             try{
                 toxicologicoDefinitivo.setInvolucro(involucro);
                 toxiDefinitivoEJB.salvar(toxicologicoDefinitivo);
                 FacesContext fc = FacesContext.getCurrentInstance();
-                fc.addMessage(null, new FacesMessage("Toxicologico Preliminar editado com sucesso!"));
+                fc.addMessage(null, new FacesMessage("Toxicologico Definitivo editado com sucesso!"));
                 toxicologicoDefinitivo = new ToxicologicoDefinitivo();
                 involucro = new Involucro();
             }catch(Exception e){
@@ -87,7 +87,7 @@ public class ToxicologicoDefinitivoMB implements Serializable{
         try{
             toxiDefinitivoEJB.excluir(toxicologicoDefinitivo);
             FacesContext fc = FacesContext.getCurrentInstance();
-            fc.addMessage(null, new FacesMessage("Toxicologico Preliminar excluído com sucesso!"));
+            fc.addMessage(null, new FacesMessage("Toxicologico Definitivo excluído com sucesso!"));
         }catch(Exception e){
              e.printStackTrace();
              FacesContext fc = FacesContext.getCurrentInstance();
@@ -97,6 +97,6 @@ public class ToxicologicoDefinitivoMB implements Serializable{
     
     public void geraRelatorioToxicologicoDefinitivo(ToxicologicoDefinitivo preliminar) {
         RelatorioFactory relatorioFactory = new RelatorioFactory();
-        relatorioFactory.geraRelatorioPreliminar(preliminar.getIdLaudo());
+        relatorioFactory.geraRelatorioPreliminar(preliminar.getIdDefinitivo());
     }
 }

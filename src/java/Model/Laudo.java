@@ -44,6 +44,8 @@ public class Laudo implements Serializable {
     private GuiaPericial guia;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "laudo")
     private List<Danos> danosList;
+    @OneToMany(mappedBy = "laudo")
+    private List<ToxicologicoDefinitivo> toxicologicoDefinitivos;
 
     public Laudo() {
     }

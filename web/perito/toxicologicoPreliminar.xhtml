@@ -84,7 +84,9 @@
                                 <h:outputText value="Observação: " />
                                 <p:inputTextarea value="#{toxicologicoPreliminarMB.toxicologicoPreliminar.observacao}"  
                                                  rows="5" cols="53" maxlength="255" autoResize="false" />
-                                <h:inputHidden />
+                                
+                                <h:inputHidden value="#{toxicologicoPreliminarMB.usuario}" converter="usuarioConverter"/>
+                                
                                 <p:commandButton value="Salvar" action="#{toxicologicoPreliminarMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
                             </h:panelGrid>
                         </h:form>
@@ -128,6 +130,9 @@
                                 </p:column>
                                 <p:column headerText="Peso Bruto(g)" filterBy="#{ti.involucro.peso}" filterMatchMode="contains">
                                     <h:outputText value="#{ti.involucro.peso}"/>
+                                </p:column>
+                                <p:column headerText="Usuário">
+                                    <h:outputText value="#{ti.usuario.nome}"/>
                                 </p:column>
                                 <p:column headerText="Comandos" style="text-align: center">
                                     <p:commandButton action="#{toxicologicoPreliminarMB.remover(ti)}" icon="ui-icon-trash" 

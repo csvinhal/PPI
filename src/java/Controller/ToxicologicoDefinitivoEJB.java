@@ -19,7 +19,7 @@ public class ToxicologicoDefinitivoEJB extends Manager{
     }
     
     public void excluir(ToxicologicoDefinitivo toxicologico){
-         toxicologico = em.find(ToxicologicoDefinitivo.class, toxicologico.getIdLaudo());
+         toxicologico = em.find(ToxicologicoDefinitivo.class, toxicologico.getIdDefinitivo());
          em.remove(toxicologico);
     } 
     

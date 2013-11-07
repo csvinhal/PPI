@@ -127,7 +127,7 @@
                                 <p:column headerText="Tipo de Exame" filterBy="#{g.tipoExame.descricaoExame}" filterMatchMode="contains">
                                     <h:outputText value="#{g.tipoExame.descricaoExame}"/>
                                 </p:column>
-                                <p:column headerText="Status" filterBy="#{g.status}" filterMatchMode="contains">
+                                <p:column headerText="Status" filterBy="#{g.status==false?'Inativa' : 'Ativa'}" filterMatchMode="contains">
                                     <h:outputText value="#{g.status==false?'Inativa' : 'Ativa'}"/>
                                 </p:column>
                                 <p:column headerText="Usuário">
