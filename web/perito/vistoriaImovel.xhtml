@@ -339,100 +339,68 @@
                                 <h:outputLabel value="Acompanhou(aram) os exames: " for="esclarecimentos3" />
                                 <p:inputTextarea id="esclarecimentos3" rows="5" cols="52" maxlength="255" autoResize="false"
                                                  value="#{vistoriaImovelMB.vistoriaImovel.esclarecimento3}" />
-                            </h:panelGrid>
-                            <p:commandButton value="Salvar" action="#{vistoriaImovelMB.salvar()}" 
+                                
+                                <h:inputHidden />
+                                <p:commandButton value="Salvar" action="#{vistoriaImovelMB.salvar()}" 
                                              update=":edicaoVistoriaImovel" icon="ui-icon-disk" ajax="false" />
+                            </h:panelGrid>
+                            
                         </h:form>
-                        
-                        <h:form id="listar" enctype="multipart/form-data">
-                                <p:dataTable value="#{vistoriaImovelMB.listarVistoriaImovels()}" var="vi" paginator="true" rows="10" 
-                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                                 {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                                 emptyMessage="Nenhuma Vistoria de Veiculo Cadastrada">
-                                    <f:facet name="header">
-                                    Lista dos Imóveis Cadastrados
-                                    </f:facet>
-
-                                    <p:column headerText="Referencia" filterBy="#{vi.referencia}" filterMatchMode="contains">
-                                        <h:outputText value="#{vi.referencia}" />
-                                    </p:column>
-                                    <p:column headerText="Local do Exame:" filterBy="#{vi.localExame}" filterMatchMode="contains">
-                                        <h:outputText value="#{vi.localExame}" />
-                                    </p:column>
-                                    <p:column headerText="Natureza da Perícia:" filterBy="#{vi.natureza}" filterMatchMode="contains">
-                                        <h:outputText value="#{vi.natureza}" />
-                                    </p:column>
-                                    <p:column headerText="Data do Fato:" filterBy="#{vi.dataFato}" filterMatchMode="contains">
-                                        <h:outputText value="#{vi.dataFato}">
-                                            <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Data e Hora Exame:" filterBy="#{vi.dataExame}" filterMatchMode="contains">
-                                        <h:outputText value="#{vi.dataExame}">
-                                            <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Local">
-                                        <p:commandButton value="Visualizar"
-                                                         oncomplete="localDialog.show()"/>
-                                    </p:column>
-                                    <p:column headerText="Vias de Acesso ao Interior">
-                                        <p:commandButton value="Visualizar"/>
-                                    </p:column>
-                                    <p:column headerText="Vias de Acesso ao Exterior">
-                                        <p:commandButton value="Visualizar"/>
-                                    </p:column>
-                                    <p:column headerText="Características Construtivas">
-                                        <p:commandButton value="Visualizar"/>
-                                    </p:column>
-
-                                    <p:column headerText="Excluir" style="text-align: center">
-                                        <p:commandButton action="#{vistoriaImovelMB.remover(vi)}"  icon="ui-icon-trash"
-                                                       onclick="if(!confirm('Confirma a exclusão da guia #{vv.idLaudo}?')) return false" ajax="false">
-                                        </p:commandButton>
-                                    </p:column>
-                                    <p:column headerText="Editar" style="text-align: center">
-                                        <p:commandButton update=":edicaoVistoriaImovel" icon="ui-icon-pencil">
-                                            <f:setPropertyActionListener target="#{vistoriaImovelMB.vistoriaImovel}" value="#{vi}"/>
-                                        </p:commandButton>
-                                    </p:column>
-                                    <p:column headerText="Imprimir">
-                                        <center>
-                                        <p:commandButton value="Visualizar Imagens" 
-                                                         icon="ui-icon-search"  
-                                                         oncomplete="eventoDialog.show()"/>
-                                        <p:commandButton value="Adicionar Imagens" 
-                                                         oncomplete="fotoDialog.show()"
-                                                         icon="ui-icon-plus" />
-                                        </center>
-                                    </p:column>
-                            </p:dataTable>
-                            
-                            <!-- Visualizar Dados Loca -->
-                            <p:dialog header="Dados Local" widgetVar="localDialog"
-                                                        resizable="false" id="localDialog" showEffect="fade"
-                                                        hideEffect="fade" modal="false" draggable="true" maximizable="false"
-                                                        minimizable="false">
-
+                        <br />
+                        <br />
+                        <p:panel id="panelListagemGuiaPericial" header="Lista de Vistorias Imóveis Cadastradas" toggleable="true">
+                            <h:form id="listar" enctype="multipart/form-data">
                                     <p:dataTable value="#{vistoriaImovelMB.listarVistoriaImovels()}" var="vi" paginator="true" rows="10" 
-                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                                 {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                                 emptyMessage="Nenhuma Vistoria de Veiculo Cadastrada">
-                                        <p:column headerText="Tipo de Imóvel:" filterBy="#{vi.localImovel.tipoImovel}" filterMatchMode="contains">
-                                            <h:outputText value="#{vi.localImovel.tipoImovel}" />
-                                        </p:column>
-                                        <p:column headerText="Edificado na porção:" filterBy="#{vi.localImovel.edificado}" filterMatchMode="contains">
-                                            <h:outputText value="#{vi.localImovel.edificado}" />
-                                        </p:column>
-                                        <p:column headerText="Ladeado por outros imóveis:" filterBy="#{vi.localImovel.ladeado}" filterMatchMode="contains">
-                                            <h:outputText value="#{vi.localImovel.ladeado}" />
-                                        </p:column>
-                                    </p:dataTable>
-                                </p:dialog>
-                            
-                            
-                            <!-- Visualizar danos -->
+                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                                     emptyMessage="Nenhuma Vistoria de Imóvel Cadastrada">
 
+                                        <p:column headerText="Referencia" filterBy="#{vi.referencia}" filterMatchMode="contains">
+                                            <h:outputText value="#{vi.referencia}" />
+                                        </p:column>
+                                        <p:column headerText="Local do Exame:" filterBy="#{vi.localExame}" filterMatchMode="contains">
+                                            <h:outputText value="#{vi.localExame}" />
+                                        </p:column>
+                                        <p:column headerText="Natureza da Perícia:" filterBy="#{vi.natureza}" filterMatchMode="contains">
+                                            <h:outputText value="#{vi.natureza}" />
+                                        </p:column>
+                                        <p:column headerText="Data do Fato:" filterBy="#{vi.dataFato}" filterMatchMode="contains">
+                                            <h:outputText value="#{vi.dataFato}">
+                                                <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Data e Hora Exame:" filterBy="#{vi.dataExame}" filterMatchMode="contains">
+                                            <h:outputText value="#{vi.dataExame}">
+                                                <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                                            </h:outputText>
+                                        </p:column>
+
+                                        <p:column headerText="Comandos" style="text-align: center">
+                                            <p:commandButton action="#{vistoriaImovelMB.remover(vi)}"  icon="ui-icon-trash"
+                                                           onclick="if(!confirm('Confirma a exclusão da guia #{vv.idLaudo}?')) return false" ajax="false">
+                                            </p:commandButton>
+                                            <p:commandButton update=":edicaoVistoriaImovel" icon="ui-icon-pencil">
+                                                <f:setPropertyActionListener target="#{vistoriaImovelMB.vistoriaImovel}" value="#{vi}"/>
+                                            </p:commandButton>
+                                        </p:column>
+                                        
+                                        <p:column headerText="Imagens">
+                                            <center>
+                                            <p:commandButton value="Visualizar Imagens" 
+                                                             icon="ui-icon-search"  
+                                                             oncomplete="eventoDialog.show()"/>
+                                            <p:commandButton value="Adicionar Imagens" 
+                                                             oncomplete="fotoDialog.show()"
+                                                             icon="ui-icon-plus">
+                                                <f:setPropertyActionListener value="#{vv}" target="#{danosMB.danos.laudo}" />
+                                            </p:commandButton>
+                                            </center>
+                                        </p:column>
+                                </p:dataTable>                         
+                            </h:form>
+                            
+                             <h:form enctype="multipart/form-data">
+                               <!-- Visualizar danos -->
                                 <p:dialog header="Imagens do Laudo" widgetVar="eventoDialog"
                                                         resizable="false" id="eventoDlg" showEffect="fade"
                                                         hideEffect="fade" modal="false" draggable="true" maximizable="false"
@@ -445,10 +413,11 @@
                                                             alt="Descrição do Dano: #{danosMB.danos.descricao}"/>  
                                         </p:galleria>  
                                     </h:panelGrid>
-                                </p:dialog>
-
-
-                               <!-- Adicionar danos -->
+                                </p:dialog>   
+                              </h:form>
+                            
+                            <h:form enctype="multipart/form-data">
+                                <!-- Adicionar danos -->
                                 <p:dialog header="Adicionar Imagens" widgetVar="fotoDialog"
                                         position="center" resizable="false" id="fotoDlg" showEffect="fade"
                                         hideEffect="fade" modal="false" width="650">
@@ -474,7 +443,8 @@
 
                                         </h:panelGrid>
                                 </p:dialog>
-                        </h:form>
+                            </h:form>
+                        </p:panel>
                     </p:panel> 
               </p:layoutUnit>
             </ui:define>

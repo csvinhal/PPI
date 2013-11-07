@@ -31,5 +31,4 @@ public class VistoriaVeiculoEJB extends Manager{
                 .setParameter("idLaudo", idLaudo);
         return (VistoriaVeiculo) query.getSingleResult();
     }
-
 }

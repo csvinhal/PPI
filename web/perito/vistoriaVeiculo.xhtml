@@ -56,97 +56,100 @@
                                 <p:inputText value="#{vistoriaVeiculoMB.veiculo.chassis}" size="50" maxlength="17" required="true"
                                                      requiredMessage="O chassi não pode ficar em branco!"/>
                                 <h:outputText value="Odometro: "/>
-                                <p:inputText value="#{vistoriaVeiculoMB.veiculo.odometro}" size="11"  maxlength="10" required="true"
+                                <p:inputText value="#{vistoriaVeiculoMB.veiculo.odometro}" size="12"  maxlength="10" required="true"
                                              requiredMessage="O odometro não pode ficar em branco!">
-
                                 </p:inputText>
+                                <h:inputHidden />
                                 <p:commandButton value="Salvar" action="#{vistoriaVeiculoMB.salvar()}" ajax="false" icon="ui-icon-disk"/>
                             </h:panelGrid>
                         </h:form>
                     </p:panel>
                    <br />
                    <br />
-                    <h:form id="listar" enctype="multipart/form-data">
-                        <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="vv" paginator="true" rows="10" 
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
-                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
-                                         emptyMessage="Nenhuma Vistoria de Veiculo Cadastrada">
-                            <f:facet name="header">
-                            Lista dos Veículos Cadastrados
-                            </f:facet>
-                            
-                            <p:column headerText="Autoridade Requisitante" filterBy="#{vv.guia.autoridade.nome}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.guia.autoridade.nome}"/>
-                            </p:column>
-                            <p:column headerText="Natureza dos Exames" filterBy="#{vv.guia.tipoExame.descricaoExame}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.guia.tipoExame.descricaoExame}" />
-                                
-                            </p:column>
-                            <p:column headerText="Local dos Exames" filterBy="#{vv.guia.localExame}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.guia.localExame}" />
-                            </p:column>
-                            <p:column headerText="Municipio" filterBy="#{vv.guia.procedencia.descricao}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.guia.procedencia.descricao}" />
-                            </p:column>
-                            <p:column headerText="Data e Hora dos Exames" filterBy="#{vv.dataExame}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.dataExame}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column headerText="Referencia Laudo" filterBy="#{vv.referencia}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.referencia}" />
-                            </p:column>
-                            <p:column headerText="Vitima" filterBy="#{vv.guia.vitima}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.guia.vitima}" />
-                            </p:column>
-                            <p:column headerText="Indiciado" filterBy="#{vv.guia.envolvido}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.guia.envolvido}" />
-                            </p:column>
-                            <p:column headerText="Destino do Laudo" filterBy="#{vv.guia.destino.nomeDestino}" filterMatchMode="contains">
-                                <h:outputText value="#{vv.guia.destino.nomeDestino}" />
-                            </p:column>
-                            <p:column headerText="Comandos" style="text-align: center">
-                                <p:commandButton action="#{vistoriaVeiculoMB.remover(vv)}"  icon="ui-icon-trash"
-                                               onclick="if(!confirm('Confirma a exclusão da guia #{vv.idLaudo}?')) return false" ajax="false">
-                                </p:commandButton>
-                                <p:commandButton update=":vistoriaVeiculo" icon="ui-icon-pencil">
-                                    <f:setPropertyActionListener target="#{vistoriaVeiculoMB.vistoriaVeiculo}" value="#{vv}"/>
-                                </p:commandButton>
-                                <p:commandButton actionListener="#{vistoriaVeiculoMB.geraRelatorioVistoriaVeiculo(vv)}" icon="ui-icon-print"
-                                                onclick="this.form.target='_blank'" ajax="false"  process="@this">
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Imagens">
-                                <center>
-                                <p:commandButton value="Visualizar Imagens" 
-                                                 icon="ui-icon-search"  
-                                                 oncomplete="eventoDialog.show()"/>
-                                <p:commandButton value="Adicionar Imagens" 
-                                                 oncomplete="fotoDialog.show()"
-                                    icon="ui-icon-plus">
-                                    <f:setPropertyActionListener value="#{vv}" target="#{danosMB.danos.laudo}" />
-                                </p:commandButton>
-                                </center>
-                            </p:column>
-                        </p:dataTable>
-                        
-                        
-                         <!-- Visualizar danos -->
-                               
-                        <p:dialog header="Imagens do Laudo" widgetVar="eventoDialog"
-                                                resizable="false" id="eventoDlg" showEffect="fade"
-                                                hideEffect="fade" modal="false" draggable="true" maximizable="false"
-                                                minimizable="false">
+                   
+                   <p:panel id="panelListagemGuiaPericial" header="Lista de Guias Periciais Cadastradas" toggleable="true">
+                        <h:form id="listar">
+                            <p:dataTable value="#{vistoriaVeiculoMB.listarVistoriaVeiculos()}" var="vv" paginator="true" rows="10" 
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15"
+                                             emptyMessage="Nenhuma Vistoria de Veiculo Cadastrada">
+                                <f:facet name="header">
+                                Lista dos Veículos Cadastrados
+                                </f:facet>
 
-                            <h:panelGrid id="infoEvento" columns="2" style="margin:0 auto;">
+                                <p:column headerText="Autoridade Requisitante" filterBy="#{vv.guia.autoridade.nome}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.guia.autoridade.nome}"/>
+                                </p:column>
+                                <p:column headerText="Natureza dos Exames" filterBy="#{vv.guia.tipoExame.descricaoExame}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.guia.tipoExame.descricaoExame}" />
 
-                                <p:galleria value="#{danosMB.listarDanos()}" var="image" panelWidth="500" panelHeight="313" showCaption="true">  
-                                    <p:graphicImage value="//resources//uploaded//#{danosMB.danos.imagem}" 
-                                                    alt="Descrição do Dano: #{danosMB.danos.descricao}"/>  
-                                </p:galleria>  
-                            </h:panelGrid>
-                        </p:dialog>        
-                    </h:form>
+                                </p:column>
+                                <p:column headerText="Local dos Exames" filterBy="#{vv.guia.localExame}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.guia.localExame}" />
+                                </p:column>
+                                <p:column headerText="Municipio" filterBy="#{vv.guia.procedencia.descricao}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.guia.procedencia.descricao}" />
+                                </p:column>
+                                <p:column headerText="Data e Hora dos Exames" filterBy="#{vv.dataExame}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.dataExame}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Referencia Laudo" filterBy="#{vv.referencia}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.referencia}" />
+                                </p:column>
+                                <p:column headerText="Vitima" filterBy="#{vv.guia.vitima}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.guia.vitima}" />
+                                </p:column>
+                                <p:column headerText="Indiciado" filterBy="#{vv.guia.envolvido}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.guia.envolvido}" />
+                                </p:column>
+                                <p:column headerText="Destino do Laudo" filterBy="#{vv.guia.destino.nomeDestino}" filterMatchMode="contains">
+                                    <h:outputText value="#{vv.guia.destino.nomeDestino}" />
+                                </p:column>
+                                <p:column headerText="Comandos" style="text-align: center">
+                                    <p:commandButton action="#{vistoriaVeiculoMB.remover(vv)}"  icon="ui-icon-trash"
+                                                   onclick="if(!confirm('Confirma a exclusão da guia #{vv.idLaudo}?')) return false" ajax="false">
+                                    </p:commandButton>
+                                    <p:commandButton update=":vistoriaVeiculo" icon="ui-icon-pencil">
+                                        <f:setPropertyActionListener target="#{vistoriaVeiculoMB.vistoriaVeiculo}" value="#{vv}"/>
+                                    </p:commandButton>
+                                    <p:commandButton actionListener="#{vistoriaVeiculoMB.geraRelatorioVistoriaVeiculo(vv)}" icon="ui-icon-print"
+                                                    onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Imagens">
+                                    <center>
+                                    <p:commandButton value="Visualizar Imagens" 
+                                                     icon="ui-icon-search"  
+                                                     oncomplete="eventoDialog.show()"/>
+                                    <p:commandButton value="Adicionar Imagens" 
+                                                     oncomplete="fotoDialog.show()"
+                                        icon="ui-icon-plus">
+                                        <f:setPropertyActionListener value="#{vv}" target="#{danosMB.danos.laudo}" />
+                                    </p:commandButton>
+                                    </center>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                   </p:panel>
+                   
+                   <h:form enctype="multipart/form-data">
+                       <!-- Visualizar danos -->
+                            <p:dialog header="Imagens do Laudo" widgetVar="eventoDialog"
+                                                    resizable="false" id="eventoDlg" showEffect="fade"
+                                                    hideEffect="fade" modal="false" draggable="true" maximizable="false"
+                                                    minimizable="false">
+
+                                <h:panelGrid id="infoEvento" columns="2" style="margin:0 auto;">
+
+                                    <p:galleria value="#{danosMB.listarDanos()}" var="image" panelWidth="500" panelHeight="313" showCaption="true">  
+                                        <p:graphicImage value="//resources//uploaded//#{danosMB.danos.imagem}" 
+                                                        alt="Descrição do Dano: #{danosMB.danos.descricao}"/>  
+                                    </p:galleria>  
+                                </h:panelGrid>
+                            </p:dialog>   
+                   </h:form>
                    <h:form enctype="multipart/form-data">
                        <!-- Adicionar danos -->
                         <p:dialog header="Adicionar Imagens" widgetVar="fotoDialog"

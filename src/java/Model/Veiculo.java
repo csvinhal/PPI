@@ -54,7 +54,7 @@ public class Veiculo implements Serializable {
     @NotNull
     @Size(min = 1, max = 4)
     private String modelo;
-    private Integer odometro;
+    private String odometro;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8)
@@ -130,11 +130,11 @@ public class Veiculo implements Serializable {
         this.modelo = modelo;
     }
 
-    public Integer getOdometro() {
+    public String getOdometro() {
         return odometro;
     }
 
-    public void setOdometro(Integer odometro) {
+    public void setOdometro(String odometro) {
         this.odometro = odometro;
     }
 

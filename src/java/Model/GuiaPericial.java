@@ -78,7 +78,7 @@ public class GuiaPericial implements Serializable {
         @JoinColumn(name = "tipoMaterial_id", referencedColumnName = "idTipoMaterial")})
     @ManyToMany
     private List<TipoDeMaterial> tipoDeMaterial;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "guia")
+    @OneToMany(mappedBy = "guia")
     private List<Laudo> laudoList;
     @JoinColumn(name = "usuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)

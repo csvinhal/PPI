@@ -20,8 +20,6 @@ public class VistoriaVeiculoMB implements Serializable {
     VistoriaVeiculoEJB vistoriaVeiculoEJB;
     private VistoriaVeiculo vistoriaVeiculo;
     private Veiculo veiculo;
-    private VistoriaVeiculo vistoriaSelecionada;
-    private Long id;
     
     public VistoriaVeiculoMB() {
     vistoriaVeiculo = new VistoriaVeiculo();
@@ -29,15 +27,6 @@ public class VistoriaVeiculoMB implements Serializable {
     }
 
     //GETS E SETS
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    
     public VistoriaVeiculo getVistoriaVeiculo() {
         return vistoriaVeiculo;
     }
@@ -53,14 +42,6 @@ public class VistoriaVeiculoMB implements Serializable {
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
     }
-
-    public VistoriaVeiculo getVistoriaSelecionada() {
-        return vistoriaSelecionada;
-    }
-
-    public void setVistoriaSelecionada(VistoriaVeiculo vistoriaSelecionada) {
-        this.vistoriaSelecionada = vistoriaSelecionada;
-    }
     
     
     //MÉTODOS
@@ -71,8 +52,8 @@ public class VistoriaVeiculoMB implements Serializable {
                 vistoriaVeiculo = vistoriaVeiculoEJB.salvar(vistoriaVeiculo);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
-                //vistoriaVeiculo = new VistoriaVeiculo();
-                //veiculo = new Veiculo();
+                vistoriaVeiculo = new VistoriaVeiculo();
+                veiculo = new Veiculo();
             }catch(Exception e){
                 e.printStackTrace();
                 FacesContext fc = FacesContext.getCurrentInstance();

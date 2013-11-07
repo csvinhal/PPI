@@ -137,17 +137,14 @@
                                     <p:commandButton action="#{guiaPericialMB.remover(g)}" icon="ui-icon-trash"
                                                    onclick="if(!confirm('Confirma a exclusão da guia #{g.numeroGuia}?')) return false" ajax="false">
                                     </p:commandButton>
-                                </p:column>
-                                <p:column headerText="Editar" style="text-align: center">
                                     <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
                                         <f:setPropertyActionListener target="#{guiaPericialMB.guiaPericial}" value="#{g}"/>
                                     </p:commandButton>
-                                </p:column>
-                                <p:column headerText="Imprimir" style="text-align: center">
                                     <p:commandButton icon="ui-icon-print" actionListener="#{guiaPericialMB.geraRelatorioGuia(g)}" 
                                                     onclick="this.form.target='_blank'" ajax="false"  process="@this">
                                     </p:commandButton>
                                 </p:column>
+                               
                                 <p:column style="text-align: center" headerText="Vincular Usuario" >
                                         <p:commandButton id="addButton" oncomplete="usuarioDialog.show()" update=":usuario"
                                                 icon="ui-icon-plus" title="Vincular Usuario" >

@@ -2,8 +2,6 @@ package Beans;
 
 import Controller.DanosEJB;
 import Model.Danos;
-import Model.Laudo;
-import Model.VistoriaVeiculo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,6 +28,7 @@ public class DanosMB implements Serializable{
         danos = new Danos();
     }
 
+    //SETS E GETS
     public Danos getDanos() {
         return danos;
     }
@@ -39,35 +38,24 @@ public class DanosMB implements Serializable{
     }
 
     
+    //METODOS
     public void salvar(){
-        if(danos.getIdDanos() == null){
-            try{
-                danosEJB.salvar(danos);
-                FacesContext fc = FacesContext.getCurrentInstance();
-                fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
-            }catch(Exception e){
-                e.printStackTrace();
-                FacesContext fc = FacesContext.getCurrentInstance();
-                fc.addMessage(null, new FacesMessage("Erro ao salvar Danos!"));
-            }
-        }else{
-            try{
-                danosEJB.salvar(danos);
-                FacesContext fc = FacesContext.getCurrentInstance();
-                fc.addMessage(null, new FacesMessage("Editado com sucesso!"));
-                danos = new Danos();
-            }catch(Exception e){
-                e.printStackTrace();
-                FacesContext fc = FacesContext.getCurrentInstance();
-                fc.addMessage(null, new FacesMessage("Erro ao editar Danos!"));
-            }
+        try{
+            danosEJB.salvar(danos);
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
+            danos = new Danos();
+        }catch(Exception e){
+            e.printStackTrace();
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage("Erro ao salvar Danos!"));
         }
     }
     
     public List<Danos> listarDanos(){
-        return danosEJB.listarDanoss();
+        return danosEJB.listarDanos();
     }
-    
+
     public void selecionarDanos(Danos danos) {
         this.danos = danos;
     }

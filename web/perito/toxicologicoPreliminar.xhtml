@@ -91,7 +91,7 @@
                     </p:panel>
                     <br />
                     <br />
-                    <p:panel id="panelListagemGuiaPericial" header="Lista de Guias Periciais Cadastradas" toggleable="true">
+                    <p:panel id="panelListagemGuiaPericial" header="Lista de Toxicológicos Cadastrados" toggleable="true">
                         <h:form id="listar">
                             <p:dataTable value="#{toxicologicoPreliminarMB.listarToxicologicosPremilinares()}" var="ti" paginator="true" rows="10" 
                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
@@ -129,17 +129,13 @@
                                 <p:column headerText="Peso Bruto(g)" filterBy="#{ti.involucro.peso}" filterMatchMode="contains">
                                     <h:outputText value="#{ti.involucro.peso}"/>
                                 </p:column>
-                                <p:column headerText="Excluir" style="text-align: center">
+                                <p:column headerText="Comandos" style="text-align: center">
                                     <p:commandButton action="#{toxicologicoPreliminarMB.remover(ti)}" icon="ui-icon-trash" 
                                                      onclick="if(!confirm('Confirma a exclusão do Toxicologico #{ti.idLaudo}?')) return false" ajax="false">
                                     </p:commandButton>
-                                </p:column>
-                                <p:column headerText="Editar" style="text-align: center">
-                                    <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
+                                     <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
                                         <f:setPropertyActionListener target="#{toxicologicoPreliminarMB.toxicologicoPreliminar}" value="#{ti}"/>
                                     </p:commandButton>
-                                </p:column>
-                                <p:column headerText="Imprimir" style="text-align: center">
                                     <p:commandButton actionListener="#{toxicologicoPreliminarMB.geraRelatorioToxicologicoPreliminar(ti)}" icon="ui-icon-print"
                                                     onclick="this.form.target='_blank'" ajax="false"  process="@this">
                                     </p:commandButton>

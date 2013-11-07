@@ -14,7 +14,7 @@ public class DanosEJB extends Manager{
         em.merge(danos);
     }
     
-    public List<Danos> listarDanoss(){
+    public List<Danos> listarDanos(){
         Query query = em.createQuery("Select d From Danos d");
         return query.getResultList();
     }
