@@ -197,7 +197,7 @@
                                         <p:commandButton action="#{toxicologicoDefinitivoMB.remover(td)}" icon="ui-icon-trash"
                                                          onclick="if(!confirm('Confirma a exclusão do Toxicologico #{td.idDefinitivo}?')) return false" ajax="false">
                                         </p:commandButton>
-                                         <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
+                                        <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
                                              <f:setPropertyActionListener target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo}" value="#{td}"/>
                                         </p:commandButton>
                                         <p:commandButton actionListener="#{toxicologicoDefinitivoMB.geraRelatorioToxicologicoDefinitivo(td)}" icon="ui-icon-print"

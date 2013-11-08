@@ -39,7 +39,8 @@
                                     <p:ajax update="nat" event="change"/>																													
                                 </p:selectOneRadio>
                                     <h:outputLabel id="nat" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.vistoriaImovel.natureza != 'Outros'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.vistoriaImovel.natureza}" 
+                                                     disabled="#{vistoriaImovelMB.vistoriaImovel.natureza != 'Outros'}"/>
                                     </h:outputLabel>
                                             
                                 <h:outputLabel value="Data do Fato: " for="dataFato" />
@@ -117,7 +118,8 @@
                                     </p:selectOneRadio>
                                     
                                     <h:outputLabel id="tranc1" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento1 != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.trancamento1}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.trancamento1 != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Marca: " for="marca1" />
@@ -150,12 +152,12 @@
                                     </p:selectOneRadio>
                                     
                                     <h:outputLabel id="tranc2" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento2 != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.trancamento2}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.trancamento2 != 'Outro'}"/>
                                     </h:outputLabel>
                                     <h:outputLabel value="Marca: " for="marca2" />
-                                    <p:inputText id="marca2" value="#{vistoriaImovelMB.localImovel.marca2}" size="40" 
-                                                 converter="localImovelConverter">
-                                    </p:inputText>
+                                    <p:inputText id="marca2" value="#{vistoriaImovelMB.localImovel.marca2}" size="40" required="true"
+                                                 requiredMessage="Campo Marca inválido!"/>
                                 </h:panelGrid>
                             </p:fieldset>
                             <br />
@@ -173,7 +175,8 @@
                                     </p:selectOneRadio> 
                                     
                                     <h:outputLabel id="edif1" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.viasEdificacao1 != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.viasEdificacao1}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.viasEdificacao1 != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Sistema de trancamento: " for="trancamento3" />
@@ -187,13 +190,13 @@
                                     </p:selectOneRadio>
                                     
                                     <h:outputLabel id="tranc3" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento3 != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.trancamento3}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.trancamento3 != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Marca: " for="marca3" />
-                                    <p:inputText id="marca3" value="#{vistoriaImovelMB.localImovel.marca3}" size="40"
-                                                 converter="localImovelConverter">
-                                    </p:inputText>
+                                    <p:inputText id="marca3" value="#{vistoriaImovelMB.localImovel.marca3}" size="40" required="true"
+                                                 requiredMessage="Campo Marca inválido!" />
                                     <h:inputHidden />
                                     <h:outputLabel value="Porta: " for="viasEdificacao2"/>
                                     <p:selectOneRadio id="viasEdificacao2" value="#{vistoriaImovelMB.localImovel.viasEdificacao2}"
@@ -206,7 +209,8 @@
                                     </p:selectOneRadio> 
                                     
                                     <h:outputLabel id="edif2" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.viasEdificacao2 != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.viasEdificacao2}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.viasEdificacao2 != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Sistema de trancamento: " for="trancamento4" />
@@ -220,13 +224,13 @@
                                     </p:selectOneRadio>
                                     
                                     <h:outputLabel id="tranc4" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.trancamento4 != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.trancamento4}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.trancamento4 != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Marca: " for="marca4" />
-                                    <p:inputText id="marca4" value="#{vistoriaImovelMB.localImovel.marca4}" size="40"
-                                                 converter="localImovelConverter">
-                                    </p:inputText>
+                                    <p:inputText id="marca4" value="#{vistoriaImovelMB.localImovel.marca4}" size="40" required="true"
+                                                 requiredMessage="Campo Marca inválido!"/>
                                     <h:inputHidden />
                                     <h:outputLabel value="Vias de clarificação natural: " for="classificacao"/>
                                     <p:selectOneRadio id="classificacao" value="#{vistoriaImovelMB.localImovel.clarificacao}"
@@ -237,7 +241,8 @@
                                     </p:selectOneRadio> 
                                     
                                     <h:outputLabel id="clar" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.clarificacao != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.clarificacao}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.clarificacao != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Estrutura (Vias de clarificação natural): " for="estruturaJanela" />
@@ -251,7 +256,8 @@
                                     </p:selectOneRadio>
                                     
                                     <h:outputLabel id="estrutJan" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.estruturaJanela != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.estruturaJanela}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.estruturaJanela != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Nº de cômodos: " for="numComodos" />
@@ -275,7 +281,8 @@
                                     </p:selectOneRadio> 
                                     
                                     <h:outputLabel id="parede" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.paredes != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.paredes}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.paredes != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Teto: " for="Teto" />
@@ -289,7 +296,8 @@
                                     </p:selectOneRadio>
                                     
                                     <h:outputLabel id="tet" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.teto != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.teto}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.teto != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Piso: " for="piso" />
@@ -303,7 +311,8 @@
                                     </p:selectOneRadio>
                                     
                                     <h:outputLabel id="pis" >
-                                        <p:inputText disabled="#{vistoriaImovelMB.localImovel.piso != 'Outro'}"/>
+                                        <p:inputText value="#{vistoriaImovelMB.localImovel.piso}" 
+                                                     disabled="#{vistoriaImovelMB.localImovel.piso != 'Outro'}"/>
                                     </h:outputLabel>
                                     
                                     <h:outputLabel value="Instalações: " for="instalacao" />
@@ -340,7 +349,7 @@
                                 <p:inputTextarea id="esclarecimentos3" rows="5" cols="52" maxlength="255" autoResize="false"
                                                  value="#{vistoriaImovelMB.vistoriaImovel.esclarecimento3}" />
                                 
-                                <h:inputHidden value="#{vistoriaVeiculoMB.usuario}" converter="usuarioConverter"/>
+                                <h:inputHidden value="#{vistoriaImovelMB.usuario}" converter="usuarioConverter"/>
                                 
                                 <p:commandButton value="Salvar" action="#{vistoriaImovelMB.salvar()}" 
                                              update=":edicaoVistoriaImovel" icon="ui-icon-disk" ajax="false" />

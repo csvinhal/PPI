@@ -2,7 +2,6 @@ package Beans;
 
 import Controller.DanosEJB;
 import Model.Danos;
-import Model.Laudo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,14 +11,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import static org.springframework.util.FileCopyUtils.BUFFER_SIZE;
 
 @ManagedBean(name = "danosMB")
-@SessionScoped
+@ViewScoped
 public class DanosMB implements Serializable{
     @EJB
     DanosEJB danosEJB;
