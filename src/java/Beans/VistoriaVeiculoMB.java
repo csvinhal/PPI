@@ -114,7 +114,7 @@ public class VistoriaVeiculoMB implements Serializable {
     
     public void geraRelatorioVistoriaVeiculo(VistoriaVeiculo veiculo) {
         RelatorioFactory relatorioFactory = new RelatorioFactory();
-        relatorioFactory.geraRelatorioPreliminar(veiculo.getIdLaudo());
+        relatorioFactory.geraRelatorioVistoriaVeiculo(veiculo.getIdLaudo());
     }
     
     public Usuario getUserLogado() {

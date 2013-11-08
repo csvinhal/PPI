@@ -78,7 +78,6 @@ public class UsuarioMB implements Serializable{
             try{
                 usuario.setSenha(c.criptografa(senha));
                 usuario.setAtivo(false);
-                usuario.setPermissao(permissao);
                 usuEJB.salvar(usuario);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Usuario salvo com sucesso!"));
@@ -90,7 +89,6 @@ public class UsuarioMB implements Serializable{
             }
        }else{
             try{
-                usuario.setPermissao(permissao);
                 usuEJB.salvar(usuario);
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.addMessage(null, new FacesMessage("Usuario editado com sucesso!"));

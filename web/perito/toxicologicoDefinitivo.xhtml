@@ -200,7 +200,7 @@
                                          <p:commandButton update=":dadosGuia" icon="ui-icon-pencil">
                                              <f:setPropertyActionListener target="#{toxicologicoDefinitivoMB.toxicologicoDefinitivo}" value="#{td}"/>
                                         </p:commandButton>
-                                        <p:commandButton actionListener="#{toxicologicoPreliminarMB.geraRelatorioToxicologicoPreliminar(td)}" icon="ui-icon-print"
+                                        <p:commandButton actionListener="#{toxicologicoDefinitivoMB.geraRelatorioToxicologicoDefinitivo(td)}" icon="ui-icon-print"
                                                         onclick="this.form.target='_blank'" ajax="false"  process="@this">
                                         </p:commandButton>
                                     </p:column>

@@ -5,6 +5,7 @@ import Controller.VistoriaImovelEJB;
 import Model.LocalImovel;
 import Model.Usuario;
 import Model.VistoriaImovel;
+import Util.RelatorioFactory;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -107,6 +108,11 @@ public class VistoriaImovelMB implements Serializable{
              FacesContext fc = FacesContext.getCurrentInstance();
              fc.addMessage(null, new FacesMessage("Erro ao excluir vistoria do veiculo!"));
         }
+    }
+    
+    public void geraRelatorioVistoriaImovel(VistoriaImovel vistoriaImovel) {
+        RelatorioFactory relatorioFactory = new RelatorioFactory();
+        relatorioFactory.geraRelatorioVistoriaImovel(vistoriaImovel.getIdLaudo());
     }
     
     public Usuario getUserLogado() {

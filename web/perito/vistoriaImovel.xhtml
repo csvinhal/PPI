@@ -386,6 +386,9 @@
                                             <p:commandButton update=":edicaoVistoriaImovel" icon="ui-icon-pencil">
                                                 <f:setPropertyActionListener target="#{vistoriaImovelMB.vistoriaImovel}" value="#{vi}"/>
                                             </p:commandButton>
+                                            <p:commandButton actionListener="#{vistoriaImovelMB.geraRelatorioVistoriaImovel(vi)}" icon="ui-icon-print"
+                                                        onclick="this.form.target='_blank'" ajax="false"  process="@this">
+                                            </p:commandButton>
                                         </p:column>
                                         
                                         <p:column headerText="Imagens">

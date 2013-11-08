@@ -85,7 +85,7 @@ public class ToxicologicoDefinitivoMB implements Serializable{
                 toxicologicoDefinitivo.setInvolucro(involucro);
                 toxiDefinitivoEJB.salvar(toxicologicoDefinitivo);
                 FacesContext fc = FacesContext.getCurrentInstance();
-                fc.addMessage(null, new FacesMessage("Toxicologico Preliminar salvo com sucesso!"));
+                fc.addMessage(null, new FacesMessage("Toxicologico Definitivo salvo com sucesso!"));
                 toxicologicoDefinitivo = new ToxicologicoDefinitivo();
                 involucro = new Involucro();
             }catch(Exception e){
@@ -137,9 +137,9 @@ public class ToxicologicoDefinitivoMB implements Serializable{
         }
     }
     
-    public void geraRelatorioToxicologicoDefinitivo(ToxicologicoDefinitivo preliminar) {
+    public void geraRelatorioToxicologicoDefinitivo(ToxicologicoDefinitivo definitivo) {
         RelatorioFactory relatorioFactory = new RelatorioFactory();
-        relatorioFactory.geraRelatorioPreliminar(preliminar.getIdDefinitivo());
+        relatorioFactory.geraRelatorioDefinitivo(definitivo.getIdDefinitivo());
     }
     
         public Usuario getUserLogado() {

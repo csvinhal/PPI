@@ -46,12 +46,78 @@ public class RelatorioFactory {
         }
      }
      
-     public static void geraRelatorioPreliminar(int idLaudo) {
+     public static void geraRelatorioPreliminar(Integer idLaudo) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             HttpServletResponse response = (HttpServletResponse) context
                     .getExternalContext().getResponse();
             InputStream reportStream = context.getExternalContext().getResourceAsStream("/relatorio/toxicologico_preliminar.jasper");
+            response.setContentType("application/pdf");
+            ServletOutputStream servletOutputStream = response.getOutputStream();
+            Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idLaudo", idLaudo);
+            JasperRunManager.runReportToPdfStream(reportStream, servletOutputStream, map, getConexao());
+            servletOutputStream.flush();
+            servletOutputStream.close();
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            context.responseComplete();
+        }
+     }
+     
+     public static void geraRelatorioDefinitivo(Integer idDefinitivo) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            HttpServletResponse response = (HttpServletResponse) context
+                    .getExternalContext().getResponse();
+            InputStream reportStream = context.getExternalContext().getResourceAsStream("/relatorio/toxicologico_preliminar.jasper");
+            response.setContentType("application/pdf");
+            ServletOutputStream servletOutputStream = response.getOutputStream();
+            Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idDefinitivo", idDefinitivo);
+            JasperRunManager.runReportToPdfStream(reportStream, servletOutputStream, map, getConexao());
+            servletOutputStream.flush();
+            servletOutputStream.close();
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            context.responseComplete();
+        }
+     }
+     
+     public static void geraRelatorioVistoriaVeiculo(Integer idLaudo) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            HttpServletResponse response = (HttpServletResponse) context
+                    .getExternalContext().getResponse();
+            InputStream reportStream = context.getExternalContext().getResourceAsStream("/relatorio/veiculo.jasper");
+            response.setContentType("application/pdf");
+            ServletOutputStream servletOutputStream = response.getOutputStream();
+            Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idLaudo", idLaudo);
+            JasperRunManager.runReportToPdfStream(reportStream, servletOutputStream, map, getConexao());
+            servletOutputStream.flush();
+            servletOutputStream.close();
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            context.responseComplete();
+        }
+     }
+     
+     public static void geraRelatorioVistoriaImovel(Integer idLaudo) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            HttpServletResponse response = (HttpServletResponse) context
+                    .getExternalContext().getResponse();
+            InputStream reportStream = context.getExternalContext().getResourceAsStream("/relatorio/imovel.jasper");
             response.setContentType("application/pdf");
             ServletOutputStream servletOutputStream = response.getOutputStream();
             Map<String, Object> map = new HashMap<String, Object>();
